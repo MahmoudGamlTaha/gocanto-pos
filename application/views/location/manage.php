@@ -1,15 +1,15 @@
-<?php $this->load->view("partial/header"); ?>
+<?php $this->load->view('partial/header'); ?>
 <div id="title_bar">
 	<div id="title" class="float_left"><?=$title?></div>
 	<?php if ($this->Employee->has_privilege('add', $controller_name)): ?>
 		<div id="new_button">
-		<?php if ($this->session->userdata('dblocation')=='default') { ?>
+		<?php if ($this->session->userdata('dblocation') == 'default') {
+    ?>
 			<a href="index.php/<?php echo $controller_name ?>/view/0/width:600/height:300" class="thickbox none" title="<?php echo $this->lang->line('location_new_location') ?>"><div class="big_button" style="float: left;"><span><?php echo $this->lang->line('location_new_location') ?></span></div></a>
-		<?php }else{
-
-			echo $this->lang->line('location_wrong_base_location');
-
-			} ?>
+		<?php 
+} else {
+    echo $this->lang->line('location_wrong_base_location');
+} ?>
 		</div>
 	<?php endif ?>
 </div>
@@ -52,7 +52,7 @@
 					<td><?php echo $value['hostname'] ?></td>
 					<td><?php echo $value['database'] ?></td>
 					<td><?php echo $value['dbdriver'] ?></td>
-					<td><?php echo ($value['active']) ? $this->lang->line('location_yes') : $this->lang->line('location_no') ; ?></td>
+					<td><?php echo ($value['active']) ? $this->lang->line('location_yes') : $this->lang->line('location_no'); ?></td>
 					<?php if ($this->Employee->has_privilege('update', $controller_name)): ?>
 					<td>
 						<div class='warning_message' style='padding:7px;'>
@@ -76,7 +76,7 @@
 	(function($){
 		init_table_sorting();
 		enable_select_all();
-		enable_search('<?=site_url("locations/suggest")?>','<?=$this->lang->line("location_search")?>');
+		enable_search('<?=site_url('locations/suggest')?>','<?=$this->lang->line('location_search')?>');
 
 		$('#enable, #disable').on('click',function(event) {
 			var url = $(this).attr('href');
@@ -87,7 +87,7 @@
 			}else{
 				notif({
 				    type: "error",
-				    msg: '<?=$this->lang->line("location_least_one")?>',
+				    msg: '<?=$this->lang->line('location_least_one')?>',
 				    width: "all",
 				    height: 100,
 				    position: "center"
@@ -119,4 +119,4 @@
 		set_feedback(response.message,'success_message',false);
 	}
 </script>
-<?php $this->load->view("partial/footer"); ?>
+<?php $this->load->view('partial/footer'); ?>

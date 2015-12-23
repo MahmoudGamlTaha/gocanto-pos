@@ -1,4 +1,4 @@
-<?php if (count($cart)>0): ?>
+<?php if (count($cart) > 0): ?>
 <div id="register_wrapper">
 	<table id="register">
 		<thead>
@@ -17,51 +17,63 @@
 				</td>
 			</tr>
 			<?php
-				foreach(array_reverse($cart, true) as $line=>$item){
-					echo form_open("receivings/edit_item/$line");
-			?>
+                foreach (array_reverse($cart, true) as $line => $item) {
+                    echo form_open("receivings/edit_item/$line");
+                    ?>
 			<tr>
-				<td style="align:center;"><?php echo $item['name']; ?><br />
+				<td style="align:center;"><?php echo $item['name'];
+                    ?><br />
 				<?php
-					echo $item['description'];
-		      		echo form_hidden('description',$item['description']);
-				?><br/>
+                    echo $item['description'];
+                    echo form_hidden('description', $item['description']);
+                    ?><br/>
 				</td>
-				<?php if ($items_module_allowed){ ?>
+				<?php if ($items_module_allowed) {
+    ?>
 				<td class="this-right">
-					<?php echo $item['price'];?>
-					<?php echo form_hidden(array('name'=>'price','value'=>$item['price']));?>
+					<?php echo $item['price'];
+    ?>
+					<?php echo form_hidden(['name' => 'price', 'value' => $item['price']]);
+    ?>
 				</td>
-				<?php }else{ ?>
+				<?php 
+} else {
+    ?>
 				<td class="this-right"><?php echo $item['price'];
-					 echo form_hidden('price',$item['price']); ?>
+    echo form_hidden('price', $item['price']);
+    ?>
 				</td>
-				<?php } ?>
+				<?php 
+}
+                    ?>
 				<td>
 				<?php
-		        	echo $item['quantity'];
-		        	echo form_hidden(array('name'=>'quantity','value'=>$item['quantity']));
-				?>
+                    echo $item['quantity'];
+                    echo form_hidden(['name' => 'quantity', 'value' => $item['quantity']]);
+                    ?>
 				</td>
-				<td><?php echo form_input(array('name'=>'discount','value'=>$item['discount'],'size'=>'3'));?></td>
-				<td class="this-right" style="padding-right: 10px;"><?php echo to_currency($item['price']*$item['quantity']-$item['price']*$item['quantity']*$item['discount']/100); ?></td>
+				<td><?php echo form_input(['name' => 'discount', 'value' => $item['discount'], 'size' => '3']);
+                    ?></td>
+				<td class="this-right" style="padding-right: 10px;"><?php echo to_currency($item['price'] * $item['quantity'] - $item['price'] * $item['quantity'] * $item['discount'] / 100);
+                    ?></td>
 			</tr>
 			</form>
-			<?php } ?>
+			<?php 
+                } ?>
 		</tbody>
 	</table>
 </div>
 <!-- Overall Receiving -->
 <div id="overall_sale">
-	<?php if(isset($supplier)){
-		echo $this->lang->line("recvs_supplier").': <b>'.$supplier. '</b><br />';
-		echo anchor("receivings/delete_supplier",'['.$this->lang->line('common_delete').' '.$this->lang->line('suppliers_supplier').']');
-	} ?>
+	<?php if (isset($supplier)) {
+    echo $this->lang->line('recvs_supplier').': <b>'.$supplier.'</b><br />';
+    echo anchor('receivings/delete_supplier', '['.$this->lang->line('common_delete').' '.$this->lang->line('suppliers_supplier').']');
+} ?>
 	<div id="finish_sale"><script src="https://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
-		<?php echo form_open("receivings/complete/$reception_id",array('id'=>'finish_sale_form')); ?>
+		<?php echo form_open("receivings/complete/$reception_id", ['id' => 'finish_sale_form']); ?>
 		<br />
 		<label id="comment_label" for="comment"><?php echo $this->lang->line('common_comments'); ?>:</label>
-		<?php echo form_textarea(array('name'=>'comment','value'=>'','rows'=>'4','cols'=>'23'));?>
+		<?php echo form_textarea(['name' => 'comment', 'value' => '', 'rows' => '4', 'cols' => '23']); ?>
 		<br /><br />
 		<div id='sale_details'>
 			<div class="float_left" style='width:55%;'><?php echo $this->lang->line('sales_total'); ?>:</div>
@@ -69,27 +81,27 @@
 		</div>
 		<table width="100%">
 			<tr><td></td><td>
-		    	<?php echo form_hidden(array('name'=>'payment_type','value'=>'Cash')); ?>
+		    	<?php echo form_hidden(['name' => 'payment_type', 'value' => 'Cash']); ?>
         	</td></tr>
         	<tr><td></td><td>
-				<?php echo form_hidden(array('name'=>'amount_tendered','value'=>0)); ?>
+				<?php echo form_hidden(['name' => 'amount_tendered', 'value' => 0]); ?>
         	</td></tr>
         </table>
         <br />
-		<?php echo "<div class='small_button' id='finish_sale_button' style='float:right;margin-top:5px;'><span>".$this->lang->line('recvs_complete_receiving')."</span></div>";
-		?>
+		<?php echo "<div class='small_button' id='finish_sale_button' style='float:right;margin-top:5px;'><span>".$this->lang->line('recvs_complete_receiving').'</span></div>';
+        ?>
 		</form>
 	</div>
-	    <?php echo form_open("receivings/cancel_receiving",array('id'=>'cancel_sale_form')); ?>
+	    <?php echo form_open('receivings/cancel_receiving', ['id' => 'cancel_sale_form']); ?>
 			    <div class='small_button' id='cancel_sale_button' style='float:left;margin-top:5px;'>
 					<span>Reset </span>
 				</div>
         </form>
 </div>
 <?php 
-else: 
-	echo $this->lang->line('recvs_no_exists').'<br/><br/>';
-	echo anchor("receivings/index",'Back','class="big_button"');
+else:
+    echo $this->lang->line('recvs_no_exists').'<br/><br/>';
+    echo anchor('receivings/index', 'Back', 'class="big_button"');
 endif;
 ?>
 
@@ -101,7 +113,7 @@ $(document).ready(function(){
     	},5500);
     	notif({
 		  type: "info",
-		  msg: '<?php echo $this->lang->line("recvs_confirm_finish_receiving"); ?>',
+		  msg: '<?php echo $this->lang->line('recvs_confirm_finish_receiving'); ?>',
 		  width: "all",
 		  height: 100,
 		  position: "center"
@@ -113,7 +125,7 @@ $(document).ready(function(){
     	},5500);
     	notif({
 		  type: "warning",
-		  msg: '<?php echo $this->lang->line("recvs_confirm_cancel_receiving"); ?>',
+		  msg: '<?php echo $this->lang->line('recvs_confirm_cancel_receiving'); ?>',
 		  width: "all",
 		  height: 100,
 		  position: "center"

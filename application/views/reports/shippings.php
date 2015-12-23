@@ -1,11 +1,11 @@
-<?php $this->load->view("partial/header"); ?>
+<?php $this->load->view('partial/header'); ?>
 <div style="text-align:center;">
 	<div id="page_title" style="margin-bottom:6px;text-align:center;"><?=$title?></div>
 	<div class="page_subtitle" style="margin-bottom:6px;">
 	<?php
-	$order = (count($notifications['shippings']['data']) > 1) ? $this->lang->line('reports_orders') : $this->lang->line('reports_order');
-	echo $this->lang->line('reports_you_have').' '.count($notifications['shippings']['data']).' '.$order; 
-	?></div>
+    $order = (count($notifications['shippings']['data']) > 1) ? $this->lang->line('reports_orders') : $this->lang->line('reports_order');
+    echo $this->lang->line('reports_you_have').' '.count($notifications['shippings']['data']).' '.$order;
+    ?></div>
 	<!-- <div class="page_subtitle" style="margin-bottom:6px;"><?="($location)"?></div> -->
 </div>
 <div id="table_holder">
@@ -29,20 +29,20 @@
 					<td><?php echo $transaction['sender'] ?></td>
 					<td>
 					<?php
-					if ($transaction['status'] != 0 && $transaction['receiver'] == $location) {
-						echo form_open("receivings/index/", array('id'=>'form-'.$transaction['transfer_id'])); 
-						echo form_hidden('reception', $transaction['transfer_id']);
-						echo form_submit(array('name'=>'submit','value'=>$this->lang->line('employees_profile_see'),'class'=>'small_button'));
-						echo form_close();
-					}
-					?>
+                    if ($transaction['status'] != 0 && $transaction['receiver'] == $location) {
+                        echo form_open('receivings/index/', ['id' => 'form-'.$transaction['transfer_id']]);
+                        echo form_hidden('reception', $transaction['transfer_id']);
+                        echo form_submit(['name' => 'submit', 'value' => $this->lang->line('employees_profile_see'), 'class' => 'small_button']);
+                        echo form_close();
+                    }
+                    ?>
 					</td>
 				</tr>
 				<tr class="hide">
 					<td colspan="5">
 						<?php
-						$transaction_details = $this->Transfers->get_my_reception_detail($transaction['transfer_id']);
-						?>
+                        $transaction_details = $this->Transfers->get_my_reception_detail($transaction['transfer_id']);
+                        ?>
 						<table class="innertable">
 							<thead>
 								<tr style="color:#FFFFFF;background-color:#0a6184;">
@@ -83,4 +83,4 @@
 		$(this).text($(this).text()!='+'?'+':'-').parents('tr').next().toggle();
 	});
 </script>
-<?php $this->load->view("partial/footer"); ?>
+<?php $this->load->view('partial/footer'); ?>

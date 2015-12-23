@@ -1,4 +1,5 @@
 <?php
+
 $lang['reports_stock_control_title'] = 'Full Details Stock Control';
 $lang['reports_reports'] = 'Reports';
 $lang['reports_report'] = 'Report';
@@ -108,16 +109,10 @@ $lang['reports_credits_reference'] = 'Reference';
 $lang['reports_credits_amount'] = 'Amount';
 $lang['reports_credits_balance'] = 'Balance';
 $lang['reports_credits_period'] = 'Payment Period';
-$lang['reports_credits_status'] = 'Status'; 
+$lang['reports_credits_status'] = 'Status';
 $lang['reports_credits_statement'] = 'Customer statement';
 $lang['reports_credits_report_date'] = 'Report generated from';
 $lang['reports_credits_report_date2'] = 'until';
 $lang['reports_credits_report_initial'] = 'Initial Balance';
 $lang['reports_credits_report_final'] = 'Final Balance';
 $lang['reports_credits_report_saldo'] = 'Total Balance';
-
-
-
-
-
-?>

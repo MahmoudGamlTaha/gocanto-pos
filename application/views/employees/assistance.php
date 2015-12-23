@@ -1,4 +1,4 @@
-<?php $this->load->view("partial/header"); ?>
+<?php $this->load->view('partial/header'); ?>
 
 <div id="page_title" style="margin-bottom:8px;"><?php echo $this->lang->line('employees_assistance_marker'); ?></div>
 
@@ -12,10 +12,10 @@
 		<tr>
 			<td>
 				
-				<?php echo form_open($controller_name.'/open_day', array('id'=>'login', 'method'=>'POST')); ?>
+				<?php echo form_open($controller_name.'/open_day', ['id' => 'login', 'method' => 'POST']); ?>
 				<table border="0">
 					<tr>
-						<td><?=form_label('Nick Name:', 'name', array("class"=>"lable-form"))?></td>
+						<td><?=form_label('Nick Name:', 'name', ['class' => 'lable-form'])?></td>
 						<td><input type="text" name="name" class="text_box" required></td>
 						<td><?=form_label('Password:', 'password')?></td>
 						<td><input type="password" name="password" class="text_box" required></td>
@@ -57,7 +57,7 @@
 									<input type="hidden" name="person_id" value="<?php echo $employee->employee_id; ?>">
 								</td>
 								<td>
-									<button class="small_button logout-button" user="<?php echo $employee->employee_id ?>"><?php echo $this->lang->line("common_logout"); ?></button>
+									<button class="small_button logout-button" user="<?php echo $employee->employee_id ?>"><?php echo $this->lang->line('common_logout'); ?></button>
 								</td>
 							</tr>
 							</form>
@@ -76,7 +76,7 @@
 <script>
 	$(function() {
 		$('#submit').click(function(event) {
-			if (confirm('<?php echo $this->lang->line("employees_con_action"); ?>')) {
+			if (confirm('<?php echo $this->lang->line('employees_con_action'); ?>')) {
 				$('#login').ajaxSubmit({
 					dataType:'json',
 					success:function(data)
@@ -85,7 +85,7 @@
 							var form = '<tr class="user-row"><form id="form_close_day'+data.user+'" action="index.php/<?php echo $controller_name; ?>/close_day" method="POST">';
 							form += '<td>'+data.message+'</td>';
 							form += '<td><input type="password" name="logoutpass" id="logoutpass"><input type="hidden" name="person_id" value="'+data.user+'"></td>';
-							form += '<td><button class="logout-button" user="'+data.user+'"><?php echo $this->lang->line("common_logout"); ?></button></td>';
+							form += '<td><button class="logout-button" user="'+data.user+'"><?php echo $this->lang->line('common_logout'); ?></button></td>';
 							form += '</form></tr>';
 
 							if ($('#sortable_table tbody .user-row').length < 1) {
@@ -144,4 +144,4 @@
 		});
 	});
 </script>
-<?php $this->load->view("partial/footer"); ?>
+<?php $this->load->view('partial/footer'); ?>

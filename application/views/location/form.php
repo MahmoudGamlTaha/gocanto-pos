@@ -3,27 +3,27 @@
 	<br>
 	<h3><?php echo $this->lang->line('location_loading'); ?></h3>
 </div>
-<?php echo form_open('locations/save/',array('id'=>'location_form')); ?>
+<?php echo form_open('locations/save/', ['id' => 'location_form']); ?>
 <div>
 	<div>
 		<h3><?php echo $this->lang->line('location_general_info') ?></h3><hr>
 		<?php echo form_hidden('id', $data['id']); ?>
 		<ul>
-			<li><?php echo form_label($this->lang->line('location_location_name').':', 'Location', array('class'=>'lable-form-required')).'<br>'.form_input('location', $data['name'], 'class="text_box"'); ?></li>
-			<li><?php echo form_label($this->lang->line('location_host').':', 'hostname', array('class'=>'lable-form-required')).'<br>'.form_input('hostname', $data['hostname'], 'class="text_box"'); ?></li>
+			<li><?php echo form_label($this->lang->line('location_location_name').':', 'Location', ['class' => 'lable-form-required']).'<br>'.form_input('location', $data['name'], 'class="text_box"'); ?></li>
+			<li><?php echo form_label($this->lang->line('location_host').':', 'hostname', ['class' => 'lable-form-required']).'<br>'.form_input('hostname', $data['hostname'], 'class="text_box"'); ?></li>
 		</ul>
 		<ul>
-			<li><?php echo form_label($this->lang->line('location_user').':', 'username', array('class'=>'lable-form-required')).'<br>'.form_input('username', $data['username'], 'class="text_box"'); ?></li>
-			<li><?php echo form_label($this->lang->line('location_password').':', 'password').'<br>'.form_password('password','', 'class="text_box"'); ?></li>
+			<li><?php echo form_label($this->lang->line('location_user').':', 'username', ['class' => 'lable-form-required']).'<br>'.form_input('username', $data['username'], 'class="text_box"'); ?></li>
+			<li><?php echo form_label($this->lang->line('location_password').':', 'password').'<br>'.form_password('password', '', 'class="text_box"'); ?></li>
 		</ul>
 		<div>
 		<?php
-			if ($data['id'] <= 0) {
-			 	echo form_label($this->lang->line('location_database').':', 'database', array('class'=>'lable-form-required')).'<br>'.form_input('database', $data['database'],'class="text_box"').'<br>';
-			}else{
-				echo $this->lang->line('location_database').':'.'<br>'.ucwords($data['database']);
-			}
-		?>
+            if ($data['id'] <= 0) {
+                echo form_label($this->lang->line('location_database').':', 'database', ['class' => 'lable-form-required']).'<br>'.form_input('database', $data['database'], 'class="text_box"').'<br>';
+            } else {
+                echo $this->lang->line('location_database').':'.'<br>'.ucwords($data['database']);
+            }
+        ?>
 		</div>
 	</div>
 	<div>
@@ -36,12 +36,12 @@
 	<div>
 		<ul id="error_message_box"></ul>
 	</div>
-	<?php echo form_submit(array(
-	'name'=>'save',
-	'id'=>'save',
-	'value'=>$this->lang->line('location_save'),
-	'class'=>'small_button float_right'
-	)); ?>
+	<?php echo form_submit([
+    'name'  => 'save',
+    'id'    => 'save',
+    'value' => $this->lang->line('location_save'),
+    'class' => 'small_button float_right',
+    ]); ?>
 </div>
 <?php echo form_close(); ?>
 <script type="text/javascript">

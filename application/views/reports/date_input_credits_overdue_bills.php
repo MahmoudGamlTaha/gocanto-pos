@@ -1,50 +1,53 @@
-<?php $this->load->view("partial/header"); 
+<?php $this->load->view('partial/header');
 
-echo form_open_multipart('reports/customers_credit_overdue_bills_data/',array('id'=>'credit_customers_data'));
+echo form_open_multipart('reports/customers_credit_overdue_bills_data/', ['id' => 'credit_customers_data']);
 ?>
 
 <div id="page_title" style="margin-bottom:8px;"><?php echo $report_name.' '.$this->lang->line('reports_report_input').' - '.$customers_name; ?></div>
 
 <?php 
 
-	if(isset($error)){
-		echo "<div class='error_message' style=' margin: 0 0 10px 0'>".$error."</div>";
-	}
+    if (isset($error)) {
+        echo "<div class='error_message' style=' margin: 0 0 10px 0'>".$error.'</div>';
+    }
 ?>
 
 <div class="box-form-view" style="min-height: 150px !important">
 
 <?php 
-	if ($this->Employee->isAdmin()){
-	$dbs = $this->Location->get_select_option_list(false, true);
-	$dbs['default']='Principal';
-	if (count($dbs)>1) $dbs['all'] = 'All';
-?>
+    if ($this->Employee->isAdmin()) {
+        $dbs = $this->Location->get_select_option_list(false, true);
+        $dbs['default'] = 'Principal';
+        if (count($dbs) > 1) {
+            $dbs['all'] = 'All';
+        }
+        ?>
 	<div style="margin-top: 60px">
 		<label class="lable-form" for="locationbd">Select a location:</label>&nbsp;
-		<?=form_dropdown('locationbd', $dbs,'', 'id="locationbd"')?>
+		<?=form_dropdown('locationbd', $dbs, '', 'id="locationbd"')?>
 	</div>
-<?php }else{ 
-		form_hidden('locationbd', $this->session->userdata('dblocation'));
-	 } ?>	
+<?php 
+    } else {
+        form_hidden('locationbd', $this->session->userdata('dblocation'));
+    } ?>	
 	<!-- <div class="sub-title-view">
 		<?php echo form_label($this->lang->line('reports_date_range'), 'report_date_range_label'); ?>:
 	</div> -->
 
 	<!-- <div id='report_date_range_simple' style="padding: 0 0 0 25px">
 		<input type="radio" name="report_type" id="simple_radio" value='simple' checked='checked'/>
-		<?php echo form_dropdown('report_date_range_simple',$report_date_range_simple, '', 'id="report_date_range_simple"'); ?>
+		<?php echo form_dropdown('report_date_range_simple', $report_date_range_simple, '', 'id="report_date_range_simple"'); ?>
 	</div> -->
 		
 	<!-- <div id='report_date_range_complex' style="padding: 0 0 0 25px">
 		<input type="radio" name="report_type" id="complex_radio" value='complex' />
-		<?php echo form_dropdown('start_month',$months, $selected_month, 'id="start_month"'); ?>
-		<?php echo form_dropdown('start_day',$days, $selected_day, 'id="start_day"'); ?>
-		<?php echo form_dropdown('start_year',$years, $selected_year, 'id="start_year"'); ?>
+		<?php echo form_dropdown('start_month', $months, $selected_month, 'id="start_month"'); ?>
+		<?php echo form_dropdown('start_day', $days, $selected_day, 'id="start_day"'); ?>
+		<?php echo form_dropdown('start_year', $years, $selected_year, 'id="start_year"'); ?>
 		-
-		<?php echo form_dropdown('end_month',$months, $selected_month, 'id="end_month"'); ?>
-		<?php echo form_dropdown('end_day',$days, $selected_day, 'id="end_day"'); ?>
-		<?php echo form_dropdown('end_year',$years, $selected_year, 'id="end_year"'); ?>
+		<?php echo form_dropdown('end_month', $months, $selected_month, 'id="end_month"'); ?>
+		<?php echo form_dropdown('end_day', $days, $selected_day, 'id="end_day"'); ?>
+		<?php echo form_dropdown('end_year', $years, $selected_year, 'id="end_year"'); ?>
 	</div> -->
 	
 	<!-- <div class="sub-title-view">
@@ -52,7 +55,7 @@ echo form_open_multipart('reports/customers_credit_overdue_bills_data/',array('i
 	</div>
 
 	<div id='report_sale_type' style="padding: 0 0 30px 25px">
-		<?php echo form_dropdown('sale_type',array('all' => $this->lang->line('reports_all'), 'sales' => $this->lang->line('reports_sales'), 'returns' => $this->lang->line('reports_returns')), 'all', 'id="sale_type"'); ?>
+		<?php echo form_dropdown('sale_type', ['all' => $this->lang->line('reports_all'), 'sales' => $this->lang->line('reports_sales'), 'returns' => $this->lang->line('reports_returns')], 'all', 'id="sale_type"'); ?>
 	</div> -->
 	<!-- <input type="hidden" id="location" name="location" value="default"> -->
 
@@ -63,18 +66,18 @@ echo form_open_multipart('reports/customers_credit_overdue_bills_data/',array('i
 </div>
 <a class="linkBack big_button" style="height: auto" href="#"><span>Back</span></a>
 <?php
-	echo form_button(array(
-		'name'=>'submit',
-		'id'=>'submit',
-		'content'=>'<span>'.$this->lang->line('common_submit').'</span>',
-		'class'=>'big_button',
-		'style'=>'height: auto;',
-		'type'=>'submit'
-		)
-	);
-	echo form_close(); 
-	
-	$this->load->view("partial/footer");
+    echo form_button([
+        'name'    => 'submit',
+        'id'      => 'submit',
+        'content' => '<span>'.$this->lang->line('common_submit').'</span>',
+        'class'   => 'big_button',
+        'style'   => 'height: auto;',
+        'type'    => 'submit',
+        ]
+    );
+    echo form_close();
+
+    $this->load->view('partial/footer');
 ?>
 
 <script type="text/javascript" language="javascript">
@@ -132,7 +135,7 @@ echo form_open_multipart('reports/customers_credit_overdue_bills_data/',array('i
 	//    		},
 	// 		messages: 
 	// 		{
-	//      		pay_amount_credit:"<?php echo $this->lang->line('customers_pay_input_empty');  ?>"
+	//      		pay_amount_credit:"<?php echo $this->lang->line('customers_pay_input_empty'); ?>"
 	// 		}
 	// 	});
 

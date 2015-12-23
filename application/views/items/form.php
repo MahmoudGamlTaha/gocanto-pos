@@ -1,47 +1,51 @@
 <?php 
-if (!isset($sendto)) $sendto=''; else $sendto='-1/'.$sendto; 
-echo form_open_multipart('items/save/'.$item_info->item_id.$sendto,array('id'=>'item_form')); 
+if (!isset($sendto)) {
+    $sendto = '';
+} else {
+    $sendto = '-1/'.$sendto;
+}
+echo form_open_multipart('items/save/'.$item_info->item_id.$sendto, ['id' => 'item_form']);
 ?>
 <!-- <div id="item_basic_info"> -->
 <div>
-	<h3><?php echo $this->lang->line("items_basic_information"); ?></h3><hr>
+	<h3><?php echo $this->lang->line('items_basic_information'); ?></h3><hr>
 	<div class="field_row clearfix">
 		<div style="width: 210px; float: left">
 			<div class="field_row clearfix">
-				<?php echo form_label($this->lang->line('items_item_number').':', 'name',array('class'=>'lable-form')); ?>
+				<?php echo form_label($this->lang->line('items_item_number').':', 'name', ['class' => 'lable-form']); ?>
 				<div>
-				<?php echo form_input(array(
-					'name'=>'item_number',
-					'id'=>'item_number',
-					'value'=>$item_info->item_number,
-					'class'=>'text_box' //,'disabled'=>'disabled'
-				));?>
+				<?php echo form_input([
+                    'name'  => 'item_number',
+                    'id'    => 'item_number',
+                    'value' => $item_info->item_number,
+                    'class' => 'text_box', //,'disabled'=>'disabled'
+                ]); ?>
 				</div>
 			</div>
 		</div>
 		<div style="width: 210px; float: left">
 			<div class="field_row clearfix">
-				<?php echo form_label($this->lang->line('items_name').':', 'items_name',array('class'=>'lable-form-required')); ?>
+				<?php echo form_label($this->lang->line('items_name').':', 'items_name', ['class' => 'lable-form-required']); ?>
 				<div>
-				<?php echo form_input(array(
-					'name'=>'name',
-					'id'=>'name',
-					'value'=>$item_info->name,
-					'class'=>'text_box'
-				));?>
+				<?php echo form_input([
+                    'name'  => 'name',
+                    'id'    => 'name',
+                    'value' => $item_info->name,
+                    'class' => 'text_box',
+                ]); ?>
 				</div>
 			</div>
 		</div>
 		<div style="width: 210px; float: left">
 			<div class="field_row clearfix">
-				<?php echo form_label($this->lang->line('items_category').':', 'category',array('class'=>'lable-form-required')); ?>
+				<?php echo form_label($this->lang->line('items_category').':', 'category', ['class' => 'lable-form-required']); ?>
 				<div >
-				<?php echo form_input(array(
-					'name'=>'category',
-					'id'=>'category',
-					'value'=>$item_info->category,
-					'class'=>'text_box'
-				));?>
+				<?php echo form_input([
+                    'name'  => 'category',
+                    'id'    => 'category',
+                    'value' => $item_info->category,
+                    'class' => 'text_box',
+                ]); ?>
 				</div>
 			</div>
 		</div>
@@ -49,65 +53,69 @@ echo form_open_multipart('items/save/'.$item_info->item_id.$sendto,array('id'=>'
 	<div class="field_row clearfix">
 		<div style="width: 210px; float: left">
 			<div class="field_row clearfix">
-				<?=form_label($this->lang->line('items_supplier').':', 'supplier',array('class'=>'lable-form'))?>
+				<?=form_label($this->lang->line('items_supplier').':', 'supplier', ['class' => 'lable-form'])?>
 				<div>
-				<?=form_dropdown('supplier_id', $suppliers, $selected_supplier,'style="width:200px;"')?>
+				<?=form_dropdown('supplier_id', $suppliers, $selected_supplier, 'style="width:200px;"')?>
 				</div>
 			</div>
 		</div>
 		<div style="width: 210px; float: left">
 			<div class="field_row clearfix">
-				<?php echo form_label($this->lang->line('items_cost_price').':', 'cost_price',array('class'=>'lable-form-required')); ?>
+				<?php echo form_label($this->lang->line('items_cost_price').':', 'cost_price', ['class' => 'lable-form-required']); ?>
 				<div style="width: 85%;">
-				<?php echo form_input(array(
-					'name'=>'cost_price',
-					'size'=>'8',
-					'id'=>'cost_price',
-					'value'=>$item_info->cost_price,
-					'class'=>'text_box'
-				));?>
+				<?php echo form_input([
+                    'name'  => 'cost_price',
+                    'size'  => '8',
+                    'id'    => 'cost_price',
+                    'value' => $item_info->cost_price,
+                    'class' => 'text_box',
+                ]); ?>
 				</div>
 			</div>
 		</div>
 		<div style="width: 210px; float: left">
 			<div class="field_row clearfix">
-				<?php echo form_label($this->lang->line('items_unit_price').':', 'unit_price',array('class'=>'lable-form-required')); ?>
+				<?php echo form_label($this->lang->line('items_unit_price').':', 'unit_price', ['class' => 'lable-form-required']); ?>
 				<div style="width: 85%;">
-				<?php echo form_input(array(
-					'name'=>'unit_price',
-					'size'=>'8',
-					'id'=>'unit_price',
-					'value'=>$item_info->unit_price,
-					'class'=>'text_box'
-				));?>
+				<?php echo form_input([
+                    'name'  => 'unit_price',
+                    'size'  => '8',
+                    'id'    => 'unit_price',
+                    'value' => $item_info->unit_price,
+                    'class' => 'text_box',
+                ]); ?>
 				</div>
 			</div>
 		</div>
 	</div>
 	<div class="field_row clearfix">
 		<div class="field_row clearfix">
-			<?php echo form_label($this->lang->line('items_pictures').':', 'photo_label',array('class'=>'lable-form','style'=>'float:none;','style'=>'float:none;')); ?>
+			<?php echo form_label($this->lang->line('items_pictures').':', 'photo_label', ['class' => 'lable-form', 'style' => 'float:none;', 'style' => 'float:none;']); ?>
 		</div>
 		<div id="previewPhotos">
 			<center>
-				<?php $tuId=md5($this->session->userdata('dblocation').'-'.$item_info->item_id);
-				if ($item_info->item_id && is_dir('./images/items/'.md5($item_info->item_id).'/')) $band=true; 
-				for ($i=0; $i < 5; $i++) {  $bgImage="";$span="";
-					if (file_exists('./images/items/'.$tuId.'/'.$tuId.'_'.$i.'.jpg')){
-						$bgImage='style="background-image: url(\'./images/items/'.$tuId.'/'.$tuId.'_'.$i.'.jpg\')"';
-						$span='<span></span>';
-					}
-					echo '<div class="photo_add">
+				<?php $tuId = md5($this->session->userdata('dblocation').'-'.$item_info->item_id);
+                if ($item_info->item_id && is_dir('./images/items/'.md5($item_info->item_id).'/')) {
+                    $band = true;
+                }
+                for ($i = 0; $i < 5; $i++) {
+                    $bgImage = '';
+                    $span = '';
+                    if (file_exists('./images/items/'.$tuId.'/'.$tuId.'_'.$i.'.jpg')) {
+                        $bgImage = 'style="background-image: url(\'./images/items/'.$tuId.'/'.$tuId.'_'.$i.'.jpg\')"';
+                        $span = '<span></span>';
+                    }
+                    echo '<div class="photo_add">
 								'.$span.'
 								<div attr="'.$i.'" '.$bgImage.'>
 									<input type="file" name="photo[]" id="photo_'.$i.'" class="invisible" multiple disabled="disabled">
 									<input type="hidden" name="photo_hi_'.$i.'" id="photo_hi_'.$i.'" value="'.$i.'" disabled="disabled">
 								</div>
 						  </div>';
-				}
-				?>
+                }
+                ?>
 			</center>
-			<div class="upload_label"><?php echo $this->lang->line("common_logo_dimensiones"); ?></div>
+			<div class="upload_label"><?php echo $this->lang->line('common_logo_dimensiones'); ?></div>
 		</div>
 	</div>
 	<div class="field_row clearfix">
@@ -121,56 +129,56 @@ echo form_open_multipart('items/save/'.$item_info->item_id.$sendto,array('id'=>'
 		</div> -->
 		<div style="width: 210px; float: left">
 			<div class="field_row clearfix">
-				<?php echo form_label($this->lang->line('items_reorder_level').':', 'reorder_level_label',array('class'=>'lable-form')); ?>
+				<?php echo form_label($this->lang->line('items_reorder_level').':', 'reorder_level_label', ['class' => 'lable-form']); ?>
 				<div>
-				<?php echo form_input(array(
-					'name'=>'reorder_level',
-					'id'=>'reorder_level',
-					'value'=>($item_info->reorder_level?$item_info->reorder_level:0),
-					'class'=>'text_box'
-				));?>
+				<?php echo form_input([
+                    'name'  => 'reorder_level',
+                    'id'    => 'reorder_level',
+                    'value' => ($item_info->reorder_level ? $item_info->reorder_level : 0),
+                    'class' => 'text_box',
+                ]); ?>
 				</div>
-				<div class="upload_label"><?php echo $this->lang->line("items_reorder_level_text"); ?></div>
+				<div class="upload_label"><?php echo $this->lang->line('items_reorder_level_text'); ?></div>
 			</div>
 		</div>
 		<!-- <div style="width: 210px; float: left">
 			<div class="field_row clearfix">
-				<?php echo form_label($this->lang->line('items_location').':', 'location',array('class'=>'lable-form')); ?>	
+				<?php echo form_label($this->lang->line('items_location').':', 'location', ['class' => 'lable-form']); ?>	
 				<div >
-				<?php echo form_input(array(
-					'name'=>'location',
-					'id'=>'location',
-					'value'=>$item_info->location,
-					'class'=>'text_box'
-				));?>
+				<?php echo form_input([
+                    'name'  => 'location',
+                    'id'    => 'location',
+                    'value' => $item_info->location,
+                    'class' => 'text_box',
+                ]); ?>
 				</div>
 			</div>
 		</div> -->
 		<!-- <div style="width: 210px; float: left">
 			<div class="field_row clearfix">
-				<?php echo form_label($this->lang->line('items_allow_alt_desciption').':', 'allow_alt_description',array('class'=>'lable-form')); ?>
+				<?php echo form_label($this->lang->line('items_allow_alt_desciption').':', 'allow_alt_description', ['class' => 'lable-form']); ?>
 				<div >
-				<?php echo form_checkbox(array(
-					'name'=>'allow_alt_description',
-					'id'=>'allow_alt_description',
-					'value'=>1,
-					'checked'=>($item_info->allow_alt_description)? 1 :0,
-					'class'=>'text_box'
-				));?>
+				<?php echo form_checkbox([
+                    'name'    => 'allow_alt_description',
+                    'id'      => 'allow_alt_description',
+                    'value'   => 1,
+                    'checked' => ($item_info->allow_alt_description) ? 1 : 0,
+                    'class'   => 'text_box',
+                ]); ?>
 				</div>
 			</div>
 		</div>
 		<div style="width: 210px; float: left">
 			<div class="field_row clearfix">
-				<?php echo form_label($this->lang->line('items_is_serialized').':', 'is_serialized',array('class'=>'lable-form')); ?>
+				<?php echo form_label($this->lang->line('items_is_serialized').':', 'is_serialized', ['class' => 'lable-form']); ?>
 				<div >
-				<?php echo form_checkbox(array(
-					'name'=>'is_serialized',
-					'id'=>'is_serialized',
-					'value'=>1,
-					'checked'=>($item_info->is_serialized)? 1 : 0,
-					'class'=>'text_box'
-				));?>
+				<?php echo form_checkbox([
+                    'name'    => 'is_serialized',
+                    'id'      => 'is_serialized',
+                    'value'   => 1,
+                    'checked' => ($item_info->is_serialized) ? 1 : 0,
+                    'class'   => 'text_box',
+                ]); ?>
 				</div>
 			</div>
 		</div> -->
@@ -178,81 +186,81 @@ echo form_open_multipart('items/save/'.$item_info->item_id.$sendto,array('id'=>'
 	<div class="field_row clearfix">
 		<div style="width: 100%;">
 			<div class="field_row clearfix">
-				<?php echo form_label($this->lang->line('items_tax').':', 'tax_percent',array('class'=>'lable-form','style'=>'float:none;display:block;')); ?>
+				<?php echo form_label($this->lang->line('items_tax').':', 'tax_percent', ['class' => 'lable-form', 'style' => 'float:none;display:block;']); ?>
 				<div style="width: 45%;display:inline-block;">
-					<?php echo form_label($this->lang->line('items_tax_1').':', 'tax_percent_1',array('class'=>'lable-form','style'=>'float:none;')).'&nbsp;&nbsp;';  
-					echo form_input(array(
-						'name'=>'tax_names[]',
-						'id'=>'tax_name_1',
-						'size'=>'8',
-						'value'=> isset($item_tax_info[0]['name']) ? $item_tax_info[0]['name'] : $this->config->item('default_tax_1_name'),
-						'class'=>'text_box'
-					)); 
-					echo form_input(array(
-						'name'=>'tax_percents[]',
-						'id'=>'tax_percent_name_1',
-						'size'=>'3',
-						'value'=> isset($item_tax_info[0]['percent']) ? $item_tax_info[0]['percent'] : $default_tax_1_rate,
-						'class'=>'text_box'
-					));?>&nbsp;%
+					<?php echo form_label($this->lang->line('items_tax_1').':', 'tax_percent_1', ['class' => 'lable-form', 'style' => 'float:none;']).'&nbsp;&nbsp;';
+                    echo form_input([
+                        'name'  => 'tax_names[]',
+                        'id'    => 'tax_name_1',
+                        'size'  => '8',
+                        'value' => isset($item_tax_info[0]['name']) ? $item_tax_info[0]['name'] : $this->config->item('default_tax_1_name'),
+                        'class' => 'text_box',
+                    ]);
+                    echo form_input([
+                        'name'  => 'tax_percents[]',
+                        'id'    => 'tax_percent_name_1',
+                        'size'  => '3',
+                        'value' => isset($item_tax_info[0]['percent']) ? $item_tax_info[0]['percent'] : $default_tax_1_rate,
+                        'class' => 'text_box',
+                    ]); ?>&nbsp;%
 				</div>
 				<div style="width: 45%;display:inline-block;">
-				<?php echo form_label($this->lang->line('items_tax_2').':', 'tax_percent_2',array('class'=>'lable-form','style'=>'float:none;')).'&nbsp;&nbsp;'; 
-				 echo form_input(array(
-					'name'=>'tax_names[]',
-					'id'=>'tax_name_2',
-					'size'=>'8',
-					'value'=> isset($item_tax_info[1]['name']) ? $item_tax_info[1]['name'] : $this->config->item('default_tax_2_name'),
-					'class'=>'text_box'
-				));
-				echo form_input(array(
-					'name'=>'tax_percents[]',
-					'id'=>'tax_percent_name_2',
-					'size'=>'3',
-					'value'=> isset($item_tax_info[1]['percent']) ? $item_tax_info[1]['percent'] : $default_tax_2_rate,
-					'class'=>'text_box'
-				));?>&nbsp;%
+				<?php echo form_label($this->lang->line('items_tax_2').':', 'tax_percent_2', ['class' => 'lable-form', 'style' => 'float:none;']).'&nbsp;&nbsp;';
+                 echo form_input([
+                    'name'  => 'tax_names[]',
+                    'id'    => 'tax_name_2',
+                    'size'  => '8',
+                    'value' => isset($item_tax_info[1]['name']) ? $item_tax_info[1]['name'] : $this->config->item('default_tax_2_name'),
+                    'class' => 'text_box',
+                ]);
+                echo form_input([
+                    'name'  => 'tax_percents[]',
+                    'id'    => 'tax_percent_name_2',
+                    'size'  => '3',
+                    'value' => isset($item_tax_info[1]['percent']) ? $item_tax_info[1]['percent'] : $default_tax_2_rate,
+                    'class' => 'text_box',
+                ]); ?>&nbsp;%
 				</div>
 			</div>
 		</div>
 	</div>
 	<div class="field_row clearfix">
 		<div style="width: 100%;">
-			<?=form_label($this->lang->line('items_tipe').':', 'tipe',array('class'=>'lable-form','style'=>'float:none;display:block;'))?>
+			<?=form_label($this->lang->line('items_tipe').':', 'tipe', ['class' => 'lable-form', 'style' => 'float:none;display:block;'])?>
 			<div style="display:inline-block;width:30%;">
-			<?php echo form_checkbox(array(
-				'id'=>'is_service',
-				'name'=>'is_service',
-				'class'=>'wide',
-				'value'=>'is_service',
-				'checked'=>$item_info->is_service
-			)); ?>&nbsp;
-			<?=form_label($this->lang->line('items_is_service').':', 'service',array('class'=>'lable-form','style'=>'float:none'))?>
+			<?php echo form_checkbox([
+                'id'      => 'is_service',
+                'name'    => 'is_service',
+                'class'   => 'wide',
+                'value'   => 'is_service',
+                'checked' => $item_info->is_service,
+            ]); ?>&nbsp;
+			<?=form_label($this->lang->line('items_is_service').':', 'service', ['class' => 'lable-form', 'style' => 'float:none'])?>
 			</div>
 			<div style="display:inline-block;width:30%;">
-				<?php echo form_checkbox(array(
-					'id'=>'is_locked',
-					'name'=>'is_locked',
-					'class'=>'wide',
-					'value'=>'is_locked',
-					'checked'=>$item_info->is_locked
-				)); ?>&nbsp;
-				<?=form_label($this->lang->line('items_is_locked').':', 'locked',array('class'=>'lable-form','style'=>'float:none'))?>
+				<?php echo form_checkbox([
+                    'id'      => 'is_locked',
+                    'name'    => 'is_locked',
+                    'class'   => 'wide',
+                    'value'   => 'is_locked',
+                    'checked' => $item_info->is_locked,
+                ]); ?>&nbsp;
+				<?=form_label($this->lang->line('items_is_locked').':', 'locked', ['class' => 'lable-form', 'style' => 'float:none'])?>
 			</div>
 		</div>
 	</div>
 	<div class="field_row clearfix">
 		<div style="float: left">
 			<div class="field_row clearfix">
-				<?php echo form_label($this->lang->line('items_description').':', 'description',array('class'=>'lable-form')); ?>
+				<?php echo form_label($this->lang->line('items_description').':', 'description', ['class' => 'lable-form']); ?>
 				<div>
-				<?php echo form_textarea(array(
-					'name'=>'description',
-					'id'=>'description',
-					'value'=>$item_info->description,
-					'rows'=>'5',
-					'cols'=>'60')
-				);?>
+				<?php echo form_textarea([
+                    'name'  => 'description',
+                    'id'    => 'description',
+                    'value' => $item_info->description,
+                    'rows'  => '5',
+                    'cols'  => '60', ]
+                ); ?>
 				</div>
 			</div>
 		</div>
@@ -262,19 +270,19 @@ echo form_open_multipart('items/save/'.$item_info->item_id.$sendto,array('id'=>'
 	<?=$this->lang->line('common_fields_required_message')?>
 </div>
 <ul id="error_message_box"></ul>
-<?php echo form_submit(array(
-	'name'=>'enviar',
-	'id'=>'enviar',
-	'value'=>$this->lang->line('common_submit'),
-	'class'=>'small_button float_right'
-)); ?>
+<?php echo form_submit([
+    'name'  => 'enviar',
+    'id'    => 'enviar',
+    'value' => $this->lang->line('common_submit'),
+    'class' => 'small_button float_right',
+]); ?>
 <?php echo form_close(); ?>
 <script type='text/javascript'>
 //validation and submit handling
 $(function(){
 	var pass=true,extensiones_permitidas = new Array(".gif", ".jpg", ".png");
 	$("#category")
-		.autocomplete("<?php echo site_url('items/suggest_category');?>",{max:100,minChars:0,delay:10})
+		.autocomplete("<?php echo site_url('items/suggest_category'); ?>",{max:100,minChars:0,delay:10})
 		.result(function(event,data,formatted){})
 		.search();
 	$('span.width_label_photo,span.height_label_photo').html(250);
@@ -283,7 +291,7 @@ $(function(){
 	});
 	$('.photo_add span').click(function(e) {
 		e.preventDefault();
-		if (confirm('<?php echo $this->lang->line("items_confirm_delete_picture"); ?>')){
+		if (confirm('<?php echo $this->lang->line('items_confirm_delete_picture'); ?>')){
 			var url=$('#item_form').attr('action').split('save');
 			var div=$(this).next('div');
 			$$.ajax({
@@ -306,7 +314,7 @@ $(function(){
 				$(this).next('input').removeAttr('disabled');
 				$(this).parents('div[attr]').addClass('photo_add_active');	
 			}else{ 
-				alert('<?php echo $this->lang->line("common_image_faild"); ?>'); 
+				alert('<?php echo $this->lang->line('common_image_faild'); ?>'); 
 				$(this).removeAttr('value');
 				$(this).attr('disabled','disabled').next('input').attr('disabled','disabled');
 				$(this).parents('div[attr]').removeClass('photo_add_active');	
@@ -402,7 +410,7 @@ $(function(){
 });
 //new jQuery
 (function($){
-	var msg='<?=$this->lang->line("items_is_service_true")?>';reor=0;
+	var msg='<?=$this->lang->line('items_is_service_true')?>';reor=0;
 	$('#is_service').change(function(){
 		var checked=$(this).is(':checked');
 		$(this).parents('#item_form').find('#quantity,#reorder_level').prop('disabled',checked);

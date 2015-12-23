@@ -1,4 +1,7 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php
+ if (!defined('BASEPATH')) {
+     exit('No direct script access allowed');
+ }
 /*
 | -------------------------------------------------------------------------
 | Hooks
@@ -9,13 +12,12 @@
 |	http://codeigniter.com/user_guide/general/hooks.html
 |
 */
-$hook['post_controller_constructor'] = array(
+$hook['post_controller_constructor'] = [
                                 'class'    => '',
                                 'function' => 'load_config',
                                 'filename' => 'load_config.php',
-                                'filepath' => 'hooks'
-                                );
-
+                                'filepath' => 'hooks',
+                                ];
 
 /* End of file hooks.php */
 /* Location: ./application/config/hooks.php */

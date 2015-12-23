@@ -1,46 +1,49 @@
-<?php $this->load->view("partial/header"); ?>
+<?php $this->load->view('partial/header'); ?>
 <div id="page_title" style="margin-bottom:8px;"><?php echo $this->lang->line('recvs_register'); ?></div>
 <?php 
-if(isset($error)){ echo "<div class='error_message'>".$error."</div>"; }
+if (isset($error)) {
+    echo "<div class='error_message'>".$error.'</div>';
+}
 //Convert assoc arr in normal vars
-foreach ($data as $key => $value) ${$key} = $value;
+foreach ($data as $key => $value) {
+    ${$key} = $value;
+}
 
-if ($this->Transfers->available()): 
-	echo form_open("receivings/index/",array('id'=>'receivings_form')); 
-	echo form_input(array('name'=>'reception','id'=>'reception','size'=>'40','placeholder'=>$this->lang->line('recvs_scan_code')));?>
+if ($this->Transfers->available()):
+    echo form_open('receivings/index/', ['id' => 'receivings_form']);
+    echo form_input(['name' => 'reception', 'id' => 'reception', 'size' => '40', 'placeholder' => $this->lang->line('recvs_scan_code')]); ?>
 	<input type="submit" value="<?php echo $this->lang->line('recvs_load'); ?>" class="small_button">
 <?php 
-	echo form_close();
-endif; 
+    echo form_close();
+endif;
 ?>
 <div id="filter-bar" id="titleTextImg" class="middle-gray-bar" style="display: none;">
 	<div style="float:left;"><?php echo $this->lang->line('search_options') ?> :</div>
 		<div id="search_filter_section" style="text-align: right; font-weight: bold;  font-size: 12px; ">
-		<?php 	 
-		echo form_open("receivings",array('id'=>'orders_filter_form')); 
-		$labels=array($this->lang->line('services_all'),
-					$this->lang->line('services_today'),
-					$this->lang->line('services_yesterday'),
-					$this->lang->line('services_lastweek'),
-					$this->lang->line('services_lastmonth'));
-		$barra='';
-		for ($i=0; $i < count($labels); $i++) { 
-			$barra.=($barra==''?'':'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;').form_radio(array('name'=>'filters','id'=>'filters'.$i,'value'=>$i,'checked'=>($cfilter==$i?1:0))).'&nbsp;'.form_label($labels[$i],'labelfilter'.$i);
-					
-		}
-		echo $barra.'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
-		$status_list = array("0"=>$this->lang->line('services_status'),
-						 "1"=>$this->lang->line('orders_status1'),
-						 "2"=>$this->lang->line('orders_status2'));
-		$other_filters_list = array(
-			$this->lang->line('reports_all'),
-			$this->lang->line('recvs_sent'),
-			$this->lang->line('recvs_receiving')
-		);
-		echo form_dropdown('filter_status', $status_list,$sfilter,"id='filter_status'");
-		echo form_dropdown('filter_other', $other_filters_list,$filters,"id='filter_other'");
-	    echo form_close(); 
-		?>
+		<?php 
+        echo form_open('receivings', ['id' => 'orders_filter_form']);
+        $labels = [$this->lang->line('services_all'),
+                    $this->lang->line('services_today'),
+                    $this->lang->line('services_yesterday'),
+                    $this->lang->line('services_lastweek'),
+                    $this->lang->line('services_lastmonth'), ];
+        $barra = '';
+        for ($i = 0; $i < count($labels); $i++) {
+            $barra .= ($barra == '' ? '' : '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;').form_radio(['name' => 'filters', 'id' => 'filters'.$i, 'value' => $i, 'checked' => ($cfilter == $i ? 1 : 0)]).'&nbsp;'.form_label($labels[$i], 'labelfilter'.$i);
+        }
+        echo $barra.'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+        $status_list = ['0'  => $this->lang->line('services_status'),
+                         '1' => $this->lang->line('orders_status1'),
+                         '2' => $this->lang->line('orders_status2'), ];
+        $other_filters_list = [
+            $this->lang->line('reports_all'),
+            $this->lang->line('recvs_sent'),
+            $this->lang->line('recvs_receiving'),
+        ];
+        echo form_dropdown('filter_status', $status_list, $sfilter, "id='filter_status'");
+        echo form_dropdown('filter_other', $other_filters_list, $filters, "id='filter_other'");
+        echo form_close();
+        ?>
 	</div>
 </div>
 <ul class="tabs">
@@ -49,13 +52,13 @@ endif;
 		<label for="tab-1"><?php echo $this->lang->line('recvs_receiving') ?></label>
 		<div class="content">
 		<?php
-		if (!$data_receive['reception_shipping']) {
-			$this->load->view('receivings/receiving', $data_receive); 
-		}else{
-			$this->load->view("receivings/receiving_",$data_receive);
-		}
+        if (!$data_receive['reception_shipping']) {
+            $this->load->view('receivings/receiving', $data_receive);
+        } else {
+            $this->load->view('receivings/receiving_', $data_receive);
+        }
 
-		?>
+        ?>
 		</div>
 	</li>
 	<li class="tab">
@@ -87,25 +90,25 @@ endif;
 								<td><?php echo $transaction['sender'] ?></td>
 								<td><?php echo $transaction['receiver'] ?></td>
 								<td><?php echo $status[$transaction['status']] ?></td>
-								<td><?php echo (($transaction['comment']) ? $transaction['comment'] : $this->lang->line('reports_no_comment') ); ?></td>
+								<td><?php echo ($transaction['comment']) ? $transaction['comment'] : $this->lang->line('reports_no_comment'); ?></td>
 								<td>
 									<div>
 									<?php
-									if ($transaction['status'] != 0 && $transaction['receiver'] == $location) {
-										echo form_open("receivings/index/", array('id'=>'form-'.$transaction['transfer_id'])); 
-										echo form_hidden('reception', $transaction['transfer_id']);
-										echo form_submit(array('name'=>'submit','value'=>$this->lang->line('employees_profile_see'),'class'=>'small_button'));
-										echo form_close();
-									}
-									?>
+                                    if ($transaction['status'] != 0 && $transaction['receiver'] == $location) {
+                                        echo form_open('receivings/index/', ['id' => 'form-'.$transaction['transfer_id']]);
+                                        echo form_hidden('reception', $transaction['transfer_id']);
+                                        echo form_submit(['name' => 'submit', 'value' => $this->lang->line('employees_profile_see'), 'class' => 'small_button']);
+                                        echo form_close();
+                                    }
+                                    ?>
 									</div>
 								</td>
 							</tr>
 							<tr class="hide">
 								<td colspan="8">
 									<?php
-									$transaction_details = $this->Transfers->get_reception_detail($transaction['transfer_id']);
-									?>
+                                    $transaction_details = $this->Transfers->get_reception_detail($transaction['transfer_id']);
+                                    ?>
 									<table class="innertable">
 										<thead>
 											<tr style="color:#FFFFFF;background-color:#0a6184;">
@@ -145,11 +148,11 @@ endif;
 	</li>
 </ul>
 <div class="clearfix" style="margin-bottom:30px;">&nbsp;</div>
-<?php $this->load->view("partial/footer"); ?>
+<?php $this->load->view('partial/footer'); ?>
 <script type="text/javascript" language="javascript">
 $(document).ready(function(){
 	//Tab 1
-	$("#item").autocomplete('<?php echo site_url("receivings/item_search"); ?>',{
+	$("#item").autocomplete('<?php echo site_url('receivings/item_search'); ?>',{
     	minChars:0,
     	max:100,
        	delay:10,
@@ -178,7 +181,7 @@ $(document).ready(function(){
     	$(this).attr('value','');
     });
 
-    $("#supplier").autocomplete('<?php echo site_url("receivings/supplier_search"); ?>',
+    $("#supplier").autocomplete('<?php echo site_url('receivings/supplier_search'); ?>',
     {
     	minChars:0,
     	delay:10,
@@ -201,7 +204,7 @@ $(document).ready(function(){
     	},5500);
     	notif({
 		  type: "info",
-		  msg: '<?php echo $this->lang->line("recvs_confirm_finish_receiving"); ?>',
+		  msg: '<?php echo $this->lang->line('recvs_confirm_finish_receiving'); ?>',
 		  width: "all",
 		  height: 100,
 		  position: "center"
@@ -225,7 +228,7 @@ $(document).ready(function(){
     	},5500);
     	notif({
 		  type: "warning",
-		  msg: '<?php echo $this->lang->line("recvs_confirm_cancel_receiving"); ?>',
+		  msg: '<?php echo $this->lang->line('recvs_confirm_cancel_receiving'); ?>',
 		  width: "all",
 		  height: 100,
 		  position: "center"

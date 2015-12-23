@@ -1,5 +1,5 @@
 <?php
-$this->load->view("partial/header");
+$this->load->view('partial/header');
 $total_general = 0;
 ?>
 <style>
@@ -25,11 +25,11 @@ $total_general = 0;
             <div id="page_title" style="margin-bottom:8px;"><?php echo $title ?></div>
             <div class="page_subtitle" style="margin-bottom:8px;">
                 <?php echo $subtitle ?><br>
-                <div id="employee"><?php echo $this->lang->line('employees_employee').": ".$employee ?></div>
+                <div id="employee"><?php echo $this->lang->line('employees_employee').': '.$employee ?></div>
             </div>
         </td>
         <td>
-            <?php echo '<img src="'.site_url().'/barcode?barcode='.$barcode.'&text='.$barcodetext.'&width=256" />';  ?>
+            <?php echo '<img src="'.site_url().'/barcode?barcode='.$barcode.'&text='.$barcodetext.'&width=256" />'; ?>
         </td>
     </tr>
 </table>
@@ -46,14 +46,14 @@ $total_general = 0;
         </thead>
         <tbody>
 
-        <?php for ($i=0;$i<count($items_info);$i++): ?>
-            <?php $total_general += $items_info[$i]->cost_price*$items_info[$i]->quantity; ?>
+        <?php for ($i = 0; $i < count($items_info); $i++): ?>
+            <?php $total_general += $items_info[$i]->cost_price * $items_info[$i]->quantity; ?>
         	<tr>
         		<td><?php echo $items_info[$i]->item_id; ?></td>
         		<td><?php echo $items_info[$i]->name; ?></td>
         		<td><?php echo $items_info[$i]->quantity; ?></td>
         		<td><?php echo to_currency($items_info[$i]->cost_price); ?></td>
-        		<td><?php echo to_currency($items_info[$i]->cost_price*$items_info[$i]->quantity); ?></td>
+        		<td><?php echo to_currency($items_info[$i]->cost_price * $items_info[$i]->quantity); ?></td>
         	</tr>
         <?php endfor; ?>
             <tr>
@@ -74,7 +74,7 @@ $total_general = 0;
     <div class="big_button" style="float: left;"><span>Back</span></div>
 </a>
 <?php
-$this->load->view("partial/footer");
+$this->load->view('partial/footer');
 ?>
 <script>
 	$('.linkPrint').click(function(){

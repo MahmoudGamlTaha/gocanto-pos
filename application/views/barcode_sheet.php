@@ -9,17 +9,15 @@
 <tr>
 <?php 
 $count = 0;
-foreach($items as $item)
-{
-	$barcode = $item['id'];
-	$text = $item['name'];
-	
-	if ($count % 2 ==0 and $count!=0)
-	{
-		echo '</tr><tr>';
-	}
-	echo "<td><img src='".site_url()."/barcode?barcode=$barcode&text=$text&width=256' /></td>";
-	$count++;
+foreach ($items as $item) {
+    $barcode = $item['id'];
+    $text = $item['name'];
+
+    if ($count % 2 == 0 and $count != 0) {
+        echo '</tr><tr>';
+    }
+    echo "<td><img src='".site_url()."/barcode?barcode=$barcode&text=$text&width=256' /></td>";
+    $count++;
 }
 ?>
 </tr>

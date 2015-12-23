@@ -1,8 +1,9 @@
 <?php
+
 /*===========================================================================*/
 /*      PHP Barcode Image Generator v1.0 [9/28/2000]
         Copyright (C)2000 by Charles J. Scheffold - cs@wsia.fm
-		Modified by Chris Muench [11/9/08] to work with codeignitor application framework
+        Modified by Chris Muench [11/9/08] to work with codeignitor application framework
 
         ---
         UPDATE 09/21/2002 by Laurent NAVARRO - ln@altidev.com - http://www.altidev.com
@@ -76,154 +77,164 @@
 */
 /*=============================================================================*/
 
-
 //-----------------------------------------------------------------------------
 // Startup code
 //-----------------------------------------------------------------------------
 
-if(isset($_GET["text"])) $text=$_GET["text"];
-if(isset($_GET["format"])) $format=$_GET["format"];
-if(isset($_GET["quality"])) $quality=$_GET["quality"];
-if(isset($_GET["width"])) $width=$_GET["width"];
-if(isset($_GET["height"])) $height=$_GET["height"];
-if(isset($_GET["type"])) $type=$_GET["type"];
-if(isset($_GET["barcode"])) $barcode=$_GET["barcode"];
+if (isset($_GET['text'])) {
+    $text = $_GET['text'];
+}
+if (isset($_GET['format'])) {
+    $format = $_GET['format'];
+}
+if (isset($_GET['quality'])) {
+    $quality = $_GET['quality'];
+}
+if (isset($_GET['width'])) {
+    $width = $_GET['width'];
+}
+if (isset($_GET['height'])) {
+    $height = $_GET['height'];
+}
+if (isset($_GET['type'])) {
+    $type = $_GET['type'];
+}
+if (isset($_GET['barcode'])) {
+    $barcode = $_GET['barcode'];
+}
 
-if (!isset ($text)) $text = '';
-if (!isset ($type)) $type = 1;
-if (empty ($quality)) $quality = 100;
-if (empty ($width)) $width = 160;
-if (empty ($height)) $height = 80;
-if (!empty ($format)) $format = strtoupper ($format);
-        else $format="PNG";
+if (!isset($text)) {
+    $text = '';
+}
+if (!isset($type)) {
+    $type = 1;
+}
+if (empty($quality)) {
+    $quality = 100;
+}
+if (empty($width)) {
+    $width = 160;
+}
+if (empty($height)) {
+    $height = 80;
+}
+if (!empty($format)) {
+    $format = strtoupper($format);
+} else {
+            $format = 'PNG';
+        }
 
-switch ($type)
-{
+switch ($type) {
         default:
                 $type = 1;
         case 1:
-                Barcode39 ($barcode, $width, $height, $quality, $format, $text);
-                break;          
+                Barcode39($barcode, $width, $height, $quality, $format, $text);
+                break;
 }
 
 //-----------------------------------------------------------------------------
 // Generate a Code 3 of 9 barcode
 //-----------------------------------------------------------------------------
-function Barcode39 ($barcode, $width, $height, $quality, $format, $text)
+function Barcode39($barcode, $width, $height, $quality, $format, $text)
 {
-        switch ($format)
-        {
+    switch ($format) {
                 default:
-                        $format = "JPEG";
-                case "JPEG": 
-                        header ("Content-type: image/jpeg");
+                        $format = 'JPEG';
+                case 'JPEG':
+                        header('Content-type: image/jpeg');
                         break;
-                case "PNG":
-                        header ("Content-type: image/png");
+                case 'PNG':
+                        header('Content-type: image/png');
                         break;
-                case "GIF":
-                        header ("Content-type: image/gif");
+                case 'GIF':
+                        header('Content-type: image/gif');
                         break;
         }
 
-
-        $im = ImageCreate ($width, $height)
-    or die ("Cannot Initialize new GD image stream");
-        $White = ImageColorAllocate ($im, 255, 255, 255);
-        $Black = ImageColorAllocate ($im, 0, 0, 0);
+    $im = ImageCreate($width, $height)
+    or die('Cannot Initialize new GD image stream');
+    $White = ImageColorAllocate($im, 255, 255, 255);
+    $Black = ImageColorAllocate($im, 0, 0, 0);
         //ImageColorTransparent ($im, $White);
-        ImageInterLace ($im, 1);
+        ImageInterLace($im, 1);
 
+    $NarrowRatio = 20;
+    $WideRatio = 55;
+    $QuietRatio = 35;
 
+    $nChars = (strlen($barcode) + 2) * ((6 * $NarrowRatio) + (3 * $WideRatio) + ($QuietRatio));
+    $Pixels = $width / $nChars;
+    $NarrowBar = (int) (20 * $Pixels);
+    $WideBar = (int) (55 * $Pixels);
+    $QuietBar = (int) (35 * $Pixels);
 
-        $NarrowRatio = 20;
-        $WideRatio = 55;
-        $QuietRatio = 35;
+    $ActualWidth = (($NarrowBar * 6) + ($WideBar * 3) + $QuietBar) * (strlen($barcode) + 2);
 
+    if (($NarrowBar == 0) || ($NarrowBar == $WideBar) || ($NarrowBar == $QuietBar) || ($WideBar == 0) || ($WideBar == $QuietBar) || ($QuietBar == 0)) {
+        ImageString($im, 1, 0, 0, 'Image is too small!', $Black);
+        OutputImage($im, $format, $quality);
+        exit;
+    }
 
-        $nChars = (strlen($barcode)+2) * ((6 * $NarrowRatio) + (3 * $WideRatio) + ($QuietRatio));
-        $Pixels = $width / $nChars;
-        $NarrowBar = (int)(20 * $Pixels);
-        $WideBar = (int)(55 * $Pixels);
-        $QuietBar = (int)(35 * $Pixels);
+    $CurrentBarX = (int) (($width - $ActualWidth) / 2);
+    $Color = $White;
+    $BarcodeFull = '*'.strtoupper($barcode).'*';
+    settype($BarcodeFull, 'string');
 
+    $FontNum = 3;
+    $FontHeight = ImageFontHeight($FontNum);
+    $FontWidth = ImageFontWidth($FontNum);
 
-        $ActualWidth = (($NarrowBar * 6) + ($WideBar*3) + $QuietBar) * (strlen ($barcode)+2);
-        
-        if (($NarrowBar == 0) || ($NarrowBar == $WideBar) || ($NarrowBar == $QuietBar) || ($WideBar == 0) || ($WideBar == $QuietBar) || ($QuietBar == 0))
-        {
-                ImageString ($im, 1, 0, 0, "Image is too small!", $Black);
-                OutputImage ($im, $format, $quality);
-                exit;
-        }
-        
-        $CurrentBarX = (int)(($width - $ActualWidth) / 2);
-        $Color = $White;
-        $BarcodeFull = "*".strtoupper ($barcode)."*";
-        settype ($BarcodeFull, "string");
-        
-        $FontNum = 3;
-        $FontHeight = ImageFontHeight ($FontNum);
-        $FontWidth = ImageFontWidth ($FontNum);
-        
-        if ($text != '')
-        {
-                $CenterLoc = (int)(($width) / 2) - (int)(($FontWidth * strlen($text)) / 2);
-                ImageString ($im, $FontNum, $CenterLoc, $height-$FontHeight, "$text", $Black);
-        }
-        
+    if ($text != '') {
+        $CenterLoc = (int) (($width) / 2) - (int) (($FontWidth * strlen($text)) / 2);
+        ImageString($im, $FontNum, $CenterLoc, $height - $FontHeight, "$text", $Black);
+    }
 
-        for ($i=0; $i<strlen($BarcodeFull); $i++)
-        {
-                $StripeCode = Code39 ($BarcodeFull[$i]);
+    for ($i = 0; $i < strlen($BarcodeFull); $i++) {
+        $StripeCode = Code39($BarcodeFull[$i]);
 
+        for ($n = 0; $n < 9; $n++) {
+            if ($Color == $White) {
+                $Color = $Black;
+            } else {
+                $Color = $White;
+            }
 
-                for ($n=0; $n < 9; $n++)
-                {
-                        if ($Color == $White) $Color = $Black;
-                        else $Color = $White;
-
-
-                        switch ($StripeCode[$n])
-                        {
+            switch ($StripeCode[$n]) {
                                 case '0':
-                                        ImageFilledRectangle ($im, $CurrentBarX, 0, $CurrentBarX+$NarrowBar, $height-1-$FontHeight-2, $Color);
+                                        ImageFilledRectangle($im, $CurrentBarX, 0, $CurrentBarX + $NarrowBar, $height - 1 - $FontHeight - 2, $Color);
                                         $CurrentBarX += $NarrowBar;
                                         break;
 
-
                                 case '1':
-                                        ImageFilledRectangle ($im, $CurrentBarX, 0, $CurrentBarX+$WideBar, $height-1-$FontHeight-2, $Color);
+                                        ImageFilledRectangle($im, $CurrentBarX, 0, $CurrentBarX + $WideBar, $height - 1 - $FontHeight - 2, $Color);
                                         $CurrentBarX += $WideBar;
                                         break;
                         }
-                }
-
-
-                $Color = $White;
-                ImageFilledRectangle ($im, $CurrentBarX, 0, $CurrentBarX+$QuietBar, $height-1-$FontHeight-2, $Color);
-                $CurrentBarX += $QuietBar;
         }
 
+        $Color = $White;
+        ImageFilledRectangle($im, $CurrentBarX, 0, $CurrentBarX + $QuietBar, $height - 1 - $FontHeight - 2, $Color);
+        $CurrentBarX += $QuietBar;
+    }
 
-        OutputImage ($im, $format, $quality);
+    OutputImage($im, $format, $quality);
 }
 
 //-----------------------------------------------------------------------------
 // Output an image to the browser
 //-----------------------------------------------------------------------------
-function OutputImage ($im, $format, $quality)
+function OutputImage($im, $format, $quality)
 {
-        switch ($format)
-        {
-                case "JPEG": 
-                        ImageJPEG ($im, "", $quality);
+    switch ($format) {
+                case 'JPEG':
+                        ImageJPEG($im, '', $quality);
                         break;
-                case "PNG":
-                        ImagePNG ($im);
+                case 'PNG':
+                        ImagePNG($im);
                         break;
-                case "GIF":
-                        ImageGIF ($im);
+                case 'GIF':
+                        ImageGIF($im);
                         break;
         }
 }
@@ -231,102 +242,98 @@ function OutputImage ($im, $format, $quality)
 //-----------------------------------------------------------------------------
 // Returns the Code 3 of 9 value for a given ASCII character
 //-----------------------------------------------------------------------------
-function Code39 ($Asc)
+function Code39($Asc)
 {
-        switch ($Asc)
-        {
+    switch ($Asc) {
                 case ' ':
-                        return "011000100";     
+                        return '011000100';
                 case '$':
-                        return "010101000";             
+                        return '010101000';
                 case '%':
-                        return "000101010"; 
+                        return '000101010';
                 case '*':
-                        return "010010100"; // * Start/Stop
+                        return '010010100'; // * Start/Stop
                 case '+':
-                        return "010001010"; 
+                        return '010001010';
                 case '|':
-                        return "010000101"; 
+                        return '010000101';
                 case '.':
-                        return "110000100"; 
+                        return '110000100';
                 case '/':
-                        return "010100010"; 
+                        return '010100010';
                 case '0':
-                        return "000110100"; 
+                        return '000110100';
                 case '1':
-                        return "100100001"; 
+                        return '100100001';
                 case '2':
-                        return "001100001"; 
+                        return '001100001';
                 case '3':
-                        return "101100000"; 
+                        return '101100000';
                 case '4':
-                        return "000110001"; 
+                        return '000110001';
                 case '5':
-                        return "100110000"; 
+                        return '100110000';
                 case '6':
-                        return "001110000"; 
+                        return '001110000';
                 case '7':
-                        return "000100101"; 
+                        return '000100101';
                 case '8':
-                        return "100100100"; 
+                        return '100100100';
                 case '9':
-                        return "001100100"; 
+                        return '001100100';
                 case 'A':
-                        return "100001001"; 
+                        return '100001001';
                 case 'B':
-                        return "001001001"; 
+                        return '001001001';
                 case 'C':
-                        return "101001000";
+                        return '101001000';
                 case 'D':
-                        return "000011001";
+                        return '000011001';
                 case 'E':
-                        return "100011000";
+                        return '100011000';
                 case 'F':
-                        return "001011000";
+                        return '001011000';
                 case 'G':
-                        return "000001101";
+                        return '000001101';
                 case 'H':
-                        return "100001100";
+                        return '100001100';
                 case 'I':
-                        return "001001100";
+                        return '001001100';
                 case 'J':
-                        return "000011100";
+                        return '000011100';
                 case 'K':
-                        return "100000011";
+                        return '100000011';
                 case 'L':
-                        return "001000011";
+                        return '001000011';
                 case 'M':
-                        return "101000010";
+                        return '101000010';
                 case 'N':
-                        return "000010011";
+                        return '000010011';
                 case 'O':
-                        return "100010010";
+                        return '100010010';
                 case 'P':
-                        return "001010010";
+                        return '001010010';
                 case 'Q':
-                        return "000000111";
+                        return '000000111';
                 case 'R':
-                        return "100000110";
+                        return '100000110';
                 case 'S':
-                        return "001000110";
+                        return '001000110';
                 case 'T':
-                        return "000010110";
+                        return '000010110';
                 case 'U':
-                        return "110000001";
+                        return '110000001';
                 case 'V':
-                        return "011000001";
+                        return '011000001';
                 case 'W':
-                        return "111000000";
+                        return '111000000';
                 case 'X':
-                        return "010010001";
+                        return '010010001';
                 case 'Y':
-                        return "110010000";
+                        return '110010000';
                 case 'Z':
-                        return "011010000";
+                        return '011010000';
                 default:
-                        return "011000100"; 
+                        return '011000100';
         }
 }
-
-
-?>

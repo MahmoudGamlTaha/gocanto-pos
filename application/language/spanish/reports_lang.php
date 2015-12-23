@@ -1,4 +1,5 @@
 <?php
+
 $lang['reports_reports'] = 'Reportes';
 $lang['reports_report'] = 'Reporte';
 $lang['reports_welcome_message'] = 'Bienvenido(a) al panel de reportes. Selecciona un reporte para verlo.';
@@ -109,4 +110,3 @@ $lang['reports_credits_report_date2'] = 'hasta';
 $lang['reports_credits_report_initial'] = 'Saldo Initial';
 $lang['reports_credits_report_final'] = 'Saldo Final';
 $lang['reports_credits_report_saldo'] = 'Saldo Total';
-?>

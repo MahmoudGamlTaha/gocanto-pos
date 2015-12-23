@@ -1,4 +1,7 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php
+ if (!defined('BASEPATH')) {
+     exit('No direct script access allowed');
+ }
 /*
 | -------------------------------------------------------------------
 | AUTO-LOADER
@@ -37,8 +40,7 @@
 |
 */
 
-$autoload['packages'] = array();
-
+$autoload['packages'] = [];
 
 /*
 | -------------------------------------------------------------------
@@ -52,8 +54,7 @@ $autoload['packages'] = array();
 |	$autoload['libraries'] = array('database', 'session', 'xmlrpc');
 */
 
-$autoload['libraries'] = array('database','form_validation','session','user_agent', 'pagination');
-
+$autoload['libraries'] = ['database', 'form_validation', 'session', 'user_agent', 'pagination'];
 
 /*
 | -------------------------------------------------------------------
@@ -64,8 +65,7 @@ $autoload['libraries'] = array('database','form_validation','session','user_agen
 |	$autoload['helper'] = array('url', 'file');
 */
 
-$autoload['helper'] = array('form','url','table','text','currency', 'html', 'download');
-
+$autoload['helper'] = ['form', 'url', 'table', 'text', 'currency', 'html', 'download'];
 
 /*
 | -------------------------------------------------------------------
@@ -80,8 +80,7 @@ $autoload['helper'] = array('form','url','table','text','currency', 'html', 'dow
 |
 */
 
-$autoload['config'] = array();
-
+$autoload['config'] = [];
 
 /*
 | -------------------------------------------------------------------
@@ -96,8 +95,7 @@ $autoload['config'] = array();
 |
 */
 
-$autoload['language'] = array('common', 'config', 'customers', 'employees', 'error', 'items','services', 'login', 'module', 'reports', 'sales','suppliers','receivings', 'item_kits', 'giftcards', 'locations','orders');
-
+$autoload['language'] = ['common', 'config', 'customers', 'employees', 'error', 'items', 'services', 'login', 'module', 'reports', 'sales', 'suppliers', 'receivings', 'item_kits', 'giftcards', 'locations', 'orders'];
 
 /*
 | -------------------------------------------------------------------
@@ -109,8 +107,7 @@ $autoload['language'] = array('common', 'config', 'customers', 'employees', 'err
 |
 */
 
-$autoload['model'] = array('Appconfig','Person','Customer','Employee','Module','Item','Service', 'Item_taxes', 'Sale', 'Sale_suspended', 'Supplier','Inventory','Receiving', 'Item_kit', 'Item_kit_items', 'Schedule', 'Giftcard', 'Location');
-
+$autoload['model'] = ['Appconfig', 'Person', 'Customer', 'Employee', 'Module', 'Item', 'Service', 'Item_taxes', 'Sale', 'Sale_suspended', 'Supplier', 'Inventory', 'Receiving', 'Item_kit', 'Item_kit_items', 'Schedule', 'Giftcard', 'Location'];
 
 /* End of file autoload.php */
 /* Location: ./application/config/autoload.php */

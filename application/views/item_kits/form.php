@@ -1,58 +1,61 @@
-<?php echo form_open('item_kits/save/'.$item_kit_info->item_kit_id,array('id'=>'item_kit_form')); ?>
+<?php echo form_open('item_kits/save/'.$item_kit_info->item_kit_id, ['id' => 'item_kit_form']); ?>
 <div>
-	<h3><?php echo $this->lang->line("item_kits_info"); ?></h3><hr>
+	<h3><?php echo $this->lang->line('item_kits_info'); ?></h3><hr>
 	<div class="field_row clearfix" style="display:block;">
-		<?php echo form_label($this->lang->line('item_kits_name').':', 'name',array('class'=>'lable-form-required')); ?>
+		<?php echo form_label($this->lang->line('item_kits_name').':', 'name', ['class' => 'lable-form-required']); ?>
 		<div>
-		<?php echo form_input(array(
-			'name'=>'name',
-			'id'=>'name',
-			'value'=>$item_kit_info->name,
-			'class'=>'text_box'
-		));?>
+		<?php echo form_input([
+            'name'  => 'name',
+            'id'    => 'name',
+            'value' => $item_kit_info->name,
+            'class' => 'text_box',
+        ]); ?>
 		</div>
 	</div>
 	<div class="field_row clearfix" style="display:block;">
-		<?php echo form_label($this->lang->line('item_kits_description').':', 'description',array('class'=>'lable-form')); ?>
+		<?php echo form_label($this->lang->line('item_kits_description').':', 'description', ['class' => 'lable-form']); ?>
 		<div >
-		<?php echo form_textarea(array(
-			'name'=>'description',
-			'id'=>'description',
-			'value'=>$item_kit_info->description,
-			'rows'=>'5',
-			'cols'=>'17',
-			'class'=>'text_box'
-		));?>
+		<?php echo form_textarea([
+            'name'  => 'description',
+            'id'    => 'description',
+            'value' => $item_kit_info->description,
+            'rows'  => '5',
+            'cols'  => '17',
+            'class' => 'text_box',
+        ]); ?>
 		</div>
 	</div>
 	<div class="field_row clearfix" style="display:block;">
-		<?php echo form_label($this->lang->line('item_kits_add_item').':', 'item',array('class'=>'lable-form')); ?>
+		<?php echo form_label($this->lang->line('item_kits_add_item').':', 'item', ['class' => 'lable-form']); ?>
 		<div>
-		<?php echo form_input(array(
-			'name'=>'item',
-			'id'=>'item',
-			'class'=>'text_box'
-		));?>
+		<?php echo form_input([
+            'name'  => 'item',
+            'id'    => 'item',
+            'class' => 'text_box',
+        ]); ?>
 		</div>
 	</div>
-	<?php  $disabled=((!isset($item_kit_info->item_kit_id) || $item_kit_info->item_kit_id=='')?'style="display:none;"':''); ?>
+	<?php  $disabled = ((!isset($item_kit_info->item_kit_id) || $item_kit_info->item_kit_id == '') ? 'style="display:none;"' : ''); ?>
 	<table id="item_kit_items" <?php echo $disabled; ?>>
 		<tr>
-			<th><?php echo $this->lang->line('common_delete');?></th>
-			<th><?php echo $this->lang->line('item_kits_item');?></th>
-			<th><?php echo $this->lang->line('item_kits_quantity');?></th>
+			<th><?php echo $this->lang->line('common_delete'); ?></th>
+			<th><?php echo $this->lang->line('item_kits_item'); ?></th>
+			<th><?php echo $this->lang->line('item_kits_quantity'); ?></th>
 		</tr>
 		
-		<?php foreach ($this->Item_kit_items->get_info($item_kit_info->item_kit_id) as $item_kit_item) {?>
+		<?php foreach ($this->Item_kit_items->get_info($item_kit_info->item_kit_id) as $item_kit_item) {
+    ?>
 			<tr>
 				<?php
-				$item_info = $this->Item->get_info($item_kit_item['item_id']);
-				?>
+                $item_info = $this->Item->get_info($item_kit_item['item_id']);
+    ?>
 				<td><a href="#" onclick='return deleteItemKitRow(this);'>X</a></td>
-				<td><?php echo $item_info->name; ?></td>
+				<td><?php echo $item_info->name;
+    ?></td>
 				<td><input class='quantity' id='item_kit_item_<?php echo $item_kit_item['item_id'] ?>' type='text' size='3' name=item_kit_item[<?php echo $item_kit_item['item_id'] ?>] value='<?php echo $item_kit_item['quantity'] ?>'/></td>
 			</tr>
-		<?php } ?>
+		<?php 
+} ?>
 	</table>
 </div>
 <div class="field_row clearfix requested">
@@ -60,16 +63,16 @@
 </div>
 <ul id="error_message_box"></ul>
 <?php
-echo form_submit(array(
-	'id'=>'submit',
-	'value'=>$this->lang->line('common_submit'),
-	'class'=>'small_button float_right'
-)); 
+echo form_submit([
+    'id'    => 'submit',
+    'value' => $this->lang->line('common_submit'),
+    'class' => 'small_button float_right',
+]);
 echo form_close(); ?>
 <script type='text/javascript'>
 //validation and submit handling
 $(document).ready(function(){
-	$("#item").autocomplete('<?php echo site_url("items/item_search"); ?>',{
+	$("#item").autocomplete('<?php echo site_url('items/item_search'); ?>',{
 		minChars:0,
 		max:100,
 		selectFirst: false,

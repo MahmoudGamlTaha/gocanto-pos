@@ -1,54 +1,72 @@
 <?php
-if(isset($error)){	echo "<div class='error_message'>$error</div>"; }
-if (isset($warning)){	echo "<div class='warning_mesage'>$warning</div>"; }
-if (isset($success)){	echo "<div class='success_message'>$success</div>"; }
+if (isset($error)) {
+    echo "<div class='error_message'>$error</div>";
+}
+if (isset($warning)) {
+    echo "<div class='warning_mesage'>$warning</div>";
+}
+if (isset($success)) {
+    echo "<div class='success_message'>$success</div>";
+}
 ?>
 <div id="register_wrapper">
 <?php 
-if ($mode!='shipping'){ $class="";
-	echo form_open('sales/change_mode',array('id'=>'mode_form')); ?>
+if ($mode != 'shipping') {
+    $class = '';
+    echo form_open('sales/change_mode', ['id' => 'mode_form']);
+    ?>
 			<span><?=$this->lang->line('sales_mode')?></span>
-		<?php echo form_dropdown('mode',$modes,$mode,'onchange="this.form.submit();"'); ?>
+		<?php echo form_dropdown('mode', $modes, $mode, 'onchange="this.form.submit();"');
+    ?>
 		<div>
 			<div id="new_button"></div>
 			<div id="show_suspended_sales_button">
 				<?php
-				// if($this->Employee->has_privilege('add','giftcards')){
-					echo anchor('giftcards/view/sale/width:'.(isset($form_width)?$form_width:360).'/height:'.(isset($form_height)?$form_height:175),
-						'<span style="font-size:75%;">Gift Card</span>',
-						array('title'=>$this->lang->line('giftcards_new'),'class'=>'small_button thickbox','style'=>'float:left;'));
-				// }
-				?>
+                // if($this->Employee->has_privilege('add','giftcards')){
+                    echo anchor('giftcards/view/sale/width:'.(isset($form_width) ? $form_width : 360).'/height:'.(isset($form_height) ? $form_height : 175),
+                        '<span style="font-size:75%;">Gift Card</span>',
+                        ['title' => $this->lang->line('giftcards_new'), 'class' => 'small_button thickbox', 'style' => 'float:left;']);
+                // }
+                ?>
 				&nbsp;
 				<?php 
-				// if(count($cart) > 0)	{
-				echo anchor('sales/suspended/width:425','<span style="font-size:75%;">'.$this->lang->line('sales_suspended_sales').'</span>',array('class'=>'small_button thickbox','title'=>$this->lang->line('sales_suspended_sales')));
-				// }
-				?>
+                // if(count($cart) > 0)	{
+                echo anchor('sales/suspended/width:425', '<span style="font-size:75%;">'.$this->lang->line('sales_suspended_sales').'</span>', ['class' => 'small_button thickbox', 'title' => $this->lang->line('sales_suspended_sales')]);
+                // }
+                ?>
 			</div>
 		</div>
 	</form>
-<?php }else $class="nosale"; ?>	
-<?php echo form_open('sales/add',array('id'=>'add_item_form','class'=>$class)); ?>
+<?php 
+} else {
+    $class = 'nosale';
+} ?>	
+<?php echo form_open('sales/add', ['id' => 'add_item_form', 'class' => $class]); ?>
 <label id="item_label" for="item">
 <?php
-if($mode=='sale'){	echo $this->lang->line('sales_find_or_scan_item'); }
-else{ echo $this->lang->line('sales_find_or_scan_item_or_receipt'); }
+if ($mode == 'sale') {
+    echo $this->lang->line('sales_find_or_scan_item');
+} else {
+    echo $this->lang->line('sales_find_or_scan_item_or_receipt');
+}
 ?>
 </label>
-<?php echo form_input(array('name'=>'item','id'=>'item','size'=>'40','placeholder'=>$this->lang->line('sales_start_typing_item_name')));?>
+<?php echo form_input(['name' => 'item', 'id' => 'item', 'size' => '40', 'placeholder' => $this->lang->line('sales_start_typing_item_name')]); ?>
 	<div id="new_item_button_register" >
 		<?php 
-		if ($mode=='shipping') $action='shipping/';
-		else $action='sales/';
-		echo anchor('items/view/-100/'.$action.'width:660/height:465','<span>'.$this->lang->line('sales_new_item').'</span>',array('class'=>'small_button thickbox','title'=>$this->lang->line('sales_new_item')));
-		?>
+        if ($mode == 'shipping') {
+            $action = 'shipping/';
+        } else {
+            $action = 'sales/';
+        }
+        echo anchor('items/view/-100/'.$action.'width:660/height:465', '<span>'.$this->lang->line('sales_new_item').'</span>', ['class' => 'small_button thickbox', 'title' => $this->lang->line('sales_new_item')]);
+        ?>
 	</div>
 	<!-- <div id="item_broken_register">
 		<?php echo anchor('items/view/-1/width:660/height:465',
-		'<div class="small_button"><span>Item Broked</span></div>',
-		array('class'=>'small_button thickbox','title'=>'Item Broken'));
-		?>
+        '<div class="small_button"><span>Item Broked</span></div>',
+        ['class' => 'small_button thickbox', 'title' => 'Item Broken']);
+        ?>
 	</div> -->
 
 </form>
@@ -68,45 +86,56 @@ else{ echo $this->lang->line('sales_find_or_scan_item_or_receipt'); }
 </thead>
 <tbody id="cart_contents">
 <?php
-if(count($cart)==0){
-?>
+if (count($cart) == 0) {
+    ?>
 <tr><td colspan='8'>
-<div class='warning_message' style='padding:7px;'><?php echo $this->lang->line('sales_no_items_in_cart'); ?></div>
+<div class='warning_message' style='padding:7px;'><?php echo $this->lang->line('sales_no_items_in_cart');
+    ?></div>
 </tr></tr>
 <?php
-}else{
-	foreach(array_reverse($cart,true) as $line=>$item)
-	{
-		$cur_item_info = $this->Item->get_info($item['item_id']);
-		echo form_open( "sales/edit_item/$line/1", array('id'=>'edit_item'.$item['item_id']) );
-	?>
+
+} else {
+    foreach (array_reverse($cart, true) as $line => $item) {
+        $cur_item_info = $this->Item->get_info($item['item_id']);
+        echo form_open("sales/edit_item/$line/1", ['id' => 'edit_item'.$item['item_id']]);
+        ?>
 		<tr id="<?=$item['item_id']?>" class="sale-line">
-		<td><?=anchor("sales/delete_item/$line",$this->lang->line('common_delete'),"class='small_button'")?></td>
+		<td><?=anchor("sales/delete_item/$line", $this->lang->line('common_delete'), "class='small_button'")?></td>
 		<td><?=$item['item_number']?></td>
 		<td style="align:center;">
 			<?=$item['name']?>
-			<?php if(!$item['is_service']){ ?><br/><small> [<?=$cur_item_info->quantity?> in stock]</small><?php } ?>
+			<?php if (!$item['is_service']) {
+    ?><br/><small> [<?=$cur_item_info->quantity?> in stock]</small><?php 
+}
+        ?>
 		</td>
 
-		<?php if ($items_module_allowed){	?>
-			<td><?=form_input(array('name'=>'price','value'=>($cur_item_info->is_service&&$item['price']==0?'':$item['price']),'size'=>'6','class'=>'edit-item text_box required','ref'=>$item['item_id']))?></td>
-		<?php }else{ ?>
+		<?php if ($items_module_allowed) {
+    ?>
+			<td><?=form_input(['name' => 'price', 'value' => ($cur_item_info->is_service && $item['price'] == 0 ? '' : $item['price']), 'size' => '6', 'class' => 'edit-item text_box required', 'ref' => $item['item_id']])?></td>
+		<?php 
+} else {
+    ?>
 			<td><?=$item['price']?></td>
-			<?=form_hidden('price',$item['price'])?>
-		<?php } ?>
+			<?=form_hidden('price', $item['price'])?>
+		<?php 
+}
+        ?>
 		<td>
 		<?php
-			if($item['is_serialized']==1):?>
+            if ($item['is_serialized'] == 1):?>
 				<?=$item['quantity']?>
-				<?=form_hidden('quantity',$item['quantity'])?>
+				<?=form_hidden('quantity', $item['quantity'])?>
 			<?php else: ?>
-				<input type="text" name="quantity" class="select-edit-item text_box " size="4"  ref="<?=$item['item_id']?>" value="<?php echo $item['quantity']; ?>"/>
-			<?php endif; ?>
+				<input type="text" name="quantity" class="select-edit-item text_box " size="4"  ref="<?=$item['item_id']?>" value="<?php echo $item['quantity'];
+        ?>"/>
+			<?php endif;
+        ?>
 			<?php //echo form_input(array('name'=>'quantity','value'=>$item['quantity'],'size'=>'2')); ?>
 		</td>
 
-		<td><?=form_input(array('name'=>'discount','value'=>$item['discount'],'size'=>'3', 'class'=>'edit-item text_box required','ref'=>$item['item_id']))?></td>
-		<td class="sub-total"><?=to_currency($item['price']*$item['quantity']-$item['price']*$item['quantity']*$item['discount']/100)?></td>
+		<td><?=form_input(['name' => 'discount', 'value' => $item['discount'], 'size' => '3', 'class' => 'edit-item text_box required', 'ref' => $item['item_id']])?></td>
+		<td class="sub-total"><?=to_currency($item['price'] * $item['quantity'] - $item['price'] * $item['quantity'] * $item['discount'] / 100)?></td>
 		<!-- <td>
 			<?php //echo form_submit('edit_item', $this->lang->line('sales_edit_item'));?>
 			<?php //echo form_button( array('value'=>$item['item_id'],'name'=>'item_broken','class'=>'item-broken','content'=>'Report Item') ); ?>
@@ -117,31 +146,33 @@ if(count($cart)==0){
 		<td colspan=2 style="text-align:left;">
 
 		<?php
-			if($item['allow_alt_description']==1){
-				echo form_input(array('name'=>'description','value'=>$item['description'],'size'=>'20'));
-			}else{
-				if ($item['description']!=''){
-					echo $item['description'];
-					echo form_hidden('description',$item['description']);
-				}else{
-					echo 'None';
-					echo form_hidden('description','');
-				}
-			}
-		?>
+            if ($item['allow_alt_description'] == 1) {
+                echo form_input(['name' => 'description', 'value' => $item['description'], 'size' => '20']);
+            } else {
+                if ($item['description'] != '') {
+                    echo $item['description'];
+                    echo form_hidden('description', $item['description']);
+                } else {
+                    echo 'None';
+                    echo form_hidden('description', '');
+                }
+            }
+        ?>
 		</td>
 		<td>&nbsp;</td>
 		<td style="color:#2F4F4F";>
-		<?php if($item['is_serialized']==1){
-				echo $this->lang->line('sales_serial').'::';
-			} ?>
+		<?php if ($item['is_serialized'] == 1) {
+    echo $this->lang->line('sales_serial').'::';
+}
+        ?>
 		</td>
 		<td colspan=3 style="text-align:left;">
-		<?php if($item['is_serialized']==1){
-				echo form_input(array('name'=>'serialnumber','value'=>$item['serialnumber'],'size'=>'20'));
-			}else{
-				echo form_hidden('serialnumber', '');
-			} ?>
+		<?php if ($item['is_serialized'] == 1) {
+    echo form_input(['name' => 'serialnumber', 'value' => $item['serialnumber'], 'size' => '20']);
+} else {
+    echo form_hidden('serialnumber', '');
+}
+        ?>
 		</td>
 		</tr> -->
 		<tr style="height:3px">
@@ -149,7 +180,8 @@ if(count($cart)==0){
 		</tr>
 		</form>
 	<?php
-	}
+
+    }
 } ?>
 </tbody>
 </table>
@@ -160,127 +192,135 @@ if(count($cart)==0){
 	
 	<div id='cancel_suspend_sale_button'>
 	<?php
-	// Only show this part if there is at least one payment entered.
-	if ($mode!='shipping'){
-		$txtsuspend='sales_suspend_sale';
-		$txtcancel='sales_cancel_sale';
-	}else{
-		$txtsuspend='sales_suspend_shipping';
-		$txtcancel='sales_cancel_shipping';
-	}
-	if(count($payments) > 0){ ?>
+    // Only show this part if there is at least one payment entered.
+    if ($mode != 'shipping') {
+        $txtsuspend = 'sales_suspend_sale';
+        $txtcancel = 'sales_cancel_sale';
+    } else {
+        $txtsuspend = 'sales_suspend_shipping';
+        $txtcancel = 'sales_cancel_shipping';
+    }
+    if (count($payments) > 0) {
+        ?>
 		<div class='small_button' id='suspend_sale_button'><span><?=$this->lang->line($txtsuspend)?></span></div>
-	<?php } 
-	if(count($cart) > 0){
-	?>
+	<?php 
+    }
+    if (count($cart) > 0) {
+        ?>
 		<div class='small_button' id='cancel_sale_button'><span><?=$this->lang->line($txtcancel)?></span></div>
-	<?php } ?>
+	<?php 
+    } ?>
 	</div>
 	
 	<div style="margin-top:5px;text-align:center;">
 	<?php 
-	// form_open('sales/select_employee',array('id'=>'select_employee_form'))
-	// // <label id="Customer_label" for="employee"> $this->lang->line('sales_select_employee')<!-- </label> -->
-	// form_input(array('name'=>'employee','id'=>'employee','class'=>'text_box','size'=>'30','value'=>$employee))
-	// form_close()
-	?>
+    // form_open('sales/select_employee',array('id'=>'select_employee_form'))
+    // // <label id="Customer_label" for="employee"> $this->lang->line('sales_select_employee')<!-- </label> -->
+    // form_input(array('name'=>'employee','id'=>'employee','class'=>'text_box','size'=>'30','value'=>$employee))
+    // form_close()
+    ?>
 	<?php
-	if ($mode=='sale' || $mode=='return'){
-		if ($customer > 0) {
-			echo $this->lang->line('sales_customer').': <b>'.$customer_name. '</b><br/>';
-			echo anchor('sales/remove_customer','['.$this->lang->line('common_remove').' '.$this->lang->line('Customers_Customer').']');
-		}else{
-			$customer_val = '';
-			echo form_open('sales/select_Customer',array('id'=>'select_Customer_form'));
-			echo '<label id="Customer_label" for="Customer">'.$this->lang->line('sales_select_Customer').'</label>';
-			echo form_input(array('value'=>$customer_val,'name'=>'customer','id'=>'Customer','size'=>'30','class'=>'text_box','style'=>'width:73%;','placeholder'=>$this->lang->line('sales_start_typing_Customer_name')));
-			
-			//echo '<div style="margin-top:5px;text-align:center;">';
-			//echo '<h3 style="margin: 5px 0 5px 0">'.$this->lang->line('common_or').'</h3>';
-			echo anchor('customers/view/-1/width:600/height:420','<span>+</span>',array('class'=>'small_button thickbox','title'=>$this->lang->line('sales_new_customer'),'style'=>'padding:4px 10px;'));
-			//echo '<div class="clearfix">&nbsp;</div>';
-			echo form_close();
-		}
-	}else{
-		include('application/config/database.php'); //Incluyo donde estaran todas las config de las databses
-		$dbs = $this->Location->get_select_option_list(true);
-		$dbs['default']='Principal';
-		echo form_open('sales/select_location',array('id'=>'select_Customer_form'));
-		echo form_label('Receiving Location:', 'location', array('id'=>'Customer_label'));
-		echo form_dropdown('location', $dbs, $this->sale_lib->get_Customer(), 'id="location"');
-		echo form_close();
-	}
-	?>
+    if ($mode == 'sale' || $mode == 'return') {
+        if ($customer > 0) {
+            echo $this->lang->line('sales_customer').': <b>'.$customer_name.'</b><br/>';
+            echo anchor('sales/remove_customer', '['.$this->lang->line('common_remove').' '.$this->lang->line('Customers_Customer').']');
+        } else {
+            $customer_val = '';
+            echo form_open('sales/select_Customer', ['id' => 'select_Customer_form']);
+            echo '<label id="Customer_label" for="Customer">'.$this->lang->line('sales_select_Customer').'</label>';
+            echo form_input(['value' => $customer_val, 'name' => 'customer', 'id' => 'Customer', 'size' => '30', 'class' => 'text_box', 'style' => 'width:73%;', 'placeholder' => $this->lang->line('sales_start_typing_Customer_name')]);
+
+            //echo '<div style="margin-top:5px;text-align:center;">';
+            //echo '<h3 style="margin: 5px 0 5px 0">'.$this->lang->line('common_or').'</h3>';
+            echo anchor('customers/view/-1/width:600/height:420', '<span>+</span>', ['class' => 'small_button thickbox', 'title' => $this->lang->line('sales_new_customer'), 'style' => 'padding:4px 10px;']);
+            //echo '<div class="clearfix">&nbsp;</div>';
+            echo form_close();
+        }
+    } else {
+        include 'application/config/database.php'; //Incluyo donde estaran todas las config de las databses
+        $dbs = $this->Location->get_select_option_list(true);
+        $dbs['default'] = 'Principal';
+        echo form_open('sales/select_location', ['id' => 'select_Customer_form']);
+        echo form_label('Receiving Location:', 'location', ['id' => 'Customer_label']);
+        echo form_dropdown('location', $dbs, $this->sale_lib->get_Customer(), 'id="location"');
+        echo form_close();
+    }
+    ?>
 
 	<div id='sale_details'>
 		<div class="sales_sub_total"><?=$this->lang->line('sales_sub_total')?>: <div><?=to_currency($subtotal)?></div></div>
 		<!-- combro de descuento opcional -->
 		<?php if ($customer > 0 && $amount_due > 0): ?>
 			<div class="discount"><?php echo $this->lang->line('customers_customer').' '.$this->lang->line('customers_lbl_td_discount') ?>(<?php echo $general_discount ?>%):
-				<?php if ($this->Employee->isAdmin()) { ?>
+				<?php if ($this->Employee->isAdmin()) {
+    ?>
 				<div><input id="customer_discount" type="checkbox" name="customer_discount" <?php echo $this->session->userdata('discounting') ?>></div>
-				<?php } ?>
+				<?php 
+} ?>
 			</div>
 		<?php endif ?>
 		<!-- FIN combro de descuento opcional -->
 		<!-- combro de inpuestos opcional -->
 		<div class="taxing"><?php echo $this->lang->line('items_tax') ?>:
-			<?php if ($this->Employee->isAdmin()) { ?>
+			<?php if ($this->Employee->isAdmin()) {
+    ?>
 			<div><input id="taxing" type="checkbox" name="taxing" <?=$taxing?>></div>
-			<?php } ?>
+			<?php 
+} ?>
 		</div>
 		<!-- FIN combro de inpuestos opcional -->
-		<?php foreach($taxes as $name=>$value) { ?>
+		<?php foreach ($taxes as $name => $value) {
+    ?>
 		<div class="taxing taxing-block clearfix" style="width: 97%;"><?=$name?>: <div><?=to_currency($value)?></div></div>
-		<?php } ?> 
+		<?php 
+} ?> 
 		<div class="total clearfix" style="width: 97%;"><?=$this->lang->line('sales_total')?>:<div><?=to_currency($total)?></div></div>
 	</div>
 
 	<?php
-	// Only show this part if there are Items already in the sale.
-	if(count($cart) > 0)
-	{
-	?>
+    // Only show this part if there are Items already in the sale.
+    if (count($cart) > 0) {
+        ?>
 		<div id="Cancel_sale">
-		<?=form_open('sales/cancel_sale',array('id'=>'cancel_sale_form'))?>
+		<?=form_open('sales/cancel_sale', ['id' => 'cancel_sale_form'])?>
 		</form>
 		</div>
 		<div class="clearfix" style="margin-bottom:1px;">&nbsp;</div>
 		<?php
-		// Only show this part if there is at least one payment entered.
-		if(count($payments) > 0 || $mode=='shipping'){
-		?>
+        // Only show this part if there is at least one payment entered.
+        if (count($payments) > 0 || $mode == 'shipping') {
+            ?>
 			<div id="finish_sale">
-				<?=form_open('sales/complete',array('id'=>'finish_sale_form'))?>
+				<?=form_open('sales/complete', ['id' => 'finish_sale_form'])?>
 				<!-- <label id="comment_label" for="comment"><?=$this->lang->line('common_comments')?>:</label> -->
 				<?php //echo form_textarea(array('name'=>'comment', 'id' => 'comment', 'value'=>$comment,'rows'=>'4','cols'=>'23'));?>
 				<!-- <br /><br /> -->
 
 				<?php
 
-				if(!empty($Customer_email))
-				{
-					echo $this->lang->line('sales_email_receipt'). ': '. form_checkbox(array(
-						'name'		=> 'email_receipt',
-						'id'		=> 'email_receipt',
-						'value'		=> '1',
-						'checked'	=> (boolean)$email_receipt,
-						)).'<br/>('.$Customer_email.')<br/>';
-				}
+                if (!empty($Customer_email)) {
+                    echo $this->lang->line('sales_email_receipt').': '.form_checkbox([
+                        'name'         => 'email_receipt',
+                        'id'           => 'email_receipt',
+                        'value'        => '1',
+                        'checked'      => (boolean) $email_receipt,
+                        ]).'<br/>('.$Customer_email.')<br/>';
+                }
 
-				if($payments_cover_total && ($mode=='sale' || $mode=='return')){
-					echo "<div class='big_button' id='finish_sale_button'><span>".$this->lang->line('sales_complete_sale')."</span></div>";
-				}
+            if ($payments_cover_total && ($mode == 'sale' || $mode == 'return')) {
+                echo "<div class='big_button' id='finish_sale_button'><span>".$this->lang->line('sales_complete_sale').'</span></div>';
+            }
 
-				if($payments_cover_total && $mode=='shipping'){
-					echo "<div class='big_button' id='finish_sale_button'><span>".$this->lang->line('sales_complete_shipping')."</span></div>";
-				}
-				?>
+            if ($payments_cover_total && $mode == 'shipping') {
+                echo "<div class='big_button' id='finish_sale_button'><span>".$this->lang->line('sales_complete_shipping').'</span></div>';
+            }
+            ?>
 			</div>
 			</form>
 		<?php
-		}
-		?>
+
+        }
+        ?>
 	<div class="payments_">
 		<div class="payments_total">Payments Total: <div><?=to_currency($payments_total)?></div></div>
 		<div class="amount_due">Amount Due: <div><?=to_currency($amount_due)?></div></div>
@@ -289,22 +329,23 @@ if(count($cart)==0){
 	<a href="#" id="show_payments" class='small_button'><?php echo $this->lang->line('sales_show_payments') ?></a>
 	<div id="Payment_Types">
 		<div style="height:100px;">
-			<?=form_open('sales/add_payment',array('id'=>'add_payment_form'))?>
+			<?=form_open('sales/add_payment', ['id' => 'add_payment_form'])?>
 			<table width="100%">
 			<tr>
 			<td>
 				<?=$this->lang->line('sales_payment').': '?>
 			</td>
 			<td>
-				<?=form_dropdown('payment_type',$payment_options,array(),'id="payment_types"')?>
+				<?=form_dropdown('payment_type', $payment_options, [], 'id="payment_types"')?>
 			</td>
 			</tr>
 			<tr>
 			<td colspan="2">
-		<!--	<span id="amount_tendered_label"><?=$this->lang->line( 'sales_amount_tendered' ).': '?></span>
+		<!--	<span id="amount_tendered_label"><?=$this->lang->line('sales_amount_tendered').': '?></span>
 			</td>
 			<td> -->
-				<?=form_input(array('name'=>'amount_tendered','id'=>'amount_tendered','class'=>'text_box','value'=>to_currency_no_money($amount_due)));?>
+				<?=form_input(['name' => 'amount_tendered', 'id' => 'amount_tendered', 'class' => 'text_box', 'value' => to_currency_no_money($amount_due)]);
+        ?>
 			</td>
 			</tr>
 			</table>
@@ -315,10 +356,9 @@ if(count($cart)==0){
 		</form>
 
 		<?php
-		// Only show this part if there is at least one payment entered.
-		if(count($payments) > 0)
-		{
-		?>
+        // Only show this part if there is at least one payment entered.
+        if (count($payments) > 0) {
+            ?>
 			<table id="register">
 			<thead>
 			<tr>
@@ -329,29 +369,32 @@ if(count($cart)==0){
 			</thead>
 			<tbody id="payment_contents">
 			<?php
-				foreach($payments as $payment_id=>$payment)
-				{
-				echo form_open("sales/edit_payment/$payment_id",array('id'=>'edit_payment_form'.$payment_id));
-				?>
+                foreach ($payments as $payment_id => $payment) {
+                    echo form_open("sales/edit_payment/$payment_id", ['id' => 'edit_payment_form'.$payment_id]);
+                    ?>
 				<tr>
-					<td><?=anchor( "sales/delete_payment/$payment_id", $this->lang->line('common_delete'),'class="small_button"' )?></td>
+					<td><?=anchor("sales/delete_payment/$payment_id", $this->lang->line('common_delete'), 'class="small_button"')?></td>
 					<td><?=$payment['payment_type']?></td>
-					<td style="text-align:right;"><?php echo to_currency( $payment['payment_amount'] ); ?></td>
+					<td style="text-align:right;"><?php echo to_currency($payment['payment_amount']);
+                    ?></td>
 				</tr>
 				</form>
 				<?php
-				}
-				?>
+
+                }
+            ?>
 			</tbody>
 			</table>
 			<br/>
 		<?php
-		}
-		?>
+
+        }
+        ?>
 	</div>
 	<?php
-	}
-	?>
+
+    }
+    ?>
 </div>
 <div class="clearfix" style="margin-bottom:30px;">&nbsp;</div>
 <script type="text/javascript" language="javascript">

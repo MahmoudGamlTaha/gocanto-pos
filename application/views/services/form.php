@@ -1,52 +1,52 @@
-<?php echo form_open('services/save/'.$service_info->service_id,array('id'=>'services_form'));
-$disabled=$service_info->service_id!=-1?'disabled':'';$acum=0;
+<?php echo form_open('services/save/'.$service_info->service_id, ['id' => 'services_form']);
+$disabled = $service_info->service_id != -1 ? 'disabled' : ''; $acum = 0;
 $currency_symbol = $this->config->item('currency_symbol') ? $this->config->item('currency_symbol') : '$';
 $default_service = $this->config->item('default_service') ? $this->config->item('default_service') : 0;
 // $default_service = 0;
 ?>
 <!-- <div id="item_basic_info"> -->
-<div class="clearfix"><h3><?php echo $this->lang->line("services_information"); ?></h3><hr></div>
+<div class="clearfix"><h3><?php echo $this->lang->line('services_information'); ?></h3><hr></div>
 <div style="width: 59%;float: left;">
 	<div class="field_row clearfix invisible">
 		<div style="width: 162px; float: left">
 			<div class="field_row clearfix">
-				<?php echo form_label($this->lang->line('common_first_name').':', 'first_name',array('class'=>'lable-form-required')); ?>
+				<?php echo form_label($this->lang->line('common_first_name').':', 'first_name', ['class' => 'lable-form-required']); ?>
 				<div>
-				<?php echo form_input(array(
-					'name'=>'first_name',
-					'id'=>'first_name',
-					'value'=>'disabled',
-					'class'=>'text_box',
-					'disabled'=>'disabled'
-				));?>
+				<?php echo form_input([
+                    'name'     => 'first_name',
+                    'id'       => 'first_name',
+                    'value'    => 'disabled',
+                    'class'    => 'text_box',
+                    'disabled' => 'disabled',
+                ]); ?>
 				</div>
 			</div>
 		</div>
 		<div style="width: 162px; float: left">
 			<div class="field_row clearfix">
-				<?php echo form_label($this->lang->line('common_last_name').':', 'last_name',array('class'=>'lable-form-required')); ?>
+				<?php echo form_label($this->lang->line('common_last_name').':', 'last_name', ['class' => 'lable-form-required']); ?>
 				<div>
-				<?php echo form_input(array(
-					'name'=>'last_name',
-					'id'=>'last_name',
-					'value'=>'disabled',
-					'class'=>'text_box',
-					'disabled'=>'disabled'
-				));?>
+				<?php echo form_input([
+                    'name'     => 'last_name',
+                    'id'       => 'last_name',
+                    'value'    => 'disabled',
+                    'class'    => 'text_box',
+                    'disabled' => 'disabled',
+                ]); ?>
 				</div>
 			</div>
 		</div>
 		<div style="width: 162px; float: left">
 				<div class="field_row clearfix">
-				<?php echo form_label($this->lang->line('common_email').':', 'email',array('class'=>'lable-form-required')); ?>
+				<?php echo form_label($this->lang->line('common_email').':', 'email', ['class' => 'lable-form-required']); ?>
 				<div>
-				<?php echo form_input(array(
-					'name'=>'email',
-					'id'=>'email',
-					'value'=>'disabled',
-					'class'=>'text_box',
-					'disabled'=>'disabled'
-				));?>
+				<?php echo form_input([
+                    'name'     => 'email',
+                    'id'       => 'email',
+                    'value'    => 'disabled',
+                    'class'    => 'text_box',
+                    'disabled' => 'disabled',
+                ]); ?>
 				</div>
 			</div>
 		</div>
@@ -54,50 +54,52 @@ $default_service = $this->config->item('default_service') ? $this->config->item(
 	<div class="field_row clearfix">
 		<div class="invisible" style="width: 162px; float: left">
 			<div class="field_row clearfix">
-				<?php echo form_label($this->lang->line('common_phone_number').':', 'phone_number',array('class'=>'lable-form-required')); ?>
+				<?php echo form_label($this->lang->line('common_phone_number').':', 'phone_number', ['class' => 'lable-form-required']); ?>
 				<div>
-				<?=form_input(array(
-					'name'=>'phone_number',
-					'id'=>'phone_number',
-					'value'=>'disabled',
-					'class'=>'text_box',
-					'disabled'=>'disabled',
-				))?>
+				<?=form_input([
+                    'name'     => 'phone_number',
+                    'id'       => 'phone_number',
+                    'value'    => 'disabled',
+                    'class'    => 'text_box',
+                    'disabled' => 'disabled',
+                ])?>
 				</div>
 			</div>
 		</div>
-		<div class="noinvisible" style="width:<?=$disabled===''?'420':'210'?>px;float:left">
+		<div class="noinvisible" style="width:<?=$disabled === '' ? '420' : '210'?>px;float:left">
 			<div class="field_row clearfix">
-				<?php echo form_label($this->lang->line('services_name_owner').':', 'name',array('class'=>'lable-form-required','style'=>'float:none;display:block;')); ?>
+				<?php echo form_label($this->lang->line('services_name_owner').':', 'name', ['class' => 'lable-form-required', 'style' => 'float:none;display:block;']); ?>
 				<div>
-				<?php echo form_input(array(
-					'name'=>'name',
-					'id'=>'name',
-					'value'=>$service_info->first_name?$service_info->first_name.' '.$service_info->last_name:'',
-					'class'=>'text_box',$disabled=>$disabled
-				));
-				if ($disabled==='') echo form_button(array(
-					'name'=>'newc',
-					'id'=>'newc',
-					'value'=>'newc',
-					'content' => '+',
-					'class'=>'small_button thickbox',
-					'style'=>'display: inline-block;margin-left: 20px;',
-				));
-				?>
+				<?php echo form_input([
+                    'name'  => 'name',
+                    'id'    => 'name',
+                    'value' => $service_info->first_name ? $service_info->first_name.' '.$service_info->last_name : '',
+                    'class' => 'text_box', $disabled => $disabled,
+                ]);
+                if ($disabled === '') {
+                    echo form_button([
+                    'name'    => 'newc',
+                    'id'      => 'newc',
+                    'value'   => 'newc',
+                    'content' => '+',
+                    'class'   => 'small_button thickbox',
+                    'style'   => 'display: inline-block;margin-left: 20px;',
+                ]);
+                }
+                ?>
 				</div>
 			</div>
 		</div>
 		<div style="width: 210px; float: left">
 			<div class="field_row clearfix">
-				<?php echo form_label($this->lang->line('services_IMEI').':', 'code',array('class'=>'lable-form')); ?>
+				<?php echo form_label($this->lang->line('services_IMEI').':', 'code', ['class' => 'lable-form']); ?>
 				<div>
-				<?php echo form_input(array(
-					'name'=>'codeimei',
-					'id'=>'codeimei',
-					'value'=>$service_info->serial,
-					'class'=>'text_box',$disabled=>$disabled
-				));?>
+				<?php echo form_input([
+                    'name'  => 'codeimei',
+                    'id'    => 'codeimei',
+                    'value' => $service_info->serial,
+                    'class' => 'text_box', $disabled => $disabled,
+                ]); ?>
 				</div>
 			</div>
 		</div>
@@ -105,54 +107,56 @@ $default_service = $this->config->item('default_service') ? $this->config->item(
 	<div class="field_row clearfix">
 		<div style="width: 162px; float: left">
 			<div class="field_row clearfix">
-				<?=form_label($this->lang->line('services_brand').':','brand_label',array('class'=>'lable-form-required'))?>
+				<?=form_label($this->lang->line('services_brand').':', 'brand_label', ['class' => 'lable-form-required'])?>
 				<div>
-				<?php echo form_input(array(
-					'name'=>'brand',
-					'id'=>'brand',
-					'value'=>$service_info->brand_name,
-					'class'=>'text_box',$disabled=>$disabled,
-					'style'=>'width: 145px;'
-				));?>
+				<?php echo form_input([
+                    'name'  => 'brand',
+                    'id'    => 'brand',
+                    'value' => $service_info->brand_name,
+                    'class' => 'text_box', $disabled => $disabled,
+                    'style' => 'width: 145px;',
+                ]); ?>
 				</div>
 			</div>
 		</div>
 		<div style="width: 162px; float: left">
 			<div class="field_row clearfix">
-				<?php echo form_label($this->lang->line('services_model').':', 'model_label',array('class'=>'lable-form-required')); ?>
+				<?php echo form_label($this->lang->line('services_model').':', 'model_label', ['class' => 'lable-form-required']); ?>
 				<div >
-				<?php echo form_input(array(
-					'name'=>'model',
-					'id'=>'model',
-					'value'=>$service_info->model_name,
-					'class'=>'text_box',$disabled=>$disabled,
-					'style'=>'width: 145px;'
-				));?>
+				<?php echo form_input([
+                    'name'  => 'model',
+                    'id'    => 'model',
+                    'value' => $service_info->model_name,
+                    'class' => 'text_box', $disabled => $disabled,
+                    'style' => 'width: 145px;',
+                ]); ?>
 				</div>
 			</div>
 		</div>
 		<div style="width: 162px; float: left">
 			<div class="field_row clearfix">
-				<?php echo form_label($this->lang->line('services_status').':', 'brand_label',array('class'=>'lable-form-required')); $status=array();
-					for($i=1;$i<5;$i++){ $status[$i]=$this->lang->line('services_status_'.$i); }
-					//$status[100]=$this->lang->line('services_status_100');
-				?>
-				<div><?=form_dropdown('status',$status,$service_info->status,'id="status" style="width:112px;"')?></div>
+				<?php echo form_label($this->lang->line('services_status').':', 'brand_label', ['class' => 'lable-form-required']); $status = [];
+                    for ($i = 1; $i < 5; $i++) {
+                        $status[$i] = $this->lang->line('services_status_'.$i);
+                    }
+                    //$status[100]=$this->lang->line('services_status_100');
+                ?>
+				<div><?=form_dropdown('status', $status, $service_info->status, 'id="status" style="width:112px;"')?></div>
 			</div>
 		</div>
 	</div>
 	<div class="field_row clearfix">       
 		<div style="float:left;">
 			<div class="field_row clearfix">
-				<?=form_label($this->lang->line('services_problem').':','comments',array('class'=>'lable-form-required'))?>
+				<?=form_label($this->lang->line('services_problem').':', 'comments', ['class' => 'lable-form-required'])?>
 				<div>
-				<?=form_textarea(array(
-					'name'=>'comments',
-					'id'=>'comments',
-					'value'=> isset($service_info->problem)?$service_info->problem:'',
-					'rows'=>'4',
-					'cols'=>'48'      
-				))?>
+				<?=form_textarea([
+                    'name'  => 'comments',
+                    'id'    => 'comments',
+                    'value' => isset($service_info->problem) ? $service_info->problem : '',
+                    'rows'  => '4',
+                    'cols'  => '48',
+                ])?>
 				</div>
 			</div>
 		</div>
@@ -164,7 +168,7 @@ $default_service = $this->config->item('default_service') ? $this->config->item(
 	<div class="field_row clearfix" style="width:100%;">
 		<div style="float: left" style="width:100%;">
 			<div id="allitems" class="field_row clearfix" style="width:100%;">
-				<?=form_label($this->lang->line('services_used_items').':','items',array('class'=>'lable-form','style'=>'float:none;display:block'))?>
+				<?=form_label($this->lang->line('services_used_items').':', 'items', ['class' => 'lable-form', 'style' => 'float:none;display:block'])?>
 				<div>
 					<input type="text" id="item_list"  name="item_list" value="<?=$item_list?>" style="width:332px;">
 				</div>
@@ -180,34 +184,40 @@ $default_service = $this->config->item('default_service') ? $this->config->item(
 	<div style="width:100%;;">
 		<div class="field_row clearfix">
 			<div style="float: left;width: 70px;">
-			<?=form_label($this->lang->line('credit_pay').':','credit_pay_label',array('class'=>'lable-form'))?>	
+			<?=form_label($this->lang->line('credit_pay').':', 'credit_pay_label', ['class' => 'lable-form'])?>	
 			</div>
 			<div style="float: left">
-			<?php echo form_dropdown('payment_type',$payment_options,array(),'id="payment_types" style="margin-right:10px"');
-			echo form_input(array(
-				'name'=>'add_pay',
-				'id'=>'add_pay',
-				'size'=>'10',
-				'value'=>'',
-				'class'=>'text_box'
-			));
-			echo form_button(
-				array(
-					'name'=>'btn_add_pay',
-					'id'=>'btn_add_pay',
-					'value'=>'pay',
-					'content' => 'Add',
-					'class'=>'small_button float_right'
-				)
-			);?>
+			<?php echo form_dropdown('payment_type', $payment_options, [], 'id="payment_types" style="margin-right:10px"');
+            echo form_input([
+                'name'  => 'add_pay',
+                'id'    => 'add_pay',
+                'size'  => '10',
+                'value' => '',
+                'class' => 'text_box',
+            ]);
+            echo form_button(
+                [
+                    'name'    => 'btn_add_pay',
+                    'id'      => 'btn_add_pay',
+                    'value'   => 'pay',
+                    'content' => 'Add',
+                    'class'   => 'small_button float_right',
+                ]
+            ); ?>
 			</div>
 		</div>
-		<?php  
-			$disabled='style="display:none;"';
-			if ($service_info->add_pay!='') $disabled='';
-			if (count($item_list_json)>0) $disabled='';
-			if (($default_service*1)>0) $disabled='';
-		?>
+		<?php 
+            $disabled = 'style="display:none;"';
+            if ($service_info->add_pay != '') {
+                $disabled = '';
+            }
+            if (count($item_list_json) > 0) {
+                $disabled = '';
+            }
+            if (($default_service * 1) > 0) {
+                $disabled = '';
+            }
+        ?>
 		<table id="registerpay" <?=$disabled?>>
 			<thead>
 			<tr>
@@ -218,53 +228,59 @@ $default_service = $this->config->item('default_service') ? $this->config->item(
 			</thead>
 			<tbody id="payment_contents">
 			<?php
-			if($service_info->add_pay!=''){
-				$payclass = explode(',', $service_info->add_pay); 
-				foreach ($payclass as $valor){
-					$class = explode(' ', $valor);$tipe=false;$mont=false; 
-					if (isset($class[1])){
-						switch ($class[0]) {
-							case 'Cash': $tipe=$this->lang->line('sales_cash'); break;
-							case 'Check': $tipe=$this->lang->line('sales_check'); break;
-							case 'GiftCard': 
-								$tipe=$this->lang->line('sales_giftcard'); 
-								$mont=$this->lang->line("sales_simple_code").':'.$class[1];
-							break;
-							case 'DebitCard': $tipe=$this->lang->line('sales_debit'); break;
-							case 'CreditCard': $tipe=$this->lang->line('sales_credit'); break;
-						}
-						$acum=$acum+(!$mont?$class[1]:0);
-					?>
+            if ($service_info->add_pay != '') {
+                $payclass = explode(',', $service_info->add_pay);
+                foreach ($payclass as $valor) {
+                    $class = explode(' ', $valor);
+                    $tipe = false;
+                    $mont = false;
+                    if (isset($class[1])) {
+                        switch ($class[0]) {
+                            case 'Cash': $tipe = $this->lang->line('sales_cash'); break;
+                            case 'Check': $tipe = $this->lang->line('sales_check'); break;
+                            case 'GiftCard':
+                                $tipe = $this->lang->line('sales_giftcard');
+                                $mont = $this->lang->line('sales_simple_code').':'.$class[1];
+                            break;
+                            case 'DebitCard': $tipe = $this->lang->line('sales_debit'); break;
+                            case 'CreditCard': $tipe = $this->lang->line('sales_credit'); break;
+                        }
+                        $acum = $acum + (!$mont ? $class[1] : 0);
+                        ?>
 					<input type="hidden" id="pay_<?=$class[0]?>" name="pay_<?=$class[0]?>" value="<?=$class[1]?>">
 					<tr class="<?=$class[0]?>">
 						<td><input type="button" class="small_button" value="Delete"></td>
 						<td><?=$tipe?></td>
-						<td style="text-align: right;"><?=$mont?$mont:to_currency($class[1])?></td>
+						<td style="text-align: right;"><?=$mont ? $mont : to_currency($class[1])?></td>
 					</tr>				
 					<?php
-					}
-				}
-			}
-			if (($default_service*1)>0){ ?>
+
+                    }
+                }
+            }
+            if (($default_service * 1) > 0) {
+                ?>
 				<tr>
 					<td></td>
 					<td><?=$this->lang->line('config_service_price')?></td>
 					<td style="text-align: right;style="><?=$currency_symbol?>- <?=$default_service?></td>
 				</tr>			
-			<?php }
-			if (count($item_list_json)>0){
-				foreach ($item_list_json as $key) {
-					$default_service=$default_service+$key['price'];
-			?>
+			<?php 
+            }
+            if (count($item_list_json) > 0) {
+                foreach ($item_list_json as $key) {
+                    $default_service = $default_service + $key['price'];
+                    ?>
 				<tr class="itemsid_<?=$key['id']?>">
 					<td><input type="button" class="small_button" value="Delete"></td>
 					<td><?=$key['text']?></td>
 					<td style="text-align: right;"><?=$currency_symbol?>-<input type="text" value="<?=$key['price']?>" style="text-align: right;width: 70px;float: right;"></td>
 				</tr>
 			<?php
-				}
-			}
-			?>
+
+                }
+            }
+            ?>
 		</tbody>
 		</table>
 		<div id="totalprice" class="priceSub" ><?=$this->lang->line('sales_sub_total')?>:<div></div></div>
@@ -274,30 +290,30 @@ $default_service = $this->config->item('default_service') ? $this->config->item(
 </div>
 <div class="clearfix"></div>
 <?php
-	echo form_button(
-		array(
-			'name'=>'enviar',
-			'id'=>'enviar',
-			'value'=>'enviar',
-			'content' => $this->lang->line('common_submit'),
-			'class'=>'small_button float_right',
-			'style'=>'margin-left: 20px;'
-		)
-	);
-	echo form_close();
-	// $hidden = array('item' => '3','customer_id' => $service_info->person_id, 'service' => $service_info->service_id);
-	echo form_open('sales/add/3',array('id'=>'payOneServices'), array());
-	echo form_button(
-		array(
-			'name'=>'pay',
-			'id'=>'pay',
-			'value'=>'pay',
-			'content' => $this->lang->line('services_pay'),
-			'class'=>'small_button float_right',
-			'style'=>$service_info->status==3?'':'display: none; margin-left: 20px;'
-		)
-	);
-	echo form_close();
+    echo form_button(
+        [
+            'name'    => 'enviar',
+            'id'      => 'enviar',
+            'value'   => 'enviar',
+            'content' => $this->lang->line('common_submit'),
+            'class'   => 'small_button float_right',
+            'style'   => 'margin-left: 20px;',
+        ]
+    );
+    echo form_close();
+    // $hidden = array('item' => '3','customer_id' => $service_info->person_id, 'service' => $service_info->service_id);
+    echo form_open('sales/add/3', ['id' => 'payOneServices'], []);
+    echo form_button(
+        [
+            'name'    => 'pay',
+            'id'      => 'pay',
+            'value'   => 'pay',
+            'content' => $this->lang->line('services_pay'),
+            'class'   => 'small_button float_right',
+            'style'   => $service_info->status == 3 ? '' : 'display: none; margin-left: 20px;',
+        ]
+    );
+    echo form_close();
 ?>
 <script>
 	var cost=new Array(),acumulate=('<?=$default_service?>')*1,simbol='<?=$currency_symbol?>',tpay='<?=$acum?>',payband=false,rest=0,items_='',pric_='',permis=true,dataItems=false,lastprice=0,newprice=0;
@@ -324,14 +340,14 @@ $(function(){
 		payband=false;
 		$('#services_form').submit();
 	});
-	$("#brand").autocomplete("<?php echo site_url('services/suggest_brand');?>",{max:100,minChars:0,delay:10})
+	$("#brand").autocomplete("<?php echo site_url('services/suggest_brand'); ?>",{max:100,minChars:0,delay:10})
 			.result(function(event,data,formatted){
 				if(data){
 					if ( $("#model").data('autocomplete')) {
 						$("#model").autocomplete("destroy");
 						$("#model").removeData('autocomplete');
 					}
-					$("#model").autocomplete("<?php echo site_url('services/suggest_models');?>/"+data[0],{max:100,minChars:0,delay:10})
+					$("#model").autocomplete("<?php echo site_url('services/suggest_models'); ?>/"+data[0],{max:100,minChars:0,delay:10})
 							.result(function(event,data,formatted){}).search();
 				}else{
 					if ( $("#model").data('autocomplete')) {
@@ -341,7 +357,7 @@ $(function(){
 					}
 				}
 			}).search();
-	$("#name").autocomplete("<?php echo site_url('services/suggest_owner');?>",{max:100,minChars:0,delay:10})
+	$("#name").autocomplete("<?php echo site_url('services/suggest_owner'); ?>",{max:100,minChars:0,delay:10})
 				.result(function(event,data,formatted){}).search();
 	$('#status').change(function(){ 
 		if($(this).val()=='3') $('#pay').show();
@@ -416,16 +432,16 @@ $(function(){
 		{
 			first_name: {
 				required: "<?php echo $this->lang->line('common_first_name_required'); ?>",
-				regex:"<?php echo  $this->lang->line('common_first_name_only_char');?>",
+				regex:"<?php echo  $this->lang->line('common_first_name_only_char'); ?>",
 				minlength: jQuery.format("<?php echo $this->lang->line('common_at_least'); ?> {0} <?php echo $this->lang->line('common_at_characters'); ?>!")
 			},
 			last_name: {
 				required: "<?php echo $this->lang->line('common_last_name_required'); ?>",
-				regex:"<?php echo  $this->lang->line('common_first_name_only_char');?>",
+				regex:"<?php echo  $this->lang->line('common_first_name_only_char'); ?>",
 				minlength: jQuery.format("<?php echo $this->lang->line('common_at_least'); ?> {0} <?php echo $this->lang->line('common_at_characters'); ?>!")
 			},
 			email: "<?php echo $this->lang->line('common_email_invalid_format'); ?>",
-			phone_number:"<?php echo $this->lang->line('common_phone_invalid_format');  ?>",
+			phone_number:"<?php echo $this->lang->line('common_phone_invalid_format'); ?>",
 			name:"<?php echo $this->lang->line('services_name_owner_is_required'); ?>",
 			// codeimei:"<?php echo $this->lang->line('services_IMEI_is_required'); ?>",
 			model:"<?php echo $this->lang->line('services_model_is_required'); ?>",
@@ -468,7 +484,7 @@ $(function(){
 		e.preventDefault();
 	});
 	$('#btn_add_pay').click(function() {
-		var paytipe=$("#payment_types").val().replace(' ',''),isgift='<?php echo $this->lang->line("sales_giftcard"); ?>';
+		var paytipe=$("#payment_types").val().replace(' ',''),isgift='<?php echo $this->lang->line('sales_giftcard'); ?>';
 		var mont=0;
 		if ($("#add_pay").val()!='') {
 			if (!isNaN($("#add_pay").val()) && $("#add_pay").val()>0){ 
@@ -482,7 +498,7 @@ $(function(){
 						$('#registerpay').append('<input type="hidden" id="pay_'+paytipe+'" name="pay_'+paytipe+'" value=",'+mont+',">');
 					}
 					paytipe=paytipe+'_'+mont;
-					mont='<?php echo $this->lang->line("sales_simple_code"); ?>:'+mont;
+					mont='<?php echo $this->lang->line('sales_simple_code'); ?>:'+mont;
 				}else{
 					if ($("#pay_"+paytipe).length>0){
 						mont = ($("#pay_"+paytipe).val()*1) + $("#add_pay").val()*1;
@@ -515,7 +531,7 @@ $(function(){
 	});
 	$("#registerpay").on('click','.small_button',function() {
 		var inputClass = $(this).parents('tr').attr('class'),
-			isgift='<?php echo $this->lang->line("sales_giftcard"); ?>'.replace(' ','');
+			isgift='<?php echo $this->lang->line('sales_giftcard'); ?>'.replace(' ','');
 		if (inputClass.indexOf(isgift)>-1){
 			var classAndcode=inputClass.split('_');
 			var str=$('#pay_'+classAndcode[0]).val().replace(','+classAndcode[1],'');
