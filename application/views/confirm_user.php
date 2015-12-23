@@ -1,33 +1,33 @@
-<?php echo form_open('home/confirm_user/',array('id' =>'form-back')) ?>
+<?php echo form_open('home/confirm_user/', ['id' => 'form-back']) ?>
 <div>
 	<div id="login_form">
 		<div class="field_row clearfix" style="margin: 0 0 5px 0">
 			<div>
-				<?php echo form_label($this->lang->line('login_username').':', 'name',array('class'=>'lable-form-required')); ?>
+				<?php echo form_label($this->lang->line('login_username').':', 'name', ['class' => 'lable-form-required']); ?>
 				<div>
 					<?php
-						echo form_input(array(
-							'name'=>'username',
-							'value'=>$fastUser,
-							'disabled'=>'disabled',
-							'class'=>'text_box'
-						));
-					?>
+                        echo form_input([
+                            'name'     => 'username',
+                            'value'    => $fastUser,
+                            'disabled' => 'disabled',
+                            'class'    => 'text_box',
+                        ]);
+                    ?>
 				</div>
 			</div>
 		</div>
 		<div class="field_row clearfix" style="margin: 0 0 5px 0">
 			<div>
-				<?php echo form_label($this->lang->line('login_password').':', 'name',array('class'=>'lable-form-required')); ?>
+				<?php echo form_label($this->lang->line('login_password').':', 'name', ['class' => 'lable-form-required']); ?>
 				<div>
 					<?php 
-						echo form_password(array(
-							'name'=>'password',
-							'id'=>'password',
-							'class'=>'text_box'
-						));
-						echo form_hidden('ajax', $ajax);
-					?>
+                        echo form_password([
+                            'name'  => 'password',
+                            'id'    => 'password',
+                            'class' => 'text_box',
+                        ]);
+                        echo form_hidden('ajax', $ajax);
+                    ?>
 				</div>
 			</div>
 		</div>
@@ -35,7 +35,7 @@
 		</div>
 		<ul id="error_msg_back"></ul>
 		<div class="form-row" style="text-align: center;margin-top: 20px;">
-			<?php echo form_submit('confirm-button',$this->lang->line('recvs_complete_receiving'), 'class = "big_button" id="b-login-c"'); ?>
+			<?php echo form_submit('confirm-button', $this->lang->line('recvs_complete_receiving'), 'class = "big_button" id="b-login-c"'); ?>
 		</div>
 	</div>
 </div>

@@ -2,17 +2,17 @@
 
 /**
  * Set the title of a chart, make one of these and pass it into
- * open_flash_chart set_title
+ * open_flash_chart set_title.
  */
 class title
 {
-	function title( $text='' )
-	{
-		$this->text = $text;
-	}
-	
-	/**
-	 * A css string. Can optionally contain:
+    public function title($text = '')
+    {
+        $this->text = $text;
+    }
+
+    /**
+     * A css string. Can optionally contain:
      * - font-size
      * - font-family
      * - font-weight
@@ -29,11 +29,11 @@ class title
      * - padding-right
      * - padding-top
      * - padding-bottom
-     * just like the css we use all the time :-)
-	 */
-	function set_style( $css )
-	{
-		$this->style = $css;
-		//"{font-size: 20px; color:#0000ff; font-family: Verdana; text-align: center;}";		
-	}
+     * just like the css we use all the time :-).
+     */
+    public function set_style($css)
+    {
+        $this->style = $css;
+        //"{font-size: 20px; color:#0000ff; font-family: Verdana; text-align: center;}";
+    }
 }

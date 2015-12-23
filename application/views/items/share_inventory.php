@@ -1,22 +1,22 @@
-<?php $this->load->view("partial/header"); ?>
+<?php $this->load->view('partial/header'); ?>
 <?php print_r($session).' Cantidad de elementos:'.count($session); ?>
 <div id="page_title" style="margin-bottom:8px;"><?php echo $title ?></div>
 <div class="page_subtitle" style="margin-bottom:8px;"><?php echo $subtitle ?></div>
-<?php echo form_open(site_url("$controller_name/search"),array('id'=>'search_form', 'method'=>'GET')); ?>
+<?php echo form_open(site_url("$controller_name/search"), ['id' => 'search_form', 'method' => 'GET']); ?>
 	<label for="search"><?php echo $this->lang->line('items_share_search'); ?></label>
 	<input type="text" name ='search' id='search' placeholder="<?php echo $this->lang->line('items_share_search_name'); ?>"/>
 <?php echo form_close() ?>
-<?=form_open(site_url("$controller_name/save_dispatch"), array('id'=>'frmShareIvn', 'method'=>'GET'))?>
+<?=form_open(site_url("$controller_name/save_dispatch"), ['id' => 'frmShareIvn', 'method' => 'GET'])?>
 	<?php
-	include('application/config/database.php'); //Incluyo donde estaran todas las config de las databses
-	$dbs = array('...'=>'...');
-	foreach ($db as $key => $value){
-		if ( $key != $_SESSION['dblocation'] ) {
-			$dbs[$key] = ucwords($key);
-		}
-	}
-	$options = 'id="dbselected"';
-	?>
+    include 'application/config/database.php'; //Incluyo donde estaran todas las config de las databses
+    $dbs = ['...' => '...'];
+    foreach ($db as $key => $value) {
+        if ($key != $_SESSION['dblocation']) {
+            $dbs[$key] = ucwords($key);
+        }
+    }
+    $options = 'id="dbselected"';
+    ?>
 	<div class="location-option">
 	<?php echo form_label('Receiving Location:', 'dbselected'); ?>
 	<?php echo form_dropdown('dbselected', $dbs, '...', $options); ?>
@@ -26,9 +26,12 @@
 		<table class="tablesorter report share-inventorie-report" id="sortable_table">
 	        <thead>
 	            <tr>
-	                <?php foreach ($headers as $header) { ?>
-	                <th><?php echo $header; ?></th>
-	                <?php } ?>
+	                <?php foreach ($headers as $header) {
+    ?>
+	                <th><?php echo $header;
+    ?></th>
+	                <?php 
+} ?>
 	            </tr>
 	        </thead>
 	        <tbody>
@@ -47,12 +50,12 @@
 	</div>
 <?=form_close()?>
 <?php
-$this->load->view("partial/footer");
+$this->load->view('partial/footer');
 ?>
 <script>
 	var default_table_row = '<tr><td colspan="5" class="td-info">'.$this->lang->line('items_share_tex');.'</td></tr>';
 
-	enable_search_form('<?php echo site_url("$controller_name/suggest")?>','<?php echo $this->lang->line("common_confirm_search")?>', false);
+	enable_search_form('<?php echo site_url("$controller_name/suggest")?>','<?php echo $this->lang->line('common_confirm_search')?>', false);
 	
 	$$('.cb').each(function(index, el) {
 		var id = this.id;

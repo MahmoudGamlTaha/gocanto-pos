@@ -1,65 +1,69 @@
 <?php
+
 class Item_taxes extends CI_Model
 {
-	var $con;
+    public $con;
 
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
         $this->load->database();
         //Seleccion de DB
         // $this->session->set_userdata(array('dblocation'=>'other'));
         $db = $this->session->userdata('dblocation');
-        if($db)
+        if ($db) {
             $this->con = $this->load->database($db, true);
-        else
+        } else {
             $this->con = $this->db;
+        }
     }
-	/*
-	Gets tax info for a particular item
-	*/
-	function get_info($item_id)
-	{
-		$this->con->from('items_taxes');
-		$this->con->where('item_id',$item_id);
-		//return an array of taxes for an item
-		return $this->con->get()->result_array();
-	}
 
-	/*
-	Inserts or updates an item's taxes
-	*/
-	function save(&$items_taxes_data, $item_id)
-	{
-		//Run these queries as a transaction, we want to make sure we do all or nothing
-		$this->con->trans_start();
+    /*
+    Gets tax info for a particular item
+    */
 
-		$this->delete($item_id);
+    public function get_info($item_id)
+    {
+        $this->con->from('items_taxes');
+        $this->con->where('item_id', $item_id);
+        //return an array of taxes for an item
+        return $this->con->get()->result_array();
+    }
 
-		foreach ($items_taxes_data as $row)
-		{
-			$row['item_id'] = $item_id;
-			$this->con->insert('items_taxes',$row);
-		}
+    /*
+    Inserts or updates an item's taxes
+    */
 
-		$this->con->trans_complete();
-		return true;
-	}
+    public function save(&$items_taxes_data, $item_id)
+    {
+        //Run these queries as a transaction, we want to make sure we do all or nothing
+        $this->con->trans_start();
 
-	function save_multiple(&$items_taxes_data, $item_ids)
-	{
-		foreach($item_ids as $item_id)
-		{
-			$this->save($items_taxes_data, $item_id);
-		}
-	}
+        $this->delete($item_id);
 
-	/*
-	Deletes taxes given an item
-	*/
-	function delete($item_id)
-	{
-		return $this->con->delete('items_taxes', array('item_id' => $item_id));
-	}
+        foreach ($items_taxes_data as $row) {
+            $row['item_id'] = $item_id;
+            $this->con->insert('items_taxes', $row);
+        }
+
+        $this->con->trans_complete();
+
+        return true;
+    }
+
+    public function save_multiple(&$items_taxes_data, $item_ids)
+    {
+        foreach ($item_ids as $item_id) {
+            $this->save($items_taxes_data, $item_id);
+        }
+    }
+
+    /*
+    Deletes taxes given an item
+    */
+
+    public function delete($item_id)
+    {
+        return $this->con->delete('items_taxes', ['item_id' => $item_id]);
+    }
 }
-?>

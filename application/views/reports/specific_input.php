@@ -1,11 +1,11 @@
-<?php $this->load->view("partial/header"); ?>
+<?php $this->load->view('partial/header'); ?>
 
 <div id="page_title" style="margin-bottom:8px;"><?php echo $this->lang->line('reports_report_input'); ?></div>
 
 <?php
-	if(isset($error)){
-		echo "<div class='error_message' style=' margin: 0 0 10px 0'>".$error."</div>";
-	}
+    if (isset($error)) {
+        echo "<div class='error_message' style=' margin: 0 0 10px 0'>".$error.'</div>';
+    }
 ?>
 
 
@@ -17,18 +17,18 @@
 
 	<div id='report_date_range_simple' style="padding: 0 0 0 25px">
 		<input type="radio" name="report_type" id="simple_radio" value='simple' checked='checked'/>
-		<?php echo form_dropdown('report_date_range_simple',$report_date_range_simple, '', 'id="report_date_range_simple"'); ?>
+		<?php echo form_dropdown('report_date_range_simple', $report_date_range_simple, '', 'id="report_date_range_simple"'); ?>
 	</div>
 	
 	<div id='report_date_range_complex' style="padding: 0 0 0 25px">
 		<input type="radio" name="report_type" id="complex_radio" value='complex' />
-		<?php echo form_dropdown('start_month',$months, $selected_month, 'id="start_month"'); ?>
-		<?php echo form_dropdown('start_day',$days, $selected_day, 'id="start_day"'); ?>
-		<?php echo form_dropdown('start_year',$years, $selected_year, 'id="start_year"'); ?>
+		<?php echo form_dropdown('start_month', $months, $selected_month, 'id="start_month"'); ?>
+		<?php echo form_dropdown('start_day', $days, $selected_day, 'id="start_day"'); ?>
+		<?php echo form_dropdown('start_year', $years, $selected_year, 'id="start_year"'); ?>
 		-
-		<?php echo form_dropdown('end_month',$months, $selected_month, 'id="end_month"'); ?>
-		<?php echo form_dropdown('end_day',$days, $selected_day, 'id="end_day"'); ?>
-		<?php echo form_dropdown('end_year',$years, $selected_year, 'id="end_year"'); ?>
+		<?php echo form_dropdown('end_month', $months, $selected_month, 'id="end_month"'); ?>
+		<?php echo form_dropdown('end_day', $days, $selected_day, 'id="end_day"'); ?>
+		<?php echo form_dropdown('end_year', $years, $selected_year, 'id="end_year"'); ?>
 	</div>
 
 	<div class="sub-title-view">
@@ -36,7 +36,7 @@
 	</div>
 	
 	<div id='report_specific_input_data' style="padding: 0 0 0 25px">
-		<?php echo form_dropdown('specific_input_data',$specific_input_data, '', 'id="specific_input_data"'); ?>
+		<?php echo form_dropdown('specific_input_data', $specific_input_data, '', 'id="specific_input_data"'); ?>
 	</div>
 	
 	<div class="sub-title-view">
@@ -44,7 +44,7 @@
 	</div>
 
 	<div id='report_sale_type' style="padding: 0 0 0 25px">
-		<?php echo form_dropdown('sale_type',array('all' => $this->lang->line('reports_all'), 'sales' => $this->lang->line('reports_sales'), 'returns' => $this->lang->line('reports_returns')), 'all', 'id="sale_type"'); ?>
+		<?php echo form_dropdown('sale_type', ['all' => $this->lang->line('reports_all'), 'sales' => $this->lang->line('reports_sales'), 'returns' => $this->lang->line('reports_returns')], 'all', 'id="sale_type"'); ?>
 	</div>
 	
 	<div class="sub-title-view">
@@ -61,15 +61,15 @@
 <a class="linkBack big_button" style="height: auto" href="#"><span>Back</span></a>
 &nbsp;
 <?php
-echo form_button(array(
-	'name'=>'generate_report',
-	'id'=>'generate_report',
-	'content'=>$this->lang->line('common_submit'),
-	'class'=>'big_button',
-	'style'=>'height: auto;')
+echo form_button([
+    'name'    => 'generate_report',
+    'id'      => 'generate_report',
+    'content' => $this->lang->line('common_submit'),
+    'class'   => 'big_button',
+    'style'   => 'height: auto;', ]
 );
 ?>
-<?php $this->load->view("partial/footer"); ?>
+<?php $this->load->view('partial/footer'); ?>
 
 <script type="text/javascript" language="javascript">
 $(document).ready(function()

@@ -1,4 +1,7 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php
+ if (!defined('BASEPATH')) {
+     exit('No direct script access allowed');
+ }
 /*
 | -------------------------------------------------------------------------
 | URI ROUTING
@@ -38,29 +41,29 @@
 |
 */
 
-$route['default_controller'] = "login";
-$route['no_access/(:any)'] = "no_access/index/$1";
-$route['reports/(summary_:any)/(:any)/(:any)'] = "reports/$1/$2/$3";
-$route['reports/summary_:any'] = "reports/date_input_excel_export";
-$route['reports/(graphical_:any)/(:any)/(:any)'] = "reports/$1/$2/$3";
-$route['reports/graphical_:any'] = "reports/date_input";
-$route['reports/(inventory_:any)/(:any)'] = "reports/$1/$2";
-$route['reports/inventory_:any'] = "reports/excel_export";
+$route['default_controller'] = 'login';
+$route['no_access/(:any)'] = 'no_access/index/$1';
+$route['reports/(summary_:any)/(:any)/(:any)'] = 'reports/$1/$2/$3';
+$route['reports/summary_:any'] = 'reports/date_input_excel_export';
+$route['reports/(graphical_:any)/(:any)/(:any)'] = 'reports/$1/$2/$3';
+$route['reports/graphical_:any'] = 'reports/date_input';
+$route['reports/(inventory_:any)/(:any)'] = 'reports/$1/$2';
+$route['reports/inventory_:any'] = 'reports/excel_export';
 
-$route['reports/(detailed_sales)/(:any)/(:any)'] = "reports/$1/$2/$3";
-$route['reports/detailed_sales'] = "reports/date_input";
-$route['reports/(detailed_receivings)/(:any)/(:any)'] = "reports/$1/$2/$3";
-$route['reports/detailed_receivings'] = "reports/date_input";
-$route['reports/(specific_:any)/(:any)/(:any)/(:any)'] = "reports/$1/$2/$3/$4";
-$route['reports/specific_customer'] = "reports/specific_customer_input";
-$route['reports/specific_employee'] = "reports/specific_employee_input";
+$route['reports/(detailed_sales)/(:any)/(:any)'] = 'reports/$1/$2/$3';
+$route['reports/detailed_sales'] = 'reports/date_input';
+$route['reports/(detailed_receivings)/(:any)/(:any)'] = 'reports/$1/$2/$3';
+$route['reports/detailed_receivings'] = 'reports/date_input';
+$route['reports/(specific_:any)/(:any)/(:any)/(:any)'] = 'reports/$1/$2/$3/$4';
+$route['reports/specific_customer'] = 'reports/specific_customer_input';
+$route['reports/specific_employee'] = 'reports/specific_employee_input';
 
-$route['orders/page'] = "orders/index/0/0";
-$route['orders/page/(:num)'] = "orders/index/0/$1";
-$route['receivings/page'] = "receivings/index/0/0";
-$route['receivings/page/(:num)'] = "receivings/index/0/$1";
+$route['orders/page'] = 'orders/index/0/0';
+$route['orders/page/(:num)'] = 'orders/index/0/$1';
+$route['receivings/page'] = 'receivings/index/0/0';
+$route['receivings/page/(:num)'] = 'receivings/index/0/$1';
 
-$route['scaffolding_trigger'] = "";
+$route['scaffolding_trigger'] = '';
 
 $route['404_override'] = 'errors/page_missing';
 

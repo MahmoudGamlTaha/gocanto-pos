@@ -19,28 +19,28 @@
 <body>
 
 <?php
-	$dbs = $this->Location->get_select_option_list(false, true);
-	$dbs['default'] = 'Principal';
+    $dbs = $this->Location->get_select_option_list(false, true);
+    $dbs['default'] = 'Principal';
 ?>
 
 <div>
-	<img src="images/<?=file_exists('images/'.$this->Appconfig->get('logo'))?$this->Appconfig->get('logo'):'logo.png'?>" border="0" />
+	<img src="images/<?=file_exists('images/'.$this->Appconfig->get('logo')) ? $this->Appconfig->get('logo') : 'logo.png'?>" border="0" />
 </div>
 
 <div class="box-login">
-	<?=form_open('login',array('id'=>'form_login'))?>
+	<?=form_open('login', ['id' => 'form_login'])?>
 	<div  class="box-title clearfix">
-		<?=(trim(validation_errors())!='')?validation_errors():$this->lang->line('login_welcome_message')?>
+		<?=(trim(validation_errors()) != '') ? validation_errors() : $this->lang->line('login_welcome_message')?>
 	</div>
 
 	<div class="clearfix">
 		<table class="box-table" border="0" cellpadding="0" cellspacing="0" width="340px">
 			<tr>
-				<td colspan="2" class="box-bkg-label-location"><?=form_label($this->lang->line('login_location_label'),'locationbd')?></td>
+				<td colspan="2" class="box-bkg-label-location"><?=form_label($this->lang->line('login_location_label'), 'locationbd')?></td>
 			</tr>
 			<tr>
 				<td colspan="2" class="box-bkg-drop-location">
-					<?=form_dropdown('locationbd',$dbs,$this->input->post('locationbd'))?>
+					<?=form_dropdown('locationbd', $dbs, $this->input->post('locationbd'))?>
 				</td>
 			</tr>
 			<tr>
@@ -48,30 +48,30 @@
 			</tr>
 			<tr>
 				<td class="icon-user"></td>
-				<td class="bkg-input-login"><?=form_input(array(
-					'name'=>'username',
-					'size'=>'20',
-					'value'=>$fastUser,
-					'placeholder'=>$this->lang->line('login_username'),
-				))?></td>
+				<td class="bkg-input-login"><?=form_input([
+                    'name'        => 'username',
+                    'size'        => '20',
+                    'value'       => $fastUser,
+                    'placeholder' => $this->lang->line('login_username'),
+                ])?></td>
 			</tr>
 			<tr>
 				<td colspan="2" height="1"></td>
 			</tr>
 			<tr>
 				<td class="icon-lock"></td>
-				<td class="bkg-input-login"><?=form_password(array(
-					'name'=>'password',
-					'size'=>'20',
-					'placeholder'=>$this->lang->line('login_password'),
-				))?>
+				<td class="bkg-input-login"><?=form_password([
+                    'name'        => 'password',
+                    'size'        => '20',
+                    'placeholder' => $this->lang->line('login_password'),
+                ])?>
 			</td>
 			</tr>
 			<tr>
 				<td colspan="2" height="1"></td>
 			</tr>
 			<tr>
-				<td colspan="2" align="center"><?=form_submit('loginButton',$this->lang->line('login_submit_labelb'),'class="form-button"')?></td>
+				<td colspan="2" align="center"><?=form_submit('loginButton', $this->lang->line('login_submit_labelb'), 'class="form-button"')?></td>
 			</tr>
 		</table>
 	</div>

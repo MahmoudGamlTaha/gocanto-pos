@@ -1,25 +1,26 @@
 <?php
-$lang['customers_new']='New Customer';
-$lang['customers_customer']='Customer';
-$lang['customers_update']='Update Customer';
-$lang['customers_confirm_delete']='Are you sure you want to delete the selected customers?';
-$lang['customers_none_selected']='You have not selected any customers to delete';
-$lang['customers_error_adding_updating'] = 'Error adding/updating customer';
-$lang['customers_successful_adding']='You have successfully added customer';
-$lang['customers_successful_updating']='You have successfully updated customer';
-$lang['customers_successful_deleted']='You have successfully deleted';
-$lang['customers_one_or_multiple']='customer(s)';
-$lang['customers_cannot_be_deleted']='Could not deleted selected customers, one or more of the selected customers has sales.';
-$lang['customers_basic_information']='Customer Information';
-$lang['customers_account_number']='Account #';
-$lang['customers_taxable']='Taxable';
-$lang['customers_excel']='Excel Import';
-$lang['customers_dow_excel']='Download Import Excel Template (CSV)';
-$lang['customers_resq_excel']='Import customers from Excel sheet';
-$lang['customers_excel_title']='Import Items from Excel';
 
-$lang['customers_h3_contact_info']='Contact Info';
-$lang['customers_h3_additional_info']='Additional Information';
+$lang['customers_new'] = 'New Customer';
+$lang['customers_customer'] = 'Customer';
+$lang['customers_update'] = 'Update Customer';
+$lang['customers_confirm_delete'] = 'Are you sure you want to delete the selected customers?';
+$lang['customers_none_selected'] = 'You have not selected any customers to delete';
+$lang['customers_error_adding_updating'] = 'Error adding/updating customer';
+$lang['customers_successful_adding'] = 'You have successfully added customer';
+$lang['customers_successful_updating'] = 'You have successfully updated customer';
+$lang['customers_successful_deleted'] = 'You have successfully deleted';
+$lang['customers_one_or_multiple'] = 'customer(s)';
+$lang['customers_cannot_be_deleted'] = 'Could not deleted selected customers, one or more of the selected customers has sales.';
+$lang['customers_basic_information'] = 'Customer Information';
+$lang['customers_account_number'] = 'Account #';
+$lang['customers_taxable'] = 'Taxable';
+$lang['customers_excel'] = 'Excel Import';
+$lang['customers_dow_excel'] = 'Download Import Excel Template (CSV)';
+$lang['customers_resq_excel'] = 'Import customers from Excel sheet';
+$lang['customers_excel_title'] = 'Import Items from Excel';
+
+$lang['customers_h3_contact_info'] = 'Contact Info';
+$lang['customers_h3_additional_info'] = 'Additional Information';
 $lang['customers_msg_address'] = 'Address is required';
 $lang['customers_msg_country'] = 'Country is required';
 $lang['customers_msg_country01'] = 'Country is required and you only can write letters [aA-zZ]';
@@ -70,8 +71,3 @@ $lang['customers_select_both_fields'] = 'Must select both fields';
 $lang['customers_overdue_bills'] = 'Overdue bills';
 $lang['customers_general'] = 'General';
 $lang['customers_period_days'] = 'days';
-
-
-
-
-?>

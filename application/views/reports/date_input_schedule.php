@@ -1,4 +1,4 @@
-<?php $this->load->view("partial/header"); ?>
+<?php $this->load->view('partial/header'); ?>
 
 <div id="page_title" style="margin-bottom:8px;"><?php echo 'Schedule Employee '.$this->lang->line('reports_report_input'); ?></div>
 
@@ -7,7 +7,7 @@
 
 
 	<div>
-		<?php echo form_label('Employee:', 'search', array('class'=>'lable-form-required')); ?>
+		<?php echo form_label('Employee:', 'search', ['class' => 'lable-form-required']); ?>
 	</div>
 
 	<div>
@@ -19,7 +19,7 @@
 	</div>
 	
 	<div>
-		<?php echo form_label('Select date:','month', array('class'=>'lable-form')); ?>
+		<?php echo form_label('Select date:', 'month', ['class' => 'lable-form']); ?>
 	</div>
 
 	<div>
@@ -31,7 +31,7 @@
 	</div>
 
 	<div>
-		<?php echo form_label('Select Year:', 'year', array('class'=>'lable-form')); ?>
+		<?php echo form_label('Select Year:', 'year', ['class' => 'lable-form']); ?>
 	</div>
 
 	<div>
@@ -83,4 +83,4 @@
 		});
 	});
 </script>
-<?php $this->load->view("partial/footer"); ?>
+<?php $this->load->view('partial/footer'); ?>

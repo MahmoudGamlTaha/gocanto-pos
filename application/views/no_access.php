@@ -1,4 +1,4 @@
-<?php $this->load->view("partial/header"); ?>
+<?php $this->load->view('partial/header'); ?>
 <style>
 	section.no-access{
 		background-color:#fff;
@@ -35,4 +35,4 @@
 		</div>
 		<p><?php echo $this->lang->line('error_no_permission_module').' '.$module_name; ?></p>
 	</section>
-<?php $this->load->view("partial/footer"); ?> 
+<?php $this->load->view('partial/footer'); ?> 

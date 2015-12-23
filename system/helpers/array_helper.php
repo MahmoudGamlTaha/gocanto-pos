@@ -1,5 +1,8 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-/**
+<?php
+ if (!defined('BASEPATH')) {
+     exit('No direct script access allowed');
+ }
+/*
  * CodeIgniter
  *
  * An open source application development framework for PHP 5.1.6 or newer
@@ -15,7 +18,7 @@
 
 // ------------------------------------------------------------------------
 
-/**
+/*
  * CodeIgniter Array Helpers
  *
  * @package		CodeIgniter
@@ -27,7 +30,7 @@
 
 // ------------------------------------------------------------------------
 
-/**
+/*
  * Element
  *
  * Lets you determine whether an array index is set and whether it has a value.
@@ -39,44 +42,40 @@
  * @param	mixed
  * @return	mixed	depends on what the array contains
  */
-if ( ! function_exists('element'))
-{
-	function element($item, $array, $default = FALSE)
-	{
-		if ( ! isset($array[$item]) OR $array[$item] == "")
-		{
-			return $default;
-		}
+if (!function_exists('element')) {
+    function element($item, $array, $default = false)
+    {
+        if (!isset($array[$item]) or $array[$item] == '') {
+            return $default;
+        }
 
-		return $array[$item];
-	}
+        return $array[$item];
+    }
 }
 
 // ------------------------------------------------------------------------
 
-/**
+/*
  * Random Element - Takes an array as input and returns a random element
  *
  * @access	public
  * @param	array
  * @return	mixed	depends on what the array contains
  */
-if ( ! function_exists('random_element'))
-{
-	function random_element($array)
-	{
-		if ( ! is_array($array))
-		{
-			return $array;
-		}
+if (!function_exists('random_element')) {
+    function random_element($array)
+    {
+        if (!is_array($array)) {
+            return $array;
+        }
 
-		return $array[array_rand($array)];
-	}
+        return $array[array_rand($array)];
+    }
 }
 
 // --------------------------------------------------------------------
 
-/**
+/*
  * Elements
  *
  * Returns only the array items specified.  Will return a default value if
@@ -88,31 +87,25 @@ if ( ! function_exists('random_element'))
  * @param	mixed
  * @return	mixed	depends on what the array contains
  */
-if ( ! function_exists('elements'))
-{
-	function elements($items, $array, $default = FALSE)
-	{
-		$return = array();
-		
-		if ( ! is_array($items))
-		{
-			$items = array($items);
-		}
-		
-		foreach ($items as $item)
-		{
-			if (isset($array[$item]))
-			{
-				$return[$item] = $array[$item];
-			}
-			else
-			{
-				$return[$item] = $default;
-			}
-		}
+if (!function_exists('elements')) {
+    function elements($items, $array, $default = false)
+    {
+        $return = [];
 
-		return $return;
-	}
+        if (!is_array($items)) {
+            $items = [$items];
+        }
+
+        foreach ($items as $item) {
+            if (isset($array[$item])) {
+                $return[$item] = $array[$item];
+            } else {
+                $return[$item] = $default;
+            }
+        }
+
+        return $return;
+    }
 }
 
 /* End of file array_helper.php */

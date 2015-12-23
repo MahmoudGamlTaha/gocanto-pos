@@ -3,8 +3,8 @@
 // Pretty print some JSON
 function json_format($json)
 {
-    $tab = "  ";
-    $new_json = "";
+    $tab = '  ';
+    $new_json = '';
     $indent_level = 0;
     $in_string = false;
 
@@ -22,63 +22,48 @@ function json_format($json)
 */
     $len = strlen($json);
 
-    for($c = 0; $c < $len; $c++)
-    {
+    for ($c = 0; $c < $len; $c++) {
         $char = $json[$c];
-        switch($char)
-        {
+        switch ($char) {
             case '{':
             case '[':
-                if(!$in_string)
-                {
-                    $new_json .= $char . "\n" . str_repeat($tab, $indent_level+1);
+                if (!$in_string) {
+                    $new_json .= $char."\n".str_repeat($tab, $indent_level + 1);
                     $indent_level++;
-                }
-                else
-                {
+                } else {
                     $new_json .= $char;
                 }
                 break;
             case '}':
             case ']':
-                if(!$in_string)
-                {
+                if (!$in_string) {
                     $indent_level--;
-                    $new_json .= "\n" . str_repeat($tab, $indent_level) . $char;
-                }
-                else
-                {
+                    $new_json .= "\n".str_repeat($tab, $indent_level).$char;
+                } else {
                     $new_json .= $char;
                 }
                 break;
             case ',':
-                if(!$in_string)
-                {
-                    $new_json .= ",\n" . str_repeat($tab, $indent_level);
-                }
-                else
-                {
+                if (!$in_string) {
+                    $new_json .= ",\n".str_repeat($tab, $indent_level);
+                } else {
                     $new_json .= $char;
                 }
                 break;
             case ':':
-                if(!$in_string)
-                {
-                    $new_json .= ": ";
-                }
-                else
-                {
+                if (!$in_string) {
+                    $new_json .= ': ';
+                } else {
                     $new_json .= $char;
                 }
                 break;
             case '"':
-                if($c > 0 && $json[$c-1] != '\\')
-                {
+                if ($c > 0 && $json[$c - 1] != '\\') {
                     $in_string = !$in_string;
                 }
             default:
                 $new_json .= $char;
-                break;                   
+                break;
         }
     }
 

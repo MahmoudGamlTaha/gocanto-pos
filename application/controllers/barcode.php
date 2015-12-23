@@ -1,14 +1,14 @@
 <?php
-class Barcode extends CI_Controller 
+
+class barcode extends CI_Controller
 {
-	function __construct()
-	{
-		parent::__construct();	
-	}
-	
-	function index()
-	{		
-		$this->load->view('barcode');
-	}	
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
+    public function index()
+    {
+        $this->load->view('barcode');
+    }
 }
-?>

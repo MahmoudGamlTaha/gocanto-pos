@@ -1,59 +1,63 @@
-<?php echo form_open_multipart('employees/save/'.($person_info->person_id?$person_info->person_id:'-1'),array('id'=>'employee_form')); ?>
+<?php echo form_open_multipart('employees/save/'.($person_info->person_id ? $person_info->person_id : '-1'), ['id' => 'employee_form']); ?>
 <div>
 	<h3 class="user-icon"><?=$this->lang->line('customers_h3_contact_info')?></h3>
-	<?php $this->load->view("people/form_basic_info"); ?>
+	<?php $this->load->view('people/form_basic_info'); ?>
 	
 	<div class="clearfix my_height"></div>
 	<h3 class="camera-icon"><?=$this->lang->line('employees_h3_photo')?></h3>
 
 	<div class="field_row clearfix">
 		<div class="field_row clearfix">
-			<?php echo form_label($this->lang->line('employees_photo').':', 'photo_label',array('class'=>'lable-form','style'=>'float:none;','style'=>'float:none;')); ?>
+			<?php echo form_label($this->lang->line('employees_photo').':', 'photo_label', ['class' => 'lable-form', 'style' => 'float:none;', 'style' => 'float:none;']); ?>
 		</div>
 		<?php 
-		$tuId=md5($this->session->userdata('dblocation').'+'.($person_info->person_id?$person_info->person_id:''));
-		if ($person_info->person_id && file_exists('./images/employees/'.$tuId.'.jpg')){ ?>
-		<div id="fileb" style="margin-bottom: 10px; background-repeat:no-repeat; width: 180px; height: 140px; background-image: url('./images/employees/<?php echo $tuId; ?>.jpg')">
+        $tuId = md5($this->session->userdata('dblocation').'+'.($person_info->person_id ? $person_info->person_id : ''));
+        if ($person_info->person_id && file_exists('./images/employees/'.$tuId.'.jpg')) {
+            ?>
+		<div id="fileb" style="margin-bottom: 10px; background-repeat:no-repeat; width: 180px; height: 140px; background-image: url('./images/employees/<?php echo $tuId;
+            ?>.jpg')">
 		</div>
 		<?php 
-			$displayNonePhoto='style="display:none;"';
-			echo form_button(
-				array(
-					'name'=>'change',
-					'id'=>'change',
-					'value'=>'change',
-					'content' => $this->lang->line('employees_photo_change'),
-					'class'=>'big_button',
-					'style'=>'display: inline-block; margin: 0 20px;'
-				)
-			);
-		}else $displayNonePhoto="style='display:block;'"; ?>
+            $displayNonePhoto = 'style="display:none;"';
+            echo form_button(
+                [
+                    'name'    => 'change',
+                    'id'      => 'change',
+                    'value'   => 'change',
+                    'content' => $this->lang->line('employees_photo_change'),
+                    'class'   => 'big_button',
+                    'style'   => 'display: inline-block; margin: 0 20px;',
+                ]
+            );
+        } else {
+            $displayNonePhoto = "style='display:block;'";
+        } ?>
 		<div id="filel" class="field_row clearfix" <?php echo $displayNonePhoto; ?>> 
 			<input type="radio" name="photop" value="0" checked="checked">	
-			<?php echo form_label($this->lang->line('config_recover_fe'), 'photo_label',array('class'=>'lable-form','style'=>'float:none;')); ?>&nbsp;&nbsp;&nbsp;&nbsp;
+			<?php echo form_label($this->lang->line('config_recover_fe'), 'photo_label', ['class' => 'lable-form', 'style' => 'float:none;']); ?>&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="radio" value="1" name="photop" >	
-			<?php echo form_label($this->lang->line('employees_photo_g'), 'photo_label',array('class'=>'lable-form','style'=>'float:none;')); ?>
+			<?php echo form_label($this->lang->line('employees_photo_g'), 'photo_label', ['class' => 'lable-form', 'style' => 'float:none;']); ?>
 		</div>
 		<div id="filee" class="field_row clearfix" <?php echo $displayNonePhoto; ?>>
 			<div class='form_field' style="-webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; ">
 				<input type="file" name="photo_e" id="photo_e">
-				<div class="upload_label"><?php echo $this->lang->line('common_logo_dimensiones');?></div>
+				<div class="upload_label"><?php echo $this->lang->line('common_logo_dimensiones'); ?></div>
 			</div>	
 		</div>
 		<div id="filei" class="field_row clearfix" style="display: none;">
 			<video id="video" width="180" height="140" autoplay></video>
 			<?php
-			echo form_button(
-					array(
-						'name'=>'snap',
-						'id'=>'snap',
-						'value'=>'snap',
-						'content' => $this->lang->line('employees_photo_capture'),
-						'class'=>'big_button',
-						'style'=>'display: inline-block; margin: 0 20px;'
-					)
-				);
-			?>
+            echo form_button(
+                    [
+                        'name'    => 'snap',
+                        'id'      => 'snap',
+                        'value'   => 'snap',
+                        'content' => $this->lang->line('employees_photo_capture'),
+                        'class'   => 'big_button',
+                        'style'   => 'display: inline-block; margin: 0 20px;',
+                    ]
+                );
+            ?>
 			<canvas id="canvas" width="180" height="140"></canvas>
 			<input type="hidden" name="protocapture" id="protocapture"/>
 		</div>
@@ -61,49 +65,55 @@
 </div>
 <div>
 	<div class="clearfix my_height"></div>
-	<h3 class="lock-icon"><?php echo $this->lang->line("employees_login_info"); ?></h3>
+	<h3 class="lock-icon"><?php echo $this->lang->line('employees_login_info'); ?></h3>
 	<div class="field_row clearfix">
 		<div style="width: 180px; float: left">
 			<div class="field_row clearfix">
-				<?php echo form_label($this->lang->line('employees_username').':', 'username',array('class'=>'lable-form-required')); ?>
+				<?php echo form_label($this->lang->line('employees_username').':', 'username', ['class' => 'lable-form-required']); ?>
 				<div >
 				<?php 
-					if($person_info->username){ $disabled="disabled"; ?>
-					<input type="hidden" name="nameuser" value="<?php echo $person_info->username; ?>">
+                    if ($person_info->username) {
+                        $disabled = 'disabled';
+                        ?>
+					<input type="hidden" name="nameuser" value="<?php echo $person_info->username;
+                        ?>">
 				<?php
-					}else $disabled="";
-					echo form_input(array(
-					'name'=>'username',
-					'id'=>'username',
-					'value'=>$person_info->username,$disabled=>$disabled,
-					'class'=>'text_box'
-				));
-				?>
+
+                    } else {
+                        $disabled = '';
+                    }
+                    echo form_input([
+                    'name'  => 'username',
+                    'id'    => 'username',
+                    'value' => $person_info->username, $disabled => $disabled,
+                    'class' => 'text_box',
+                ]);
+                ?>
 				</div>
 			</div>
 		</div>
 		<div style="width: 180px; float: left">
 			<div class="field_row clearfix">
-				<?php $password_label_attributes = $person_info->person_id == "" ? array('class'=>'lable-form-required'):array('class'=>'lable-form');
-				echo form_label($this->lang->line('employees_password').':', 'password',$password_label_attributes); ?>
+				<?php $password_label_attributes = $person_info->person_id == '' ? ['class' => 'lable-form-required'] : ['class' => 'lable-form'];
+                echo form_label($this->lang->line('employees_password').':', 'password', $password_label_attributes); ?>
 				<div>
-				<?php echo form_password(array(
-					'name'=>'password',
-					'id'=>'password',
-					'class'=>'text_box'
-				));?>
+				<?php echo form_password([
+                    'name'  => 'password',
+                    'id'    => 'password',
+                    'class' => 'text_box',
+                ]); ?>
 				</div>
 			</div>
 		</div>
 		<div style="width: 180px; float: left">
 			<div class="field_row clearfix">
-				<?php echo form_label($this->lang->line('employees_repeat_password').':', 'repeat_password',$password_label_attributes); ?>
+				<?php echo form_label($this->lang->line('employees_repeat_password').':', 'repeat_password', $password_label_attributes); ?>
 				<div >
-				<?php echo form_password(array(
-					'name'=>'repeat_password',
-					'id'=>'repeat_password',
-					'class'=>'text_box'
-				));?>
+				<?php echo form_password([
+                    'name'  => 'repeat_password',
+                    'id'    => 'repeat_password',
+                    'class' => 'text_box',
+                ]); ?>
 				</div>
 			</div>
 		</div>
@@ -111,98 +121,109 @@
 </div>
 <div id="employee_permission_info">
 	<div class="clearfix my_height"></div>
-	<h3 class="access-icon"><?php echo $this->lang->line("employees_permission_info"); ?></h3>
-	<p><?php echo $this->lang->line("employees_permission_desc"); ?></p>
+	<h3 class="access-icon"><?php echo $this->lang->line('employees_permission_info'); ?></h3>
+	<p><?php echo $this->lang->line('employees_permission_desc'); ?></p>
 	<select id="employee_profile_type">
 		<option value=""><?php echo $this->lang->line('employees_profi'); ?>...</option>
 	</select>
 	<input type="hidden" name="employee_profile_type" value="<?=$person_info->type_employees?>" />
 	<div id="radio" style="margin-top: 10px;"><input type="checkbox"  style="margin-right: 10px;"><?php echo $this->lang->line('employees_see'); ?></div>
 	<ul id="permission_list" style="display: none;">
-		<?php foreach($all_modules->result() as $module) { 
-			switch ($module->module_id) {
-				case 'stock_control': 
-					$classSee=' no-see'; $styleli=''; break;
-				case 'notification_alert':
-					$classSee=' no-see'; $styleli='style="width:642px;height:65px;"'; break;					
-				default: $classSee='';$styleli=''; break;
-			}
-		?>
-		<li <?php echo $styleli; ?>>
-			<span class="medium"><?php echo $this->lang->line('module_'.$module->module_id);?>:</span>
-			<span class="small"><?php echo $this->lang->line('module_'.$module->module_id.'_desc');?></span>
-			<ul class="module-options<?php echo $classSee; ?>">
-				<li class="<?php echo $classSee; ?>">
+		<?php foreach ($all_modules->result() as $module) {
+    switch ($module->module_id) {
+                case 'stock_control':
+                    $classSee = ' no-see'; $styleli = ''; break;
+                case 'notification_alert':
+                    $classSee = ' no-see'; $styleli = 'style="width:642px;height:65px;"'; break;
+                default: $classSee = ''; $styleli = ''; break;
+            }
+    ?>
+		<li <?php echo $styleli;
+    ?>>
+			<span class="medium"><?php echo $this->lang->line('module_'.$module->module_id);
+    ?>:</span>
+			<span class="small"><?php echo $this->lang->line('module_'.$module->module_id.'_desc');
+    ?></span>
+			<ul class="module-options<?php echo $classSee;
+    ?>">
+				<li class="<?php echo $classSee;
+    ?>">
 				<?php
-					$subpermissions = explode(',', $module->options);
-					$attribs = array(
-						'id'=>$module->module_id,
-						'name'=>'permissions[]',
-						'value'=>$module->module_id,
-						'class'=>'permissions-option',
-						'checked'=>$this->Employee->has_permission($module->module_id,$person_info->person_id)
-					);
-					echo form_checkbox($attribs);
-				?>
-				<span><?php echo $this->lang->line('employees_profile_see'); ?></span>	
+                    $subpermissions = explode(',', $module->options);
+    $attribs = [
+                        'id'      => $module->module_id,
+                        'name'    => 'permissions[]',
+                        'value'   => $module->module_id,
+                        'class'   => 'permissions-option',
+                        'checked' => $this->Employee->has_permission($module->module_id, $person_info->person_id),
+                    ];
+    echo form_checkbox($attribs);
+    ?>
+				<span><?php echo $this->lang->line('employees_profile_see');
+    ?></span>	
 				</li>
 				<?php 
-				foreach ($subpermissions as $subpermission) {
-					if ($subpermission != 'none' || $subpermission == '') {
-						$attribs = array(
-							'id'=>$module->module_id.'-'.str_replace(" ","_",$subpermission),
-							'name'=>$module->module_id.'[]',
-							'value'=>$subpermission,
-							'class'=>$module->module_id.'-option',
-							'checked'=>$this->Employee->has_privilege_permi($module->module_id,$person_info->person_id,$subpermission));
-						echo "<li>";
-						echo form_checkbox($attribs);
-						echo form_label(ucwords($subpermission));
-						echo "</li>";
-					}
-				}
-				?>
+                foreach ($subpermissions as $subpermission) {
+                    if ($subpermission != 'none' || $subpermission == '') {
+                        $attribs = [
+                            'id'      => $module->module_id.'-'.str_replace(' ', '_', $subpermission),
+                            'name'    => $module->module_id.'[]',
+                            'value'   => $subpermission,
+                            'class'   => $module->module_id.'-option',
+                            'checked' => $this->Employee->has_privilege_permi($module->module_id, $person_info->person_id, $subpermission), ];
+                        echo '<li>';
+                        echo form_checkbox($attribs);
+                        echo form_label(ucwords($subpermission));
+                        echo '</li>';
+                    }
+                }
+    ?>
 			</ul>
 		</li>
-		<?php } ?>
+		<?php 
+} ?>
 	</ul>
 </div>
-<?php $days = array('Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'); ?>
+<?php $days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']; ?>
 <table id="employee_schedule">
 	<tr>
-		<?php foreach($days as $day) echo '<th>'.$day.'</th>'; ?>
+		<?php foreach ($days as $day) {
+    echo '<th>'.$day.'</th>';
+} ?>
 		<th></th>
 	</tr>
 	<tr>
-		<?php foreach($days as $day){
-		echo '<td class="checkDays">'.
-		form_checkbox(strtolower($day), $day, $this->Schedule->workable_day($day, $person_info->person_id))
-		.'</td>';
-		} ?>
+		<?php foreach ($days as $day) {
+    echo '<td class="checkDays">'.
+        form_checkbox(strtolower($day), $day, $this->Schedule->workable_day($day, $person_info->person_id))
+        .'</td>';
+} ?>
 		<td class="checkDays">Days</td>
 	</tr>
 	<tr>
 		<?php
-			$horas = array();
-			for ($i=0; $i < 23; $i++) { $horas[] = $i; }
-			foreach($days as $day){
-				$select=$this->Schedule->workable_day_hour($day, 'in', $person_info->person_id);
-				$disabled=$select===false?'disabled="disabled"':'';
-				echo '<td>'.form_dropdown('in'.$day, $horas,$select, 'id="in'.strtolower($day).'" '.$disabled).'</td>';
-			} 
-		?>
+            $horas = [];
+            for ($i = 0; $i < 23; $i++) {
+                $horas[] = $i;
+            }
+            foreach ($days as $day) {
+                $select = $this->Schedule->workable_day_hour($day, 'in', $person_info->person_id);
+                $disabled = $select === false ? 'disabled="disabled"' : '';
+                echo '<td>'.form_dropdown('in'.$day, $horas, $select, 'id="in'.strtolower($day).'" '.$disabled).'</td>';
+            }
+        ?>
 		<td>In</td>
 	</tr>
 	<tr>
 		<?php
-			unset($horas[0]);
-			$horas[] = 23;
-			foreach($days as $day){
-				$select=$this->Schedule->workable_day_hour($day, 'out', $person_info->person_id);
-				$disabled=$select===false?'disabled="disabled"':'';
-				echo '<td>'.form_dropdown('out'.$day, $horas,$select, 'id="out'.strtolower($day).'" '.$disabled).'</td>';
-			} 
-		?>
+            unset($horas[0]);
+            $horas[] = 23;
+            foreach ($days as $day) {
+                $select = $this->Schedule->workable_day_hour($day, 'out', $person_info->person_id);
+                $disabled = $select === false ? 'disabled="disabled"' : '';
+                echo '<td>'.form_dropdown('out'.$day, $horas, $select, 'id="out'.strtolower($day).'" '.$disabled).'</td>';
+            }
+        ?>
 		<td>Out</td>
 	</tr>
 </table>
@@ -212,19 +233,19 @@
 </div>
 <ul id="error_message_box"></ul>
 <?php
-echo form_submit(array(
-	'name'=>'sendto',
-	'id'=>'sendto',	
-	'value'=>$this->lang->line('common_submit'),
-	'class'=>'small_button float_right')
+echo form_submit([
+    'name'  => 'sendto',
+    'id'    => 'sendto',
+    'value' => $this->lang->line('common_submit'),
+    'class' => 'small_button float_right', ]
 );
 echo form_close(); ?>
 <?php 
-	$retypes=''; 
-	foreach ($module_profiles as $key) {
-		$key['module']=str_replace(" ","_",$key['module']);
-		$retypes.=implode("|",$key).']';
-	}
+    $retypes = '';
+    foreach ($module_profiles as $key) {
+        $key['module'] = str_replace(' ', '_', $key['module']);
+        $retypes .= implode('|', $key).']';
+    }
 ?>
 <script type='text/javascript'>
 $(document).ready(function(){
@@ -408,7 +429,7 @@ $(document).ready(function(){
 					error:function(response){ console.log(response); },
 					dataType:'json'
 				});
-			}else{ alert('<?php echo $this->lang->line("common_image_faild"); ?>');  }
+			}else{ alert('<?php echo $this->lang->line('common_image_faild'); ?>');  }
 			return false;
 		},
 		errorLabelContainer: "#error_message_box",
@@ -433,9 +454,11 @@ $(document).ready(function(){
 
 			password:
 			{
-				<?php if($person_info->person_id == "") { ?>
+				<?php if ($person_info->person_id == '') {
+    ?>
 				required:true,
-				<?php } ?>
+				<?php 
+} ?>
 				minlength: 8
 			},
 			repeat_password:
@@ -457,12 +480,12 @@ $(document).ready(function(){
 		{
      		first_name: {
 			      required: "<?php echo $this->lang->line('common_first_name_required'); ?>",
-			      regex:"<?php echo  $this->lang->line('common_first_name_only_char');?>",
+			      regex:"<?php echo  $this->lang->line('common_first_name_only_char'); ?>",
 			      minlength: jQuery.format("<?php echo $this->lang->line('common_at_least'); ?> {0} <?php echo $this->lang->line('common_at_characters'); ?>!")
     		},
     		last_name: {
 			      required: "<?php echo $this->lang->line('common_last_name_required'); ?>",
-			      regex:"<?php echo  $this->lang->line('common_first_name_only_char');?>",
+			      regex:"<?php echo  $this->lang->line('common_first_name_only_char'); ?>",
 			      minlength: jQuery.format("<?php echo $this->lang->line('common_at_least'); ?> {0} <?php echo $this->lang->line('common_at_characters'); ?>!")
     		},
      		username:
@@ -473,9 +496,12 @@ $(document).ready(function(){
 
 			password:
 			{
-				<?php if($person_info->person_id == "") { ?>
-				required:"<?php echo $this->lang->line('employees_password_required'); ?>",
-				<?php } ?>
+				<?php if ($person_info->person_id == '') {
+    ?>
+				required:"<?php echo $this->lang->line('employees_password_required');
+    ?>",
+				<?php 
+} ?>
 				minlength: "<?php echo $this->lang->line('employees_password_minlength'); ?>"
 			},
 			repeat_password:
@@ -484,7 +510,7 @@ $(document).ready(function(){
      		},
      		email: "<?php echo $this->lang->line('common_email_invalid_format'); ?>",
      		employee_profile_type:"Profile type is required",
-     		phone_number:"<?php echo $this->lang->line('common_phone_invalid_format');  ?>"
+     		phone_number:"<?php echo $this->lang->line('common_phone_invalid_format'); ?>"
 		}
 	});
 });

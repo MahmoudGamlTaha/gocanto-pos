@@ -1,4 +1,6 @@
-<?php if(ENVIRONMENT == 'development')$this->output->enable_profiler(true); ?>
+<?php if (ENVIRONMENT == 'development') {
+    $this->output->enable_profiler(true);
+} ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -73,35 +75,43 @@ html{
 <nav class="main-menu">
 	<ul>
 		<?php
-		foreach($allowed_modules->result() as $module){
-			$sub_menu = @file_exists('application/views/sub_menus/'.$module->module_id.'.sb.php');
-			switch ($module->module_id) {
-				case 'sales': $text='/index/sales'; break;
-				case 'notification_alert': $band=true; $text=''; break;
-				default: $text=''; break;
-			}
-			if (isset($band) && $band=true){ unset($band); continue; }
-		?>
-		<li class="menu_item<?php echo ($sub_menu) ? ' alternative-menu-vertical' : '';  ?>" id="<?=$module->module_id?>">
+        foreach ($allowed_modules->result() as $module) {
+            $sub_menu = @file_exists('application/views/sub_menus/'.$module->module_id.'.sb.php');
+            switch ($module->module_id) {
+                case 'sales': $text = '/index/sales'; break;
+                case 'notification_alert': $band = true; $text = ''; break;
+                default: $text = ''; break;
+            }
+            if (isset($band) && $band = true) {
+                unset($band);
+                continue;
+            }
+            ?>
+		<li class="menu_item<?php echo ($sub_menu) ? ' alternative-menu-vertical' : '';
+            ?>" id="<?=$module->module_id?>">
 			<ul url="<?=site_url("$module->module_id").$text?>">
 				<li>
 					<img src="images/menubar/<?=$module->module_id?>.png" border="0" alt="Menubar Image" />
 				</li>
 				<li>
-					<span><?=$this->lang->line("module_".$module->module_id)?></span>
-					<?php if(isset($module->shortcut)&&$module->shortcut!=''){ ?><a href="<?=site_url("$module->module_id").$module->shortcut?>" title="<?=$this->lang->line("module_".$module->module_id)?>" class='small_button thickbox shortcut_button'>+</a><?php } ?>
+					<span><?=$this->lang->line('module_'.$module->module_id)?></span>
+					<?php if (isset($module->shortcut) && $module->shortcut != '') {
+    ?><a href="<?=site_url("$module->module_id").$module->shortcut?>" title="<?=$this->lang->line('module_'.$module->module_id)?>" class='small_button thickbox shortcut_button'>+</a><?php 
+}
+            ?>
 				</li>
 			</ul>
 			<?php
-			//Submenus para main menu solo agregar archivo en: "application/views/sub_menus"
-			if ($sub_menu) {
-				$this->load->view('sub_menus/'.$module->module_id.'.sb.php', array('active_module'=>$module->module_id));
-			}
-			?>
+            //Submenus para main menu solo agregar archivo en: "application/views/sub_menus"
+            if ($sub_menu) {
+                $this->load->view('sub_menus/'.$module->module_id.'.sb.php', ['active_module' => $module->module_id]);
+            }
+            ?>
 		</li>
 		<?php
-		}
-		?>
+
+        }
+        ?>
 		<li class="menu_item" id="assistance">
 			<ul>
 				<li><img src="images/menubar/schedule.png" border="0" alt="Menubar Image" style="cursor: pointer" /></li>
@@ -113,76 +123,88 @@ html{
 
 <nav class="user">
 	<div class="logo">
-		<a href="index.php"><img src="images/<?=file_exists('images/'.$this->Appconfig->get('logo'))?$this->Appconfig->get('logo'):'logo.png'?>" border="0"/><?php //echo $this->config->item('company'); ?></a>
+		<a href="index.php"><img src="images/<?=file_exists('images/'.$this->Appconfig->get('logo')) ? $this->Appconfig->get('logo') : 'logo.png'?>" border="0"/><?php //echo $this->config->item('company'); ?></a>
 	</div>
 	<div id="menubar_date">
 		<?=date('F d, Y')?>
 		<span></span>
 	</div>
 	<?php
-		$dbs = $this->Location->get_select_option_list();
-		$dbs['default']='Principal';
-		$people = $this->Employee->get_all();
-	?>
+        $dbs = $this->Location->get_select_option_list();
+        $dbs['default'] = 'Principal';
+        $people = $this->Employee->get_all();
+    ?>
 	<div class="container-menus">
-	<?php if(isset($notifications)){ ?>
+	<?php if (isset($notifications)) {
+    ?>
 		<nav id="notifications" class="alternative-menu">
 			<?php 
-				$li='';$num=0;
-				foreach ($notifications as $notification => $data){
-					$noti_num = count($data['data']);
-					$num=$num+$noti_num;//clearfix
-					$li.='<li class="clearfix"><div class="notification-'.$notification.'" style="max-width: 26px;float:left;'.($noti_num>999?'font-size: 12px;':'').'">'.$noti_num.'</div>';
-					if ( $noti_num > 0 ){ //Si tiene notificaciones se pone como enlace
-						$li.=anchor($data['url'],$data['title'],'style="float:right;max-width:100px;"');
-					}else{
-						$li.='<label style="float:right;max-width:100px;">'.$data['title'].'</label>';
-					}
-					$li.='</li>';
-				} 
-			?>
-			<div><?php echo $num; ?></div>
-			<ul><?php echo $li; ?></ul>
+                $li = '';
+    $num = 0;
+    foreach ($notifications as $notification => $data) {
+        $noti_num = count($data['data']);
+        $num = $num + $noti_num; //clearfix
+                    $li .= '<li class="clearfix"><div class="notification-'.$notification.'" style="max-width: 26px;float:left;'.($noti_num > 999 ? 'font-size: 12px;' : '').'">'.$noti_num.'</div>';
+        if ($noti_num > 0) { //Si tiene notificaciones se pone como enlace
+                        $li .= anchor($data['url'], $data['title'], 'style="float:right;max-width:100px;"');
+        } else {
+            $li .= '<label style="float:right;max-width:100px;">'.$data['title'].'</label>';
+        }
+        $li .= '</li>';
+    }
+    ?>
+			<div><?php echo $num;
+    ?></div>
+			<ul><?php echo $li;
+    ?></ul>
 		</nav>
-		<?php } ?>
+		<?php 
+} ?>
 		<nav id="menu_changelocation">
 			<span>User:</span><?=' '.$user_info->first_name.' '.$user_info->last_name; ?>
 		</nav>
-		<nav id="menu_location" class="<?php if ($this->Employee->isAdmin()){  ?>alternative-menu <?php } ?>">
+		<nav id="menu_location" class="<?php if ($this->Employee->isAdmin()) {
+    ?>alternative-menu <?php 
+} ?>">
 			<form action="index.php/employees/set_location" method="POST" id="form-location">
 				<input type="hidden" value="" name="location"/>
 			</form>
 			<span>
 				<?php 
-				$_location=$this->session->userdata('dblocation')=='default'?'principal':$this->session->userdata('dblocation');
-				echo '<span>Location: </span>'.ucwords($_location);
-				if ($this->Employee->isAdmin()){ ?>
+                $_location = $this->session->userdata('dblocation') == 'default' ? 'principal' : $this->session->userdata('dblocation');
+                echo '<span>Location: </span>'.ucwords($_location);
+                if ($this->Employee->isAdmin()) {
+                    ?>
 				<ul>
 					<?php 
-					foreach($dbs as $key => $db){ ?>
+                    foreach ($dbs as $key => $db) {
+                        ?>
 					<li>
-						<?=anchor('#',$db, 'data-url="'.str_replace('"', '\"', $key).'"')?>
+						<?=anchor('#', $db, 'data-url="'.str_replace('"', '\"', $key).'"')?>
 					</li>
-					<?php } ?>
+					<?php 
+                    }
+                    ?>
 				</ul>
-				<?php } ?>
+				<?php 
+                } ?>
 			</span> 
 		</nav>
 		<nav id="menu_changeuser" class="alternative-menu">
 			<span><?=$this->lang->line('common_changeuser')?></span>
 			<ul>
 				<?php
-					foreach($people->result() as $person)
-					{
-						?>
-						<li><?=anchor("cajas/change/".$person->person_id."/width:550/height:380",$person->last_name.' '.$person->first_name,'class="thickbox" title="'.$this->lang->line('common_end_of_the_day').'"')?></li>
+                    foreach ($people->result() as $person) {
+                        ?>
+						<li><?=anchor('cajas/change/'.$person->person_id.'/width:550/height:380', $person->last_name.' '.$person->first_name, 'class="thickbox" title="'.$this->lang->line('common_end_of_the_day').'"')?></li>
 						<?php
-					}
-				?>
+
+                    }
+                ?>
 			</ul>
 		</nav>
 		<nav id="menu_logout">
-			<a href="index.php/cajas/logout/width:550/height:380" class="thickbox" title="<?php echo $this->lang->line('common_end_of_the_day') ?>"><?=$this->lang->line("common_end_of_the_day")?></a>
+			<a href="index.php/cajas/logout/width:550/height:380" class="thickbox" title="<?php echo $this->lang->line('common_end_of_the_day') ?>"><?=$this->lang->line('common_end_of_the_day')?></a>
 		</nav>
 	</div>
 </nav>

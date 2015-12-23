@@ -1,4 +1,6 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
+<?php
+
+defined('BASEPATH') or exit('No direct script access allowed');
 /*
 |--------------------------------------------------------------------------
 | Enable/Disable Migrations
@@ -8,8 +10,7 @@
 | whenever you intend to do a schema migration.
 |
 */
-$config['migration_enabled'] = TRUE;
-
+$config['migration_enabled'] = true;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,7 +24,6 @@ $config['migration_enabled'] = TRUE;
 */
 $config['migration_version'] = 1;
 
-
 /*
 |--------------------------------------------------------------------------
 | Migrations Path
@@ -34,8 +34,7 @@ $config['migration_version'] = 1;
 | Also, writing permission is required within the migrations path.
 |
 */
-$config['migration_path'] = APPPATH . 'migrations/';
-
+$config['migration_path'] = APPPATH.'migrations/';
 
 /* End of file migration.php */
 /* Location: ./application/config/migration.php */

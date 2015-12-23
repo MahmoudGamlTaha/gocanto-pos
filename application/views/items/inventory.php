@@ -1,58 +1,58 @@
-<?php echo form_open('items/save_inventory/'.$item_info->item_id,array('id'=>'item_form')); ?>
+<?php echo form_open('items/save_inventory/'.$item_info->item_id, ['id' => 'item_form']); ?>
 <div>
-	<h3><?php echo $this->lang->line("items_basic_information"); ?></h3><hr>
+	<h3><?php echo $this->lang->line('items_basic_information'); ?></h3><hr>
 	<table align="center" border="0">
 		<tr>
-			<th><?php echo form_label($this->lang->line('items_item_number').':', 'name',array('class'=>'lable-form')); ?></th>
+			<th><?php echo form_label($this->lang->line('items_item_number').':', 'name', ['class' => 'lable-form']); ?></th>
 			<td>
 				<?php 
-				echo form_input(array (
-					'name'=>'item_number',
-					'id'=>'item_number',
-					'value'=>$item_info->item_number,
-					'style'       => 'border:none',
-					'readonly' => 'readonly'
-				)); ?>
+                echo form_input([
+                    'name'        => 'item_number',
+                    'id'          => 'item_number',
+                    'value'       => $item_info->item_number,
+                    'style'       => 'border:none',
+                    'readonly'    => 'readonly',
+                ]); ?>
 			</td>
 		</tr>
 		<tr>
-			<th><?php echo form_label($this->lang->line('items_name').':', 'name',array('class'=>'lable-form')); ?></th>
+			<th><?php echo form_label($this->lang->line('items_name').':', 'name', ['class' => 'lable-form']); ?></th>
 			<td>
 				<?php 
-				echo form_input(array (
-					'name'=>'name',
-					'id'=>'name',
-					'value'=>$item_info->name,
-					'style'       => 'border:none',
-					'readonly' => 'readonly'
-				));	?>
+                echo form_input([
+                    'name'        => 'name',
+                    'id'          => 'name',
+                    'value'       => $item_info->name,
+                    'style'       => 'border:none',
+                    'readonly'    => 'readonly',
+                ]); ?>
 			</td>
 		</tr>
 		<tr>
-			<th><?php echo form_label($this->lang->line('items_category').':', 'category',array('class'=>'lable-form')); ?></th>
+			<th><?php echo form_label($this->lang->line('items_category').':', 'category', ['class' => 'lable-form']); ?></th>
 			<td>
 				<?php 
-				echo form_input(array (
-					'name'=>'category',
-					'id'=>'category',
-					'value'=>$item_info->category,
-					'style'       => 'border:none',
-					'readonly' => 'readonly'
-				)); ?>
+                echo form_input([
+                    'name'        => 'category',
+                    'id'          => 'category',
+                    'value'       => $item_info->category,
+                    'style'       => 'border:none',
+                    'readonly'    => 'readonly',
+                ]); ?>
 			</td>
 		</tr>
 		<tr>
-			<th><?php echo form_label($this->lang->line('items_current_quantity').':', 'quantity',array('class'=>'lable-form')); ?></th>
+			<th><?php echo form_label($this->lang->line('items_current_quantity').':', 'quantity', ['class' => 'lable-form']); ?></th>
 			<td>
 				<?php 
-				echo form_input(array (
-					'name'=>'quantity',
-					'id'=>'quantity',
-					'value'=>$item_info->quantity,
-					'style'       => 'border:none',
-					'readonly' => 'readonly'
-				));
-				?>
+                echo form_input([
+                    'name'        => 'quantity',
+                    'id'          => 'quantity',
+                    'value'       => $item_info->quantity,
+                    'style'       => 'border:none',
+                    'readonly'    => 'readonly',
+                ]);
+                ?>
 			</td>
 		</tr>
 	</table>
@@ -61,21 +61,21 @@
 	<h3><?=$this->lang->line('items_inventory_manipulation_title')?></h3><hr>
 	<div>
 		<div class="field_row clearfix">
-			<strong><?php echo form_label($this->lang->line('items_add_minus').':', 'quantity',array('class'=>'lable-form-required','style'=>'float: none;')); ?></strong>
+			<strong><?php echo form_label($this->lang->line('items_add_minus').':', 'quantity', ['class' => 'lable-form-required', 'style' => 'float: none;']); ?></strong>
 			<div>
-			<?php echo form_input(array(
-				'name'=>'newquantity',
-				'id'=>'newquantity',
-				'class'=>'text_box'
-			));?>
+			<?php echo form_input([
+                'name'  => 'newquantity',
+                'id'    => 'newquantity',
+                'class' => 'text_box',
+            ]); ?>
 			</div>
 		</div>
 	</div>
 	<!-- <div class="field_row clearfix"> -->
 	<?php
-	// $options = 'id="dbselected"';
-	// echo form_label('To:', 'newquantityTo');
-	?>
+    // $options = 'id="dbselected"';
+    // echo form_label('To:', 'newquantityTo');
+    ?>
 		<!-- <div class='form_field'>
 		<?php //echo form_dropdown('dbselected', $dbs, '...', $options); ?>
 		</div> -->
@@ -84,15 +84,15 @@
 
 	<div >
 		<div class="field_row clearfix">
-			<strong><?php echo form_label($this->lang->line('items_inventory_comments').':', 'description',array('class'=>'lable-form','style'=>'float: none;')); ?></strong>
+			<strong><?php echo form_label($this->lang->line('items_inventory_comments').':', 'description', ['class' => 'lable-form', 'style' => 'float: none;']); ?></strong>
 			<div>
-				<?php echo form_textarea(array(
-					'name'=>'trans_comment',
-					'id'=>'trans_comment',
-					'rows'=>'3',
-					'cols'=>'40',
-					'class'=>'text_box'
-				));?>
+				<?php echo form_textarea([
+                    'name'  => 'trans_comment',
+                    'id'    => 'trans_comment',
+                    'rows'  => '3',
+                    'cols'  => '40',
+                    'class' => 'text_box',
+                ]); ?>
 			</div>
 		</div>
 	</div>
@@ -104,12 +104,12 @@
 </div>
 <ul id="error_message_box"></ul>
 <?php
-echo form_submit(array(
-	'name'=>'submit',
-	'id'=>'submit',
-	'value'=>$this->lang->line('common_submit'),
-	'class'=>'small_button float_right'
-));
+echo form_submit([
+    'name'  => 'submit',
+    'id'    => 'submit',
+    'value' => $this->lang->line('common_submit'),
+    'class' => 'small_button float_right',
+]);
 echo form_close();
 ?>
 <script type='text/javascript'>

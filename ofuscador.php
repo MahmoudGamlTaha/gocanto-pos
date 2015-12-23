@@ -1,28 +1,30 @@
 <?php 
-function ofuscar($string, $count=1){
-	$result = array();
-	$arreglo = str_split($string); //Separamos palabra por caracter
+function ofuscar($string, $count = 1)
+{
+    $result = [];
+    $arreglo = str_split($string); //Separamos palabra por caracter
 
-	for ($i=0; $i < $count; $i++) {
-		$retorno = '';
-		foreach ($arreglo as $value) {
-			$paow = rand(0,2);
-			if ($paow) {
-				$retorno .= '\\'.decoct( ord( $value ) );
-			}else{
-				$retorno .= '\\x'.dechex( ord( $value ) );
-			}
-		}
-		$result[$i]['original'] = $string;
-		$result[$i]['ofus'] = $retorno;
-	}
-	return $result;
+    for ($i = 0; $i < $count; $i++) {
+        $retorno = '';
+        foreach ($arreglo as $value) {
+            $paow = rand(0, 2);
+            if ($paow) {
+                $retorno .= '\\'.decoct(ord($value));
+            } else {
+                $retorno .= '\\x'.dechex(ord($value));
+            }
+        }
+        $result[$i]['original'] = $string;
+        $result[$i]['ofus'] = $retorno;
+    }
+
+    return $result;
 }
 ?>
 <?php if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest'):
-	$word = $_POST['word'];
-	$count = $_POST['count'];
-	die( json_encode( ofuscar($word, $count) ) );
+    $word = $_POST['word'];
+    $count = $_POST['count'];
+    die(json_encode(ofuscar($word, $count)));
 ?>
 <?php else: ?>
 <!doctype html>

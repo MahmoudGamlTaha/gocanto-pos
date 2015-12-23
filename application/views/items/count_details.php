@@ -1,76 +1,76 @@
-<?php echo form_open('items/save_inventory/'.$item_info->item_id,array('id'=>'item_form')); ?>
+<?php echo form_open('items/save_inventory/'.$item_info->item_id, ['id' => 'item_form']); ?>
 <div>
-	<h3><?php echo $this->lang->line("items_basic_information"); ?></h3><hr>
+	<h3><?php echo $this->lang->line('items_basic_information'); ?></h3><hr>
 	<div class="field_row clearfix">
 		<table align="center" border="0">
 			<tr>
-				<td><?php echo form_label($this->lang->line('items_item_number').':', 'items_number',array('class'=>'lable-form')); ?></td>
+				<td><?php echo form_label($this->lang->line('items_item_number').':', 'items_number', ['class' => 'lable-form']); ?></td>
 				<td>
 					<?php
-					echo form_input(array (
-						'name'=>'item_number',
-						'id'=>'item_number',
-						'value'=>$item_info->item_number,
-						'style'       => 'border:none',
-						'readonly' => 'readonly',
-						'class'=>'text_box'
-					)); ?>
+                    echo form_input([
+                        'name'        => 'item_number',
+                        'id'          => 'item_number',
+                        'value'       => $item_info->item_number,
+                        'style'       => 'border:none',
+                        'readonly'    => 'readonly',
+                        'class'       => 'text_box',
+                    ]); ?>
 				</td>
 				<td rowspan="4" width="200">
-					<?php  $tuId=md5($this->session->userdata('dblocation').'-'.$item_info->item_id);
-						for ($i=0; $i < 5; $i++) {
-							if (file_exists('./images/items/'.$tuId.'/'.$tuId.'_'.$i.'.jpg')){
-								echo '<div class="photo_add" style="border:1px transparent solid;">
+					<?php  $tuId = md5($this->session->userdata('dblocation').'-'.$item_info->item_id);
+                        for ($i = 0; $i < 5; $i++) {
+                            if (file_exists('./images/items/'.$tuId.'/'.$tuId.'_'.$i.'.jpg')) {
+                                echo '<div class="photo_add" style="border:1px transparent solid;">
 											<div style="background-image:url(\'./images/items/'.$tuId.'/'.$tuId.'_'.$i.'.jpg\')">
 											</div>
 									  </div>';
-							  	break;
-							}
-						}
-					?>
+                                break;
+                            }
+                        }
+                    ?>
 				</td>
 			</tr>
 			<tr>
-				<td><?php echo form_label($this->lang->line('items_name').':', 'items_name',array('class'=>'lable-form')); ?></td>
+				<td><?php echo form_label($this->lang->line('items_name').':', 'items_name', ['class' => 'lable-form']); ?></td>
 				<td>
 					<?php
-					echo form_input(array (
-						'name'=>'name',
-						'id'=>'name',
-						'value'=>$item_info->name,
-						'style'       => 'border:none',
-						'readonly' => 'readonly',
-						'class'=>'text_box'
-					)); ?>
+                    echo form_input([
+                        'name'        => 'name',
+                        'id'          => 'name',
+                        'value'       => $item_info->name,
+                        'style'       => 'border:none',
+                        'readonly'    => 'readonly',
+                        'class'       => 'text_box',
+                    ]); ?>
 				</td>
 			</tr>
 			<tr>
-				<td><?php echo form_label($this->lang->line('items_category').':', 'items_category',array('class'=>'lable-form')); ?></td>
+				<td><?php echo form_label($this->lang->line('items_category').':', 'items_category', ['class' => 'lable-form']); ?></td>
 				<td>
 					<?php
-					echo form_input(array (
-						'name'=>'category',
-						'id'=>'category',
-						'value'=>$item_info->category,
-						'style'       => 'border:none',
-						'readonly' => 'readonly',
-						'class'=>'text_box'
-					));	?>
+                    echo form_input([
+                        'name'        => 'category',
+                        'id'          => 'category',
+                        'value'       => $item_info->category,
+                        'style'       => 'border:none',
+                        'readonly'    => 'readonly',
+                        'class'       => 'text_box',
+                    ]); ?>
 				</td>
 			</tr>
 			<tr>
-				<td><?php echo form_label($this->lang->line('items_current_quantity').':', 'items_quantity',array('class'=>'lable-form')); ?></td>
+				<td><?php echo form_label($this->lang->line('items_current_quantity').':', 'items_quantity', ['class' => 'lable-form']); ?></td>
 				<td>
 					<?php
-					echo form_input(array (
-						'name'=>'quantity',
-						'id'=>'quantity',
-						'value'=>($item_info->is_service?'unlimited':number_format($item_info->quantity)),
-						'style'       => 'border:none',
-						'readonly' => 'readonly',
-						'class'=>'text_box'
-					));
-					?>
+                    echo form_input([
+                        'name'        => 'quantity',
+                        'id'          => 'quantity',
+                        'value'       => ($item_info->is_service ? 'unlimited' : number_format($item_info->quantity)),
+                        'style'       => 'border:none',
+                        'readonly'    => 'readonly',
+                        'class'       => 'text_box',
+                    ]);
+                    ?>
 				</td>
 			</tr>
 		</table>
@@ -87,22 +87,30 @@
 			<th width="45%" class="noBorderTop noBorderRigth"><?php echo $this->lang->line('items_observ'); ?></th>
 		</tr>
 		<?php
-			$vector=$this->Inventory->get_inventory_data_for_item($item_info->item_id)->result_array();
-			$limit=count($vector);$i=0;
-			foreach($vector as $row) {
-			$class=($i++==($limit-1)?' noBorderBottom':'');
-		?>
+            $vector = $this->Inventory->get_inventory_data_for_item($item_info->item_id)->result_array();
+            $limit = count($vector); $i = 0;
+            foreach ($vector as $row) {
+                $class = ($i++ == ($limit - 1) ? ' noBorderBottom' : '');
+                ?>
 		<tr align="center">
-			<td class="noBorderLeft<?php echo $class;?>"><?php echo $row['trans_date'];?></td>
-			<td class="<?php echo $class;?>"><?php
-				$person_id = $row['trans_user'];
-				$employee = $this->Employee->get_info($person_id);
-				echo $employee->first_name." ".$employee->last_name;
-				?>
+			<td class="noBorderLeft<?php echo $class;
+                ?>"><?php echo $row['trans_date'];
+                ?></td>
+			<td class="<?php echo $class;
+                ?>"><?php
+                $person_id = $row['trans_user'];
+                $employee = $this->Employee->get_info($person_id);
+                echo $employee->first_name.' '.$employee->last_name;
+                ?>
 			</td>
-			<td class="<?php echo $class;?>"><?php echo $row['trans_inventory']; ?></td>
-			<td class="noBorderRigth<?php echo $class;?>"><?php echo $row['trans_comment'];?></td>
+			<td class="<?php echo $class;
+                ?>"><?php echo $row['trans_inventory'];
+                ?></td>
+			<td class="noBorderRigth<?php echo $class;
+                ?>"><?php echo $row['trans_comment'];
+                ?></td>
 		</tr>
-		<?php } ?>
+		<?php 
+            } ?>
 	</table>
 </div>

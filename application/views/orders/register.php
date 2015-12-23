@@ -11,26 +11,25 @@
 <div id="filter-bar" id="titleTextImg" class="middle-gray-bar" style="display: none;">
 	<div style="float:left;"><?php echo $this->lang->line('search_options') ?> :</div>
 		<div id="search_filter_section" style="text-align: right; font-weight: bold;  font-size: 12px; ">
-		<?php 	 
-		echo form_open("orders",array('id'=>'orders_filter_form')); 
-		$labels=array($this->lang->line('services_all'),
-					$this->lang->line('services_today'),
-					$this->lang->line('services_yesterday'),
-					$this->lang->line('services_lastweek'),
-					$this->lang->line('services_lastmonth'));
-		$barra='';
-		for ($i=0; $i < count($labels); $i++) { 
-			$barra.=($barra==''?'':'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;').form_radio(array('name'=>'filters','id'=>'filters'.$i,'value'=>$i,'checked'=>($filters==$i?1:0))).'&nbsp;'.form_label($labels[$i],'labelfilter'.$i);
-					
-		}
-		echo $barra.'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
-		$options = array("0"=>$this->lang->line('services_status'),
-						 "1"=>$this->lang->line('orders_status1'),
-						 "2"=>$this->lang->line('orders_status2'));
-		echo form_dropdown('filter_status', $options,$filter_status,"id='filter_status'");
-		echo form_dropdown('filter_location', $location_lists,$filter_location,"id='filter_location'");
-	    echo form_close(); 
-		?>
+		<?php 
+        echo form_open('orders', ['id' => 'orders_filter_form']);
+        $labels = [$this->lang->line('services_all'),
+                    $this->lang->line('services_today'),
+                    $this->lang->line('services_yesterday'),
+                    $this->lang->line('services_lastweek'),
+                    $this->lang->line('services_lastmonth'), ];
+        $barra = '';
+        for ($i = 0; $i < count($labels); $i++) {
+            $barra .= ($barra == '' ? '' : '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;').form_radio(['name' => 'filters', 'id' => 'filters'.$i, 'value' => $i, 'checked' => ($filters == $i ? 1 : 0)]).'&nbsp;'.form_label($labels[$i], 'labelfilter'.$i);
+        }
+        echo $barra.'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+        $options = ['0'      => $this->lang->line('services_status'),
+                         '1' => $this->lang->line('orders_status1'),
+                         '2' => $this->lang->line('orders_status2'), ];
+        echo form_dropdown('filter_status', $options, $filter_status, "id='filter_status'");
+        echo form_dropdown('filter_location', $location_lists, $filter_location, "id='filter_location'");
+        echo form_close();
+        ?>
 	</div>
 </div>
 <ul class="tabs">
@@ -39,7 +38,7 @@
 		<label for="tab-1">New</label>
 		<div class="content">
 			<div id="table_holder">
-				<?php echo form_open('orders/save/', 'id="form-order"');?>
+				<?php echo form_open('orders/save/', 'id="form-order"'); ?>
 				<table id="sortable_table" class="tablesorter" style="width: 100%;" >
 					<thead>
 						<tr>
@@ -51,52 +50,61 @@
 						</tr>
 					</thead>
 					<tbody id="cart_contents">
-					<?php if(count($cart)==0){ ?>
+					<?php if (count($cart) == 0) {
+    ?>
 						<tr>
-							<td colspan='5'><div class='warning_message' style='padding:7px;'><?php echo $this->lang->line('orders_no_items_in_cart'); ?></div></td>
+							<td colspan='5'><div class='warning_message' style='padding:7px;'><?php echo $this->lang->line('orders_no_items_in_cart');
+    ?></div></td>
 						</tr>
-					<?php }else{
-
-							foreach(array_reverse($cart,true) as $line=>$item){
-								$cur_item_info = $this->Item->get_info($item['item_id']);
-					?>
-								<tr id="<?=$item['item_id']?>" class="sale-line<?php echo ($cur_item_info->reorder_level < 1) ? ' no_stock' : '' ; ?>">
+					<?php 
+} else {
+    foreach (array_reverse($cart, true) as $line => $item) {
+        $cur_item_info = $this->Item->get_info($item['item_id']);
+        ?>
+								<tr id="<?=$item['item_id']?>" class="sale-line<?php echo ($cur_item_info->reorder_level < 1) ? ' no_stock' : '';
+        ?>">
 									<td>
-										<?php echo anchor("orders/delete_item/".$item['item_id'],$this->lang->line('common_delete'),"class='small_button delete_item'")?>
+										<?php echo anchor('orders/delete_item/'.$item['item_id'], $this->lang->line('common_delete'), "class='small_button delete_item'")?>
 									</td>
 									<td>
 										<?=$cur_item_info->item_id?>
 									</td>
 									<td style="align:center;">
 										<?=$cur_item_info->name?>
-										<input type="hidden" name="items[<?php echo $item['item_id']; ?>][id_item]" value="<?php echo $item['item_id']; ?>">
+										<input type="hidden" name="items[<?php echo $item['item_id'];
+        ?>][id_item]" value="<?php echo $item['item_id'];
+        ?>">
 									</td>
 									<td align="right">
 										<?=$cur_item_info->quantity?>
-										<input type="hidden" name="items[<?php echo $item['item_id']; ?>][current_quantity]" value="<?=$cur_item_info->quantity?>">
+										<input type="hidden" name="items[<?php echo $item['item_id'];
+        ?>][current_quantity]" value="<?=$cur_item_info->quantity?>">
 									</td>
 									<td align="right">
-										<input type="text" name="items[<?php echo $item['item_id']; ?>][quantity]" value="<?php echo floor($cur_item_info->reorder_level); ?>" class="item-quantity" style="width: 50px;text-align: right;">
+										<input type="text" name="items[<?php echo $item['item_id'];
+        ?>][quantity]" value="<?php echo floor($cur_item_info->reorder_level);
+        ?>" class="item-quantity" style="width: 50px;text-align: right;">
 									</td>
 								</tr>
-					<?php 	}
-						} ?>
+					<?php 
+    }
+} ?>
 					</tbody>
 				</table>
 				<?php 
-				echo anchor('orders/index/1', $this->lang->line('orders_fill_cart_with_low_stock_items'), 'class="big_button" style="display: inline-block; margin:10px; float: left;"');
-				
-				echo form_submit(
-							array(
-								'name'=>'sendto',
-								'id'=>'sendto',
-								'value'=>$this->lang->line('orders_send_order'),
-								'class'=>'big_button',
-								'style'=>'display: inline-block; margin:10px; float: right;'
-							));
-				echo anchor('orders/cancel_order', $this->lang->line('orders_cancel'), 'class="big_button" style="display: inline-block; margin:10px; float: right;"');
-				echo form_close(); 
-				?>
+                echo anchor('orders/index/1', $this->lang->line('orders_fill_cart_with_low_stock_items'), 'class="big_button" style="display: inline-block; margin:10px; float: left;"');
+
+                echo form_submit(
+                            [
+                                'name'  => 'sendto',
+                                'id'    => 'sendto',
+                                'value' => $this->lang->line('orders_send_order'),
+                                'class' => 'big_button',
+                                'style' => 'display: inline-block; margin:10px; float: right;',
+                            ]);
+                echo anchor('orders/cancel_order', $this->lang->line('orders_cancel'), 'class="big_button" style="display: inline-block; margin:10px; float: right;"');
+                echo form_close();
+                ?>
 			</div>
 		</div>
 	</li>
@@ -125,87 +133,110 @@
 									<td class="expand"><span class="small_button thickbox">+</span></td>
 									<td><?php echo 'ORDE '.$order['id']; ?></td>
 									<td><?php echo $order['date'] ?></td>
-									<td><?php echo ($order['location']=='default'?'Principal':$order['location']); ?></td>
+									<td><?php echo $order['location'] == 'default' ? 'Principal' : $order['location']; ?></td>
 									<td><?php echo $status[$order['status']] ?></td>
-									<td colspan="1"><?php echo (($order['comments']) ? $order['comments'] : $this->lang->line('reports_no_comment') ); ?></td>
-									<?php if ($order['status']==1){ 
-										if ($order['location']==$location){
-									?>
+									<td colspan="1"><?php echo ($order['comments']) ? $order['comments'] : $this->lang->line('reports_no_comment'); ?></td>
+									<?php if ($order['status'] == 1) {
+    if ($order['location'] == $location) {
+        ?>
 										<td colspan="1" style="width: 100px;text-align: center;color: #6C6;font-weight: bold;font-size: 12px;">
-											<?php 								
-												if ($this->Transfers->get_my_reception_detail($order['sale_id'])->num_rows()){
-													echo '<span style="color: #37B">'.$this->lang->line('orders_submitted').'</span>';
-													echo anchor('receivings/index/'.$order['sale_id'], $this->lang->line('employees_profile_see'), 'class="small_button" style="padding: 5px 6px;"');
-												}else echo $this->lang->line('orders_received');
-											?>
+											<?php 
+                                                if ($this->Transfers->get_my_reception_detail($order['sale_id'])->num_rows()) {
+                                                    echo '<span style="color: #37B">'.$this->lang->line('orders_submitted').'</span>';
+                                                    echo anchor('receivings/index/'.$order['sale_id'], $this->lang->line('employees_profile_see'), 'class="small_button" style="padding: 5px 6px;"');
+                                                } else {
+                                                    echo $this->lang->line('orders_received');
+                                                }
+        ?>
 										</td>
-									<?php }else{ ?>
+									<?php 
+    } else {
+        ?>
 										<td colspan="1" style="color: #6C6;font-weight: bold;font-size: 14px;text-align: center;">
-											<?php echo $this->lang->line('orders_status2');  ?>
+											<?php echo $this->lang->line('orders_status2');
+        ?>
 										</td>
-									<?php }
-										}else{ 
-										 if ($order['location']==$location){ ?>
+									<?php 
+    }
+} else {
+    if ($order['location'] == $location) {
+        ?>
 										<td colspan="1" style="color: #FA4;font-weight: bold;font-size: 14px;text-align: center;">
-											<?php echo $this->lang->line('orders_status1');  ?>
+											<?php echo $this->lang->line('orders_status1');
+        ?>
 										</td>
-									<?php }else{ ?>
+									<?php 
+    } else {
+        ?>
 										<td colspan="1" style="width: 140px;text-align: center;">
 											<?php 
-												if ($this->Employee->isAdmin()) {
-													echo anchor('home/confirm_user/orders-cancel-'.$order['id'].'/'.$this->lang->line('orders_canceled').'/0/0/width:350/height:180/', $this->lang->line('orders_cancel'), array('class'=>"small_button thickbox", 'style'=>"padding: 7px 10px;", 'title'=>'Help'));
-												}
-											?>
+                                                if ($this->Employee->isAdmin()) {
+                                                    echo anchor('home/confirm_user/orders-cancel-'.$order['id'].'/'.$this->lang->line('orders_canceled').'/0/0/width:350/height:180/', $this->lang->line('orders_cancel'), ['class' => 'small_button thickbox', 'style' => 'padding: 7px 10px;', 'title' => 'Help']);
+                                                }
+        ?>
 										</td>
-									<?php }
-									} ?>
+									<?php 
+    }
+} ?>
 								</tr>
 								<tr class="hide">
 									<td colspan="7">
 										<?php 
-										$order_details = $this->Order->get_detail($order['id']); 
-										$flag = ($order['status']) ? false : true ;
-										?>
+                                        $order_details = $this->Order->get_detail($order['id']);
+                                        $flag = ($order['status']) ? false : true;
+                                        ?>
 										<table class="innertable">
 											<thead>
 												<tr style="color:#FFFFFF;background-color:#0a6184;">
 													<th><?php echo $this->lang->line('reports_item_name') ?></th>
 													<th><?php echo $this->lang->line('reports_amount_needed') ?></th>
-													<?php if ($order['location']==$location){ ?>
+													<?php if ($order['location'] == $location) {
+    ?>
 													<th><?php echo $this->lang->line('giftcards_current_quantity') ?></th>
-													<?php }else{ ?>
-													<th><?php echo $this->lang->line('giftcards_current_quantity').' ('.($order['location']=='default'?'Principal':$order['location']).')' ?></th>
-													<th><?php echo $this->lang->line('giftcards_current_quantity').' ('.($location=='default'?'Principal':$location).')' ?></th>
-													<?php } ?>
-													<?php if ($flag) echo '<th></th>'; ?>
+													<?php 
+} else {
+    ?>
+													<th><?php echo $this->lang->line('giftcards_current_quantity').' ('.($order['location'] == 'default' ? 'Principal' : $order['location']).')' ?></th>
+													<th><?php echo $this->lang->line('giftcards_current_quantity').' ('.($location == 'default' ? 'Principal' : $location).')' ?></th>
+													<?php 
+} ?>
+													<?php if ($flag) {
+    echo '<th></th>';
+} ?>
 												</tr>
 											</thead>
 											<tbody>
 											<?php
-											foreach ($order_details->result() as $detail): 
-												$stock=$this->Item->get_info($detail->id_item,'quantity,name');
-												if ($order['location']!=$location) 
-													$colorbg=$stock->quantity<$detail->quantity?'class="no_stock"':'';
-												else $colorbg='';
+                                            foreach ($order_details->result() as $detail):
+                                                $stock = $this->Item->get_info($detail->id_item, 'quantity,name');
+                                                if ($order['location'] != $location) {
+                                                    $colorbg = $stock->quantity < $detail->quantity ? 'class="no_stock"' : '';
+                                                } else {
+                                                    $colorbg = '';
+                                                }
 
-											?>
+                                            ?>
 											<tr <?php echo $colorbg; ?>>
 												<td><?php echo $stock->name; ?></td>
 												<td><?php echo $detail->quantity ?></td>
-												<?php if ($order['location']==$location){ ?>
+												<?php if ($order['location'] == $location) {
+    ?>
 												<td><?php echo $detail->current_quantity ?></td>
-												<?php }else{ ?>
+												<?php 
+} else {
+    ?>
 												<td><?php echo $detail->current_quantity ?></td>
 												<td><?php echo $stock->quantity ?></td>
-												<?php } ?>
 												<?php 
-												if ($flag) {
-													echo '<td class="middle" rowspan="'.$order_details->num_rows().'">';
-													echo anchor('orders/check_availability/'.$order['id'], $this->lang->line('orders_make_shipping'), 'class="small_button make-shipping" style="padding: 7px 10px;"');
-													echo "</td>";
-												}
-												$flag=false;
-												?>
+} ?>
+												<?php 
+                                                if ($flag) {
+                                                    echo '<td class="middle" rowspan="'.$order_details->num_rows().'">';
+                                                    echo anchor('orders/check_availability/'.$order['id'], $this->lang->line('orders_make_shipping'), 'class="small_button make-shipping" style="padding: 7px 10px;"');
+                                                    echo '</td>';
+                                                }
+                                                $flag = false;
+                                                ?>
 											</tr>
 											<?php endforeach ?>
 											</tbody>
@@ -233,7 +264,7 @@
 	$('#cart_contents').on('click','.delete_item',function(){
 			var that = this;
 			var url=this.href;
-			if (confirm('<?php echo $this->lang->line("orders_confirm_items"); ?>')){
+			if (confirm('<?php echo $this->lang->line('orders_confirm_items'); ?>')){
 				$.ajax({
 					url: url,
 					type: 'GET',
@@ -246,7 +277,7 @@
 						}
 
 						if ( $('#cart_contents > .sale-line').length == 0 ) {
-							var tr = '<tr><td colspan="5"><div class="warning_message" style="padding:7px;"><?php echo $this->lang->line("orders_no_items_in_cart"); ?></div></td></tr>';
+							var tr = '<tr><td colspan="5"><div class="warning_message" style="padding:7px;"><?php echo $this->lang->line('orders_no_items_in_cart'); ?></div></td></tr>';
 							$('#cart_contents').html(tr);							
 						}
 					}
@@ -285,7 +316,7 @@
 							$(ele).remove();
 						}
 						var tr = '<tr id="'+val.added.id+'" class="sale-line">'+
-							'<td><a href="index.php/orders/delete_item/'+val.added.id+'" class="small_button delete_item"><?php echo $this->lang->line("common_delete") ?></a></td>'+
+							'<td><a href="index.php/orders/delete_item/'+val.added.id+'" class="small_button delete_item"><?php echo $this->lang->line('common_delete') ?></a></td>'+
 							'<td>'+val.added.id+'</td>'+
 							'<td style="align:center;">'+
 								val.added.text+
@@ -376,7 +407,7 @@
 	$(".tablesorter td.expand span").click(function(event){
 		$(this).text($(this).text()!='+'?'+':'-').parents('tr').next().toggle();
 	});
-	var error='<?php echo (isset($error)?$error:"") ?>';
+	var error='<?php echo isset($error) ? $error : '' ?>';
 	if (error!='') 
 		setTimeout(function(){
 				tb_show("Error", 'index.php/reports/see_dialog_error/'+error+'/width:350/height:350');

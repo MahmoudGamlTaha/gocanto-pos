@@ -18,21 +18,21 @@
 				</tr>
 			</thead>
 			<tbody>
-				<?php $num=count($items_info); $url=str_replace('/index.php', "",site_url());
-					for ($i=0; $i < $num; $i++) {  
-						$imagen='<img src="'.$url.'/images/no_image2.png" width="120"/>'; 
-						$tuId=md5($location.'-'.$items_info[$i]['item_id']); 
-						for ($j=0; $j < 5; $j++) { 
-							if (file_exists('./images/items/'.$tuId.'/'.$tuId.'_'.$j.'.jpg')){
-										$imagen= '<img src="'.$url.'/images/items/'.$tuId.'/'.$tuId.'_'.$j.'.jpg" width="120"/>';
-										// $imagen= '<div class="photo_add" style="border:1px transparent solid;">
-										// 			<div style="background-image:url(\'./images/items/'.$tuId.'/'.$tuId.'_'.$j.'.jpg\')">
-										// 			</div>
-										// 	  </div>';
-									  	break;
-							}
-						} 
-						echo '<tr>
+				<?php $num = count($items_info); $url = str_replace('/index.php', '', site_url());
+                    for ($i = 0; $i < $num; $i++) {
+                        $imagen = '<img src="'.$url.'/images/no_image2.png" width="120"/>';
+                        $tuId = md5($location.'-'.$items_info[$i]['item_id']);
+                        for ($j = 0; $j < 5; $j++) {
+                            if (file_exists('./images/items/'.$tuId.'/'.$tuId.'_'.$j.'.jpg')) {
+                                $imagen = '<img src="'.$url.'/images/items/'.$tuId.'/'.$tuId.'_'.$j.'.jpg" width="120"/>';
+                                        // $imagen= '<div class="photo_add" style="border:1px transparent solid;">
+                                        // 			<div style="background-image:url(\'./images/items/'.$tuId.'/'.$tuId.'_'.$j.'.jpg\')">
+                                        // 			</div>
+                                        // 	  </div>';
+                                        break;
+                            }
+                        }
+                        echo '<tr>
 						<td>
 							<table width="420">
 								<tbody>
@@ -52,13 +52,13 @@
 										<th width="20%">'.$this->lang->line('items_category').':</td>
 										<td width="30%">'.$items_info[$i]['category'].'</td>
 										<th width="20%">'.$this->lang->line('items_current_quantity').':</td>
-										<td width="30%">'.($items_info[$i]['is_service']?'unlimited':number_format($items_info[$i]['quantity'])).'</td>
+										<td width="30%">'.($items_info[$i]['is_service'] ? 'unlimited' : number_format($items_info[$i]['quantity'])).'</td>
 									</tr>
 									<tr>
 										<th width="20%">'.$this->lang->line('items_reorder_level').':</td>
 										<td width="30%">'.$items_info[$i]['reorder_level'].'</td>
 										<th width="20%">'.$this->lang->line('items_description').':</td>
-										<td width="30%">'.($items_info[$i]['description']?$items_info[$i]['description']:'"not provided"').'</td>
+										<td width="30%">'.($items_info[$i]['description'] ? $items_info[$i]['description'] : '"not provided"').'</td>
 									</tr>
 								</tbody>
 							</table>							
@@ -66,8 +66,8 @@
 						<td colspan="3" style="width:240px;"><img style="margin-top:10px;" src="'.site_url().'/barcode?barcode='.$items_info[$i]['item_id'].'&text='.$items_info[$i]['name'].'&width=200" /></td>
 						<td colspan="2" style="width:150px;">'.$imagen.'</td>
 					</tr>';
-					}
-				?>
+                    }
+                ?>
 
 			</tbody>
 		</table>

@@ -1,9 +1,8 @@
-<?php $this->load->view("partial/header"); ?>
+<?php $this->load->view('partial/header'); ?>
 <?php
-if (isset($error_message))
-{
-	echo '<h1 style="text-align: center;">'.$error_message.'</h1>';
-	exit;
+if (isset($error_message)) {
+    echo '<h1 style="text-align: center;">'.$error_message.'</h1>';
+    exit;
 }
 ?>
 <div id="receipt_wrapper">
@@ -23,15 +22,16 @@ if (isset($error_message))
 		</tr>
 	</table>
 	<div id="receipt_general_info">
-		<?php if(isset($supplier))
-		{
-		?>
-			<div id="customer"><?php echo $this->lang->line('suppliers_supplier').": ".$supplier; ?></div>
+		<?php if (isset($supplier)) {
+    ?>
+			<div id="customer"><?php echo $this->lang->line('suppliers_supplier').': '.$supplier;
+    ?></div>
 		<?php
-		}
-		?>
-		<div id="sale_id"><?php echo $this->lang->line('recvs_id').": ".$receiving_id; ?></div>
-		<div id="employee"><?php echo $this->lang->line('employees_employee').": ".$employee; ?></div>
+
+}
+        ?>
+		<div id="sale_id"><?php echo $this->lang->line('recvs_id').': '.$receiving_id; ?></div>
+		<div id="employee"><?php echo $this->lang->line('employees_employee').': '.$employee; ?></div>
 	</div>
 
 	<table id="receipt_items">
@@ -49,25 +49,34 @@ if (isset($error_message))
 	<th style="width:17%;text-align:right;">Sub Total</th>
 	</tr>
 	<?php
-	foreach(array_reverse($cart, true) as $line=>$item)
-	{
-	?>
+    foreach (array_reverse($cart, true) as $line => $item) {
+        ?>
 		<tr>
-		<td><span class='long_name'><?php echo $item['name']; ?></span><span class='short_name'><?php echo character_limiter($item['name'],10); ?></span></td>
-		<td><?php echo to_currency($item['price']); ?></td>
-		<td style='text-align:center;'><?php echo $item['quantity']; ?></td>
-		<td style='text-align:center;'><?php echo $item['discount']; ?></td>
-		<td style='text-align:right;'><?php echo to_currency($item['price']*$item['quantity']-$item['price']*$item['quantity']*$item['discount']/100); ?></td>
+		<td><span class='long_name'><?php echo $item['name'];
+        ?></span><span class='short_name'><?php echo character_limiter($item['name'], 10);
+        ?></span></td>
+		<td><?php echo to_currency($item['price']);
+        ?></td>
+		<td style='text-align:center;'><?php echo $item['quantity'];
+        ?></td>
+		<td style='text-align:center;'><?php echo $item['discount'];
+        ?></td>
+		<td style='text-align:right;'><?php echo to_currency($item['price'] * $item['quantity'] - $item['price'] * $item['quantity'] * $item['discount'] / 100);
+        ?></td>
 		</tr>
 	    <tr>
 
-	    <td colspan="2" align="center"><?php echo $item['description']; ?></td>
-		<td colspan="2" ><?php echo $item['serialnumber']; ?></td>
-		<td colspan="1"><?php echo '---'; ?></td>
+	    <td colspan="2" align="center"><?php echo $item['description'];
+        ?></td>
+		<td colspan="2" ><?php echo $item['serialnumber'];
+        ?></td>
+		<td colspan="1"><?php echo '---';
+        ?></td>
 	    </tr>
 	<?php
-	}
-	?>	
+
+    }
+    ?>	
 	<tr>
 	<td colspan="3" style='text-align:right;'><?php echo $this->lang->line('sales_total'); ?></td>
 	<td colspan="2" style='text-align:right'><?php echo to_currency($total); ?></td>
@@ -78,21 +87,25 @@ if (isset($error_message))
 	<td colspan="2" style='text-align:right'><?php echo $payment_type; ?></td>
 	</tr>
 
-	<?php if(isset($amount_change))
-	{
-	?>
+	<?php if (isset($amount_change)) {
+    ?>
 		<tr>
-		<td colspan="3" style='text-align:right;'><?php echo $this->lang->line('sales_amount_tendered'); ?></td>
-		<td colspan="2" style='text-align:right'><?php echo to_currency($amount_tendered); ?></td>
+		<td colspan="3" style='text-align:right;'><?php echo $this->lang->line('sales_amount_tendered');
+    ?></td>
+		<td colspan="2" style='text-align:right'><?php echo to_currency($amount_tendered);
+    ?></td>
 		</tr>
 
 		<tr>
-		<td colspan="3" style='text-align:right;'><?php echo $this->lang->line('sales_change_due'); ?></td>
-		<td colspan="2" style='text-align:right'><?php echo $amount_change; ?></td>
+		<td colspan="3" style='text-align:right;'><?php echo $this->lang->line('sales_change_due');
+    ?></td>
+		<td colspan="2" style='text-align:right'><?php echo $amount_change;
+    ?></td>
 		</tr>
 	<?php
-	}
-	?>
+
+}
+    ?>
 	</table>
 
 	<div id="sale_return_policy">
@@ -105,11 +118,10 @@ if (isset($error_message))
 <a class="linkBack" href="index.php/sales">
     <div class="big_button" style="float: left;"><span>Back</span></div>
 </a>
-<?php $this->load->view("partial/footer"); ?>
+<?php $this->load->view('partial/footer'); ?>
 
-<?php if ($this->Appconfig->get('print_after_sale'))
-{
-?>
+<?php if ($this->Appconfig->get('print_after_sale')) {
+    ?>
 <script type="text/javascript">
 $(window).load(function()
 {
@@ -117,5 +129,6 @@ $(window).load(function()
 });
 </script>
 <?php
+
 }
 ?>

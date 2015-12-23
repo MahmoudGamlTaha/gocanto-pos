@@ -13,9 +13,11 @@ swfobject.embedSWF(
 );
 </script>
 <div id="report_summary">
-<?php foreach($summary_data as $name=>$value){ ?>
+<?php foreach ($summary_data as $name => $value) {
+    ?>
 	<div class="summary_row"><?=$this->lang->line('reports_'.$name).': '.to_currency($value)?></div>
-<?php } ?>
+<?php 
+} ?>
 </div>
 <div id="location_id" style="margin:0 auto;text-align:center;">Location:<?=$location?></div>
-<?=isset($last)?'':'<br/><hr/><br/>'?>
+<?=isset($last) ? '' : '<br/><hr/><br/>'?>

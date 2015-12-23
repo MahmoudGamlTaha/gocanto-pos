@@ -1,39 +1,38 @@
 <?php
-$this->load->view("partial/header"); 
-//$this->load->view('flange_option', array('control'=>'reports')); 
+$this->load->view('partial/header');
+//$this->load->view('flange_option', array('control'=>'reports'));
 ?>
 <section class="stock-manage">
 	<div style="text-align:center;">
 		<div id="page_title" style="margin-bottom:6px;text-align:center;"><?=$title?></div>
 		<div class="page_subtitle" style="margin-bottom:6px;">
 		<?php
-		// if (isset($error)) echo "<div class='error_message'>$error</div>";
-		//echo $sub_title; 
-		?>
+        // if (isset($error)) echo "<div class='error_message'>$error</div>";
+        //echo $sub_title;
+        ?>
 		</div>
 	</div>
 	<div id="titleTextImg" class="middle-gray-bar">
 		<div style="float:left;"><?php echo $this->lang->line('search_options') ?> :</div>
 			<div id="search_filter_section" style="text-align: right; font-weight: bold;  font-size: 12px; ">
-			<?php 	 
-			echo form_open("reports/control_stock".$completelocac,array('id'=>'orders_filter_form')); 
-			$labels=array($this->lang->line('services_all'),
-						$this->lang->line('services_today'),
-						$this->lang->line('services_yesterday'),
-						$this->lang->line('services_lastweek'),
-						$this->lang->line('services_lastmonth'));
-			$barra='';
-			for ($i=0; $i < count($labels); $i++) { 
-				$barra.=($barra==''?'':'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;').form_radio(array('name'=>'filters','id'=>'filters'.$i,'value'=>$i,'checked'=>($cfilter==$i?1:0))).'&nbsp;'.form_label($labels[$i],'labelfilter'.$i);
-						
-			}
-			echo $barra.'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
-			$options = array("0"=>$this->lang->line('services_status'),
-							 "1"=>$this->lang->line('orders_status1'),
-							 "2"=>$this->lang->line('orders_status2'));
-			echo form_dropdown('filter_status', $options,$sfilter,"id='filter_status'");
-		    echo form_close(); 
-			?>
+			<?php 
+            echo form_open('reports/control_stock'.$completelocac, ['id' => 'orders_filter_form']);
+            $labels = [$this->lang->line('services_all'),
+                        $this->lang->line('services_today'),
+                        $this->lang->line('services_yesterday'),
+                        $this->lang->line('services_lastweek'),
+                        $this->lang->line('services_lastmonth'), ];
+            $barra = '';
+            for ($i = 0; $i < count($labels); $i++) {
+                $barra .= ($barra == '' ? '' : '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;').form_radio(['name' => 'filters', 'id' => 'filters'.$i, 'value' => $i, 'checked' => ($cfilter == $i ? 1 : 0)]).'&nbsp;'.form_label($labels[$i], 'labelfilter'.$i);
+            }
+            echo $barra.'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+            $options = ['0'      => $this->lang->line('services_status'),
+                             '1' => $this->lang->line('orders_status1'),
+                             '2' => $this->lang->line('orders_status2'), ];
+            echo form_dropdown('filter_status', $options, $sfilter, "id='filter_status'");
+            echo form_close();
+            ?>
 		</div>
 	</div>
 	<ul class="tabs">
@@ -62,36 +61,47 @@ $this->load->view("partial/header");
 									<td class="expand"><span class="small_button thickbox">+</span></td>
 									<td><?php echo 'ORDE '.$order['id']; ?></td>
 									<td><?php echo $order['date'] ?></td>
-									<td><?php echo ($order['location']=='default'?'Principal':$order['location']); ?></td>
+									<td><?php echo $order['location'] == 'default' ? 'Principal' : $order['location']; ?></td>
 									<td><?php echo $status[$order['status']] ?></td>
-									<td colspan="1"><?php echo (($order['comments']) ? $order['comments'] : $this->lang->line('reports_no_comment') ); ?></td>
-									<?php if ($order['status']==1){ 
-										if ($order['location']==$location){
-									?>
+									<td colspan="1"><?php echo ($order['comments']) ? $order['comments'] : $this->lang->line('reports_no_comment'); ?></td>
+									<?php if ($order['status'] == 1) {
+    if ($order['location'] == $location) {
+        ?>
 										<td colspan="1" style="width: 100px;text-align: center;color: #6C6;font-weight: bold;font-size: 12px;">
-											<?php 								
-												if ($this->Transfers->get_my_reception_detail($order['sale_id'])->num_rows()){
-													echo '<span style="color: #37B">'.$this->lang->line('orders_submitted').'</span>';
-													echo anchor('receivings/index/'.$order['sale_id'], $this->lang->line('employees_profile_see'), 'class="small_button" style="padding: 5px 6px;"');
-												}else echo $this->lang->line('orders_received');
-											?>
+											<?php 
+                                                if ($this->Transfers->get_my_reception_detail($order['sale_id'])->num_rows()) {
+                                                    echo '<span style="color: #37B">'.$this->lang->line('orders_submitted').'</span>';
+                                                    echo anchor('receivings/index/'.$order['sale_id'], $this->lang->line('employees_profile_see'), 'class="small_button" style="padding: 5px 6px;"');
+                                                } else {
+                                                    echo $this->lang->line('orders_received');
+                                                }
+        ?>
 										</td>
-									<?php }else{ ?>
+									<?php 
+    } else {
+        ?>
 										<td colspan="1" style="color: #6C6;font-weight: bold;font-size: 14px;text-align: center;">
-											<?php echo $this->lang->line('orders_status2');  ?>
+											<?php echo $this->lang->line('orders_status2');
+        ?>
 										</td>
-									<?php }
-										}else{ 
-										 if ($order['location']==$location){ ?>
+									<?php 
+    }
+} else {
+    if ($order['location'] == $location) {
+        ?>
 										<td colspan="1" style="color: #FA4;font-weight: bold;font-size: 14px;text-align: center;">
-											<?php echo $this->lang->line('orders_status1');  ?>
+											<?php echo $this->lang->line('orders_status1');
+        ?>
 										</td>
-									<?php }else{ ?>
+									<?php 
+    } else {
+        ?>
 										<td colspan="1" style="width: 140px;text-align: center;">
-											<?php echo anchor('home/confirm_user/orders-cancel-'.$order['id'].'/'.$this->lang->line('orders_canceled').'/0/0/width:350/height:180/', $this->lang->line('orders_cancel'), array('class'=>"small_button thickbox", 'style'=>"padding: 7px 10px;", 'title'=>'Help')) ?>
+											<?php echo anchor('home/confirm_user/orders-cancel-'.$order['id'].'/'.$this->lang->line('orders_canceled').'/0/0/width:350/height:180/', $this->lang->line('orders_cancel'), ['class' => 'small_button thickbox', 'style' => 'padding: 7px 10px;', 'title' => 'Help']) ?>
 										</td>
-									<?php }
-									} ?>
+									<?php 
+    }
+} ?>
 								</tr>
 								<tr class="hide">
 									<td colspan="7">
@@ -101,40 +111,50 @@ $this->load->view("partial/header");
 												<tr style="color:#FFFFFF;background-color:#0a6184;">
 													<th><?php echo $this->lang->line('reports_item_name') ?></th>
 													<th><?php echo $this->lang->line('reports_amount_needed') ?></th>
-													<?php if ($order['location']==$location){ ?>
+													<?php if ($order['location'] == $location) {
+    ?>
 													<th><?php echo $this->lang->line('giftcards_current_quantity') ?></th>
-													<?php }else{ ?>
-													<th><?php echo $this->lang->line('giftcards_current_quantity').' ('.($order['location']=='default'?'Principal':$order['location']).')' ?></th>
-													<th><?php echo $this->lang->line('giftcards_current_quantity').' ('.($location=='default'?'Principal':$location).')' ?></th>
-													<?php } ?>
+													<?php 
+} else {
+    ?>
+													<th><?php echo $this->lang->line('giftcards_current_quantity').' ('.($order['location'] == 'default' ? 'Principal' : $order['location']).')' ?></th>
+													<th><?php echo $this->lang->line('giftcards_current_quantity').' ('.($location == 'default' ? 'Principal' : $location).')' ?></th>
+													<?php 
+} ?>
 													<th></th>
 												</tr>
 											</thead>
 											<tbody>
 											<?php 
-											$flag = true;
-											foreach ($order_details->result() as $detail): 
-												$stock=$this->Item->get_info($detail->id_item,'quantity,name');
-												if ($order['location']!=$location) 
-													$colorbg=$stock->quantity<$detail->quantity?'class="no_stock"':'';
-												else $colorbg='';
-											?>
+                                            $flag = true;
+                                            foreach ($order_details->result() as $detail):
+                                                $stock = $this->Item->get_info($detail->id_item, 'quantity,name');
+                                                if ($order['location'] != $location) {
+                                                    $colorbg = $stock->quantity < $detail->quantity ? 'class="no_stock"' : '';
+                                                } else {
+                                                    $colorbg = '';
+                                                }
+                                            ?>
 											<tr <?php echo $colorbg; ?>>
 												<td><?php echo $stock->name; ?></td>
 												<td><?php echo $detail->quantity ?></td>
-												<?php if ($order['location']==$location){ ?>
+												<?php if ($order['location'] == $location) {
+    ?>
 												<td><?php echo $detail->current_quantity ?></td>
-												<?php }else{ ?>
+												<?php 
+} else {
+    ?>
 												<td><?php echo $detail->current_quantity ?></td>
 												<td><?php echo $stock->quantity ?></td>
-												<?php } ?>
+												<?php 
+} ?>
 												<?php if ($flag): ?>
 													<td class="middle" rowspan="<?php echo $order_details->num_rows() ?>">
 													<?php echo anchor('orders/check_availability/'.$order['id'], $this->lang->line('orders_make_shipping'), 'class="small_button" style="padding: 7px 10px;"'); ?>
 													</td>
 												<?php
-												$flag=false; 
-												endif ?>
+                                                $flag = false;
+                                                endif ?>
 											</tr>
 											<?php endforeach ?>
 											</tbody>
@@ -181,20 +201,20 @@ $this->load->view("partial/header");
 									<td><?php echo $transaction['sender'] ?></td>
 									<td><?php echo $transaction['receiver'] ?></td>
 									<td><?php echo $status[$transaction['status']] ?></td>
-									<td><?php echo (($transaction['comment']) ? $transaction['comment'] : $this->lang->line('reports_no_comment') ); ?></td>
+									<td><?php echo ($transaction['comment']) ? $transaction['comment'] : $this->lang->line('reports_no_comment'); ?></td>
 									<td>
 									<?php
-									if ($transaction['status'] != 1 && $transaction['receiver'] == $location) {
-										echo anchor('receivings/index/'.$transaction['transfer_id'], $this->lang->line('employees_profile_see'), 'class="small_button" style="padding:5px 7px;"');
-									}
-									?>
+                                    if ($transaction['status'] != 1 && $transaction['receiver'] == $location) {
+                                        echo anchor('receivings/index/'.$transaction['transfer_id'], $this->lang->line('employees_profile_see'), 'class="small_button" style="padding:5px 7px;"');
+                                    }
+                                    ?>
 									</td>
 								</tr>
 								<tr class="hide">
 									<td colspan="8">
 										<?php
-										$transaction_details = $this->Transfers->get_reception_detail($transaction['transfer_id']);
-										?>
+                                        $transaction_details = $this->Transfers->get_reception_detail($transaction['transfer_id']);
+                                        ?>
 										<table class="innertable">
 											<thead>
 												<tr style="color:#FFFFFF;background-color:#0a6184;">
@@ -245,10 +265,10 @@ $this->load->view("partial/header");
 	$(".tablesorter td.expand span").click(function(event){
 		$(this).text($(this).text()!='+'?'+':'-').parents('tr').next().toggle();
 	});
-	var error='<?php echo (isset($error)?$error:"") ?>';
+	var error='<?php echo isset($error) ? $error : '' ?>';
 	if (error!='') 
 		setTimeout(function(){
 				tb_show("Error", 'index.php/reports/see_dialog_error/'+error+'/width:350/height:350');
 		}, 1000);
 </script>
-<?php $this->load->view("partial/footer"); ?>
+<?php $this->load->view('partial/footer'); ?>
